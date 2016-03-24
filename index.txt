@@ -3,5 +3,8 @@ Index
 1. Input source:
 	a. AS400 codes
 	b. EClipse workspace
-	c. html codes from Eee PC
 	d. Migrate as400_learning_note.xlsx
+
+2. The principle of adding entry:
+	a. Dont record too much and too detail: it should only comes to frequent-used and hard to remember code.
+	b. Record & Remember: It should not be a record and forget, its only a supporting tool.
