@@ -1,0 +1,3 @@
+http://www.hanselman.com/blog/ExampleHowToContributeAPatchToAnOpenSourceProjectLikeDasBlog.aspx
+
+Example: How to contribute a patch to an Open Source Project like DasBlog
