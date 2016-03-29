@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!--Custom css style-->
+		<link rel="stylesheet" href="css.css">
+			
+		<!-- JQuery scripts and Bootstrap Core scripts -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+		<script type="text/javascript" src="js.js"></script>
+		
+	</head>
+	<body onload="createListFromData();">
+		<p class='sorting-controls'>Sort by: <a href='#ascend'>Score Ascending</a> | <a href='#descend'>Score Descending</a></p>
+		<p class='current-sorting-by'>Currently sorting by <span>nothing</span>.</p>
+		<div id="player-board">
+		</div>
+		
+		<a href='#return'>Return</a>
+
+		<!-- Not for displaying. For JS to use -->
+		<div class="template">
+		  <div class="player">
+			<div class="profile-pic">
+			  <img src='' alt='profile pic placeholder'>
+			</div>
+			<p class="name"></p>
+			<p class="score"></p>
+		  </div>
+		</div>
+	</body>
+</html>
