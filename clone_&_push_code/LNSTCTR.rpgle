@@ -8,7 +8,7 @@
       ************************************************************************
      H DATEDIT(*YMD) DATFMT(*ISO) TIMFMT(*HMS)
      FLNSTLSACC UF A E           K DISK
-     FIMTRANSB  IF   E           K DISK
+     FIMTRANSB01IF   E           K DISK
      FLNSTPF    UF A E           K DISK
       *counter *
      DCTR              S             10P 0 INZ(0)
@@ -19,15 +19,14 @@
      C                   READ      LNSTLSACC
      C                   DOU       %EOF(LNSTLSACC)
      C                   EVAL      CTR=0
-     C     *START        SETLL     IMTRANSB
-     C                   READ      IMTRANSB
-     C                   DOU       %EOF(IMTRANSB)
+     C     LLSRACC       SETLL     IMTRANSB01
+     C     LLSRACC       READE     IMTRANSB01
+     C                   DOW       NOT %EOF(IMTRANSB01)
      C                   IF        DGEFFDATE >= LLSRWSTR AND
-     C                             DGEFFDATE <= LLSRWEND AND
-     C                             LLSRACC = DGACCT
+     C                             DGEFFDATE <= LLSRWEND
      C                   EVAL      CTR=CTR+1
      C                   ENDIF
-     C                   READ      IMTRANSB
+     C     LLSRACC       READE     IMTRANSB01
      C                   ENDDO
      C                   EVAL      LLSTSNQTY=CTR
      C                   UPDATE    RLNSTLSACC
@@ -39,13 +38,11 @@
      C                   DOU       %EOF(LNSTPF)
      C                   EVAL      CTR=0
      C                   IF        LNSTFCHG=' '
-     C     *START        SETLL     LNSTLSACC
-     C                   READ      LNSTLSACC
+     C     LNSTLNNOTE    SETLL     LNSTLSACC
+     C     LNSTLNNOTE    READE     LNSTLSACC
      C                   DOU       %EOF(LNSTLSACC)
-     C                   IF        LNSTLNNOTE=LLSLNNOTE
      C                   EVAL      CTR=CTR+LLSTSNQTY
-     C                   ENDIF
-     C                   READ      LNSTLSACC
+     C     LNSTLNNOTE    READE     LNSTLSACC
      C                   ENDDO
      C                   EVAL      LNSTTSNQTY=CTR
      C                   IF        LNSTTSNQTY < MINSTD
