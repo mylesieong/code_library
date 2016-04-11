@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web>
+   <page name="login">
+
+      <element>
+         <Title>澳門商業銀行 - 影像擷取系統</Title>
+         <file>Login/login.jsp, Main/main.jsp</file>
+      </element>
+  
+      <element>
+         <BannerText>澳門商業銀行 - 影像擷取系統</BannerText>
+         <file>Top/top.jsp</file>
+      </element>
+      
+      <element>
+         <LogoutText>登出</LogoutText>
+         <file>Top/top.jsp</file>
+      </element>
+      
+      <element>
+         <LoginFormTitle>用戶登入</LoginFormTitle>
+         <file>Login/loginform.jsp</file>
+      </element>
+      
+      <element>
+         <LoginFormUserName>名稱</LoginFormUserName>
+         <file>Login/loginform.jsp</file>
+      </element>
+      
+      <element>
+         <LoginFormPassword>密碼</LoginFormPassword>
+         <file>Login/loginform.jsp</file>
+      </element>
+      
+      <element>
+         <LoginFormOKBtn>確定</LoginFormOKBtn>
+         <file>Login/loginform.jsp</file>
+      </element>
+
+   </page>
+
+
+   <page name="main">
+   
+      <element>
+         <MainFormTitle>選擇影像</MainFormTitle>
+         <file>Main/menu.jsp</file>
+      </element>
+      
+      <element>
+         <MainFormTypeLabel>種類</MainFormTypeLabel>
+         <file>Main/menu.jsp</file>
+      </element>
+      
+      <element>
+         <MainFormKeyLabel>影像碼</MainFormKeyLabel>
+         <file>Main/menu.jsp</file>
+      </element>
+      
+      <element>
+         <MainFormClearBtn>清除</MainFormClearBtn>
+         <file>Main/menu.jsp</file>
+      </element>
+      
+      <element>
+         <MainFormRetrieveBtn>擷取</MainFormRetrieveBtn>
+         <file>Main/menu.jsp</file>
+      </element>
+      
+      <element>
+         <ResultHeader0>客戶資料編號</ResultHeader0>
+         <file>Main/result.jsp</file>
+      </element>
+      
+      <element>
+         <ResultHeader1>檔案名稱</ResultHeader1>
+         <file>Main/result.jsp</file>
+      </element>
+      
+      <element>
+         <ResultHeader2>上傳日期</ResultHeader2>
+         <file>Main/result.jsp</file>
+      </element>
+      
+      <element>
+         <ResultHeader3>掃描日期</ResultHeader3>
+         <file>Main/result.jsp</file>
+      </element>
+      
+      <element>
+         <ResultHeader4>掃描時間</ResultHeader4>
+         <file>Main/result.jsp</file>
+      </element>
+      
+      <element>
+         <ResultHeader5>表格類別</ResultHeader5>
+         <file>Main/result.jsp</file>
+      </element>
+
+   </page>
+   
+
+   <messages>
+
+      <element>
+         <msg_sessionfail>閣置時間過長，請重新登入!</msg_sessionfail>
+         <file>Login/loginform.jsp</file>
+      </element>
+  
+      <element>
+         <msg_loginfail_2>用戶登入名稱被禁用!</msg_loginfail_2>
+         <file>Login/loginform.jsp</file>
+      </element>
+      
+      <element>
+         <msg_loginfail_6>用戶登入名稱逾時!</msg_loginfail_6>
+         <file>Login/loginform.jsp</file>
+      </element>
+      
+      <element>
+         <msg_loginok_rsEmpty>該用戶沒有權限!</msg_loginok_rsEmpty>
+         <file>Login/loginform.jsp</file>
+      </element>
+      
+      <element>
+         <msg_loginfail_others>用戶登入名稱或密碼無效!</msg_loginfail_others>
+         <file>Login/loginform.jsp</file>
+      </element>
+      
+      <element>
+         <ResultEmpty>找不到相關記錄!</ResultEmpty>
+         <file>Main/result.jsp</file>
+      </element>
+      
+   </messages>
+
+   
+</web>
+
+
+
+
+ 

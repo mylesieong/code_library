@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/ImageRetrievalSystem/!svn/ver/1/WebContent/WEB-INF/lib
+END
+jai_codec-1.1.3.jar
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/ImageRetrievalSystem/!svn/ver/1/WebContent/WEB-INF/lib/jai_codec-1.1.3.jar
+END
+jt400.jar
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/ImageRetrievalSystem/!svn/ver/1/WebContent/WEB-INF/lib/jt400.jar
+END
+sqljdbc4.jar
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/ImageRetrievalSystem/!svn/ver/1/WebContent/WEB-INF/lib/sqljdbc4.jar
+END

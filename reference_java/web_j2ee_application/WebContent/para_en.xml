@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web>
+   <page name="login">
+
+      <element>
+         <BannerText>BCM Image Retrieval System</BannerText>
+         <file>Top/top.jsp</file>
+      </element>
+      
+      <element>
+         <LogoutText>Logout</LogoutText>
+         <file>Top/top.jsp</file>
+      </element>
+      
+      <element>
+         <LoginFormTitle>User Login</LoginFormTitle>
+         <file>Login/loginform.jsp</file>
+      </element>
+      
+      <element>
+         <LoginFormUserName>User Name</LoginFormUserName>
+         <file>Login/loginform.jsp</file>
+      </element>
+      
+      <element>
+         <LoginFormPassword>Password</LoginFormPassword>
+         <file>Login/loginform.jsp</file>
+      </element>
+      
+      <element>
+         <LoginFormOKBtn>OK</LoginFormOKBtn>
+         <file>Login/loginform.jsp</file>
+      </element>
+
+   </page>
+
+
+   <page name="main">
+   
+      <element>
+         <MainFormTitle>Specify Image</MainFormTitle>
+         <file>Main/menu.jsp</file>
+      </element>
+      
+      <element>
+         <MainFormTypeLabel>Type</MainFormTypeLabel>
+         <file>Main/menu.jsp</file>
+      </element>
+      
+      <element>
+         <MainFormKeyLabel>Key</MainFormKeyLabel>
+         <file>Main/menu.jsp</file>
+      </element>
+      
+      <element>
+         <MainFormClearBtn>Clear</MainFormClearBtn>
+         <file>Main/menu.jsp</file>
+      </element>
+      
+      <element>
+         <MainFormRetrieveBtn>Retrieve</MainFormRetrieveBtn>
+         <file>Main/menu.jsp</file>
+      </element>
+      
+      <element>
+         <ResultHeader0>CIF</ResultHeader0>
+         <file>Main/result.jsp</file>
+      </element>
+      
+      <element>
+         <ResultHeader1>File ID</ResultHeader1>
+         <file>Main/result.jsp</file>
+      </element>
+      
+      <element>
+         <ResultHeader2>Post Date</ResultHeader2>
+         <file>Main/result.jsp</file>
+      </element>
+      
+      <element>
+         <ResultHeader3>Scan Date</ResultHeader3>
+         <file>Main/result.jsp</file>
+      </element>
+      
+      <element>
+         <ResultHeader4>Scan Time</ResultHeader4>
+         <file>Main/result.jsp</file>
+      </element>
+      
+      <element>
+         <ResultHeader5>Type</ResultHeader5>
+         <file>Main/result.jsp</file>
+      </element>
+
+   </page>
+   
+
+   <messages>
+
+      <element>
+         <msg_sessionfail>Time's out. Please login again!</msg_sessionfail>
+         <file>Login/loginform.jsp</file>
+      </element>
+  
+      <element>
+         <msg_loginfail_2>User ID is disabled!</msg_loginfail_2>
+         <file>Login/loginform.jsp</file>
+      </element>
+      
+      <element>
+         <msg_loginfail_6>User ID is Expired!</msg_loginfail_6>
+         <file>Login/loginform.jsp</file>
+      </element>
+      
+      <element>
+         <msg_loginok_rsEmpty>User ID is Expired!</msg_loginok_rsEmpty>
+         <file>Login/loginform.jsp</file>
+      </element>
+      
+      <element>
+         <msg_loginfail_others>Invalid user ID or password!</msg_loginfail_others>
+         <file>Login/loginform.jsp</file>
+      </element>
+      
+      <element>
+         <ResultEmpty>No result is matched!</ResultEmpty>
+         <file>Main/result.jsp</file>
+      </element>
+      
+   </messages>
+
+   
+</web>
+
+
+
+
+ 

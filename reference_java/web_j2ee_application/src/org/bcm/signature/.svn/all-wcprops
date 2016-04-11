@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/ImageRetrievalSystem/!svn/ver/1/src/org/bcm/signature
+END
+FileItem.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/ImageRetrievalSystem/!svn/ver/1/src/org/bcm/signature/FileItem.java
+END
+SigConnectionServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/ImageRetrievalSystem/!svn/ver/1/src/org/bcm/signature/SigConnectionServlet.java
+END
+VerifyPwServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/ImageRetrievalSystem/!svn/ver/1/src/org/bcm/signature/VerifyPwServlet.java
+END
