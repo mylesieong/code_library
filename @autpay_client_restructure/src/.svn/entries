@@ -1,0 +1,31 @@
+10
+
+dir
+3
+http://pc-13-027:8080/svn/autopay/src
+http://pc-13-027:8080/svn/autopay
+
+
+
+2013-08-13T07:54:27.093790Z
+3
+bb14
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+6dd35cd3-5789-b24f-81e1-e28f8392c9db
+
+autopay
+dir
+
