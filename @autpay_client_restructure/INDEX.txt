@@ -1,2 +1,0 @@
-INDEX>
-1. Recode autopay client with spring 3.
