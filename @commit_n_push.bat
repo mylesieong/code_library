@@ -1,1 +1,1 @@
-git status && git add * > ./push.log && exit
+git status >> ./push.log && git add * >> ./push.log && git commit -m "Explicit Commit" >> ./push.log && exit
