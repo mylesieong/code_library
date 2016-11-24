@@ -1,0 +1,1 @@
+git status && git add * > ./push.log && exit
