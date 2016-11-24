@@ -34,3 +34,27 @@ Changes not staged for commit:
 	modified:   push.log
 
 no changes added to commit (use "git add" and/or "git commit -a")
+[master fbe4cbe] Explicit Commit
+ Committer: Myles Ieong Sai Hou <BI77@corp.dahsing.com>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 27 insertions(+), 1 deletion(-)
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   push.log
+
+no changes added to commit (use "git add" and/or "git commit -a")
