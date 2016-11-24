@@ -8,3 +8,29 @@ Changes not staged for commit:
 	modified:   @commit_n_push.bat
 
 no changes added to commit (use "git add" and/or "git commit -a")
+[master d608fc2] Explicit Commit
+ Committer: Myles Ieong Sai Hou <BI77@corp.dahsing.com>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 11 insertions(+), 1 deletion(-)
+On branch master
+Your branch is ahead of 'origin/master' by 2 commits.
+  (use "git push" to publish your local commits)
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   @commit_n_push.bat
+	modified:   push.log
+
+no changes added to commit (use "git add" and/or "git commit -a")
