@@ -1,1 +1,1 @@
-git status >> ./push.log && git add * >> ./push.log && git commit -m "Explicit Commit" >> ./push.log && git push origin master >> ./push.log && exit
+git add * >> ./push.log && git commit -m "Explicit Commit" >> ./push.log && git push origin master >> ./push.log && exit
