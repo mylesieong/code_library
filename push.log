@@ -103,3 +103,19 @@ After doing this, you may fix the identity used for this commit with:
     git commit --amend --reset-author
 
  1 file changed, 15 insertions(+)
+[master 53656a2] Explicit Commit
+ Committer: Myles Ieong Sai Hou <BI77@corp.dahsing.com>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 15 insertions(+)
+ rewrite index.xlsx (65%)

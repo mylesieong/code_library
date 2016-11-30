@@ -1,1 +1,2 @@
-git add * >> ./push.log && git commit -m "Explicit Commit" >> ./push.log && git push origin master >> ./push.log && exit
+git add * && git commit && git push origin master
+PAUSE
