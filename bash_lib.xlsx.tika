@@ -1,0 +1,81 @@
+工作表1
+	TOPIC	DSCP	CODE
+	linux	checksum	$md5sum -b {filename}
+$sha1sum -b {filename}
+	Linux	vncsever	vncserver :1
+vncserver -kill :1
+	Linux	change modification recursively	sudo chmod a+w -R {filename}
+	Linux	make a batch file	#!/bin/bash
+pwd
+	Linux	find a file with regex	$find {search-path} -name "*.pdf"
+$find (search-path} -type f              //指定查找文件類型文件
+p.s. default search into sub-directories.
+	linux	How to make a batch file	1. nano a *.sh file
+2. insert header #!/bin/bash and your command below
+3. chmod +x *.sh
+4. $./*.sh
+	Linux	Delete a folder with all its content	$sudo rm -R {target_folder}
+	Linux	Change Read-only to Editable	$sudo chmod u+w {target_file}
+	Linux	About Environment Variable:	$ set 會顯示所有Environment variable
+$ printenv MAVEN_HOME 等價於 echo $MAVEN_HOME
+	Linux	Unzip a tar file	$ sudo tar -xf {file.tar.gz} -C {target direcotry}
+$ sudo tar zxvf {filename} 
+-x extract
+-f 指明後面的參數是文件名
+-C change result to follow path
+-z 指明是tar.gz類型
+-v verbolsely state process
+	Linux	History command	$ history
+$ ! n (n is the history command no.)
+	Linux	Grep command	$ history | grep {searchparameter}
+	Linux	Piping command	$ echo "String to be writen" > /etc/{some document}
+	Linux	install git	apt-get install git-all
+	Linux	install unity	apt-get install ubuntu-desktop
+	Linux	vncsever	apt-get install vnc4server
+	Linux	variable	/*set*/ JAVA_HOME=~/jdk
+/*export*/ export JAVA_HOME
+	Linux	create link	ln -s -v $CATALINA_HOME/bin/catalina.sh ~/tomcat
+-s是造soft link的意思, -v是有什麼講出來的意思
+	linux	Stop job	Ctrl + C
+	Netcat	check a port	nc -v 127.0.0.1 8080
+	Netcat	send udp package	udp: echo "foobar" | nc -u -w1 localhost 5000
+tcp: echo "foobar" | nc 127.0.0.1 5000
+	Netcat	open a listen port	udp: nc -lu localhost 5000
+tcp: nc -l 5000
+	Netcat	scan ports	tcp: nc -vnz -w 1 192.168.233.208 1-1000 2000-3000
+udp: nc -vnzu 192.168.1.8 1-65535
+	Netcat	response in port	client: echo "request for anything" | nc 127.0.0.1 5000
+server: nc -l 127.0.0.1 5000 < response.html
+	Netcat	response in port w HTTP protocol	client: [browser]>http://139.162.20.124:9000/
+client: echo -ne "GET / HTTP/1.0\r\n\r\n" | nc 127.0.0.1 9000
+server: while true; do nc -l 9000 < response.html; done
+	Netcat	Send HTTP request	echo -ne "GET / HTTP/1.0\r\n\r\n" | nc www.google.com 80
+	linux	setup env variable	In linux, there is a script call .bashrc in your ~ directory that run on your boot. You can export your env variable in this script. 
+	linux	check cpu	cat /proc/cpuinfo
+	Nmap	scan target	The format of nmap is: $nmap [Scan types] [Options] {target_ip_address}
+$namp -sS 127.0.0.1
+$nmap -sS 127.*.*.1-255
+$nmap -sX -p 20,30,40,8080 127.0.0.1
+	Sed	basic ops	Delete lines:
+> sed '/^u/d' input.txt              //delete lines start with char 'u'
+	for + sed	Clear all comment and save java source to a file with suffix 'Cleaned'	for f in $(find *.java -type f); do sed '/*/d' $f > ${f}.Cleaned.java; done
+	Generic	run a cmd at background	Run a cmd at background:
+> {command_body} &
+Check the process:
+> top
+> ps -a
+> pstree
+	Encode	Introduce ICONV to convert encoding and XXD to cat in HEX	Convert from file a to file b: 
+> iconv -f ASCII -t UTF-8 < fileA.txt > fileB.txt
+Show the encoding option:
+> iconv -l 
+Show HEX of a file:
+> xxd filea.txt
+
+
+工作表2
+
+
+工作表3
+
+

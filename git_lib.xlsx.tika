@@ -1,0 +1,132 @@
+Sheet1
+	Language	Desc	Code Ref
+	Git	Trace history	git log --follow {filename}
+git show {commit hashcode}
+git diff {branchnameA} {branchnameB}
+	Git	basic command	$git rm {file}
+$git status (-s)
+$git diff
+$git diff --cached
+	Git	clone to local	$git clone https://github.com/mylesieong/my_maven_projects.git
+	Git	clone to host	**從無到有:
+$git init
+$git add {file}
+$git config -global user.email "myles.ieong@gmail.com"
+$git config -global user.name "myles"
+$git commit -m "a project name"
+$git remote add origin https://github.com/mylesieong/my_maven_projects.git
+$git push -u origin master
+(mylesieong:sewshort)
+**從有到有:
+$git push origin master
+	Git	checkout	git checkout {branch name or hashcode}
+	Git	list all branch	git branch
+	Git	create branch	git branch new_branch
+	Git	delete  branch	git branch -d new_branch
+	Git	update remote repo or update local repo	git push origin master 
+git pull origin master
+	Git	graph	git log --graph --oneline --decorate
+	Git	merge	1. as long as the changed files are different between 2 branch, merge can go fast-forward wo additional modificaiton
+2. git merge branch-bug-fix
+	Git	diff	When you have staged all your new files, you can use below command to compare the difference to last commit:
+>git diff --cached
+	Git	diff of a file between commits	git diff <revision_1>:<file_1> <revision_2>:<file_2>
+for example: git diff master:pom.xml d44ac61:pom.xml
+	Git	當你不想要一些unstaged changes時	第一服藥:
+$git stash save --keep-index
+$git stash drop
+第二服藥:
+$git clean -f   (force meanning)
+第三服藥:
+按照git 的提示: $git checkout -- .
+	Remote	remote basic	$git remote show     
+origin
+$git remote -v           
+origin https://github…library.git (fetch)
+origin https://github…library.git (push)
+$ git remote add pb https://github.com/paulboone/ticgit
+$ git remote -v
+origin https://github.com/schacon/ticgit (fetch)
+origin https://github.com/schacon/ticgit (push)
+pb https://github.com/paulboone/ticgit (fetch)
+pb https://github.com/paulboone/ticgit (push)
+	Remote	remote branch	$ git branch -r 
+origin/HEAD -> origin/master
+origin/master
+$ git push origin master:new_branch //Crt new brnch on rmt & push lcl/mstr to it
+$ git branch -r 
+origin/HEAD -> origin/master
+origin/new_branch
+origin/master
+	Local	tricks abt revisioning	$ git show {branch_name/at_least_4_digit_of_commit_SHA1} //show certain commit diff compare to last commit
+$ git reflog //system will name the log in format HEAD@{n} so you can easily ref them
+$ git show {branch_name/at_least_4_digit_of_commit_SHA1}^  //show previous commit
+$ git show {branch_name/at_least_4_digit_of_commit_SHA1}^2  //show 2nd parent (only for merge commit)
+$ git show {branch_name/at_least_4_digit_of_commit_SHA1}^^^... //show previous n generation father
+$ git show {branch_name/at_least_4_digit_of_commit_SHA1}~n //equivalent to last command
+	Local	Master trapped in a wrong commit tunnel	1. First of all, assume the wrong tunnel commit cannot/shouldnot merge to head, so steps would be delete the master branch first, and then re-create master branch at the right commit
+$ git checkout master
+$ git branch wrong_track && git checkout wrong_track  <--- cannot delete master when using it
+$ git branch -d master
+$ git checkout {master_or_any_other_commit}
+$ git branch master
+	Remote	Force-push from local to remote	$ git push -f {target_branch_like_origin} {new_of_local_branch}
+	Remote @ local	Using Local File System as remote	If you want to build a remote repo at local file system, use below command to build a remote repo:
+> git init --bare /d/{repo_name}.git
+The you can add this as a remote origin (or whatever name) to your current git repo with below cmd:
+> git remote add {origin_or_whatever} /d/{repo_name}.git
+And so that you can perform same feature to this "remote" just as github like clone/push/pull...
+
+p.s. For more information, refer to: http://www.thehorrors.org.uk/snippets/git-local-filesystem-remotes/
+	Git concept	Relationship between "working directory" and "staging area"	STAGE 本質上 is the product of comparasion between HEAD and WORKDIR. So items in STAGE can be regarded as " actions" basic on HEAD to become WORK. Below command or action is related:
+> git add {…}      //move red to green entry in git status that add stuff to head
+> git rm {…}       //move red to green entry in git status that remove stuffs from head
+> git rm --cached {...}       //move green to red to unstage
+> git checkout -- {…}      //move red to nth in git status
+> user edit the WORK      //generate red entry in git status
+	Git concept	Git folder under git folder: submodule	* When our new git folder contains another git folder, then the subfolder is name "submodule" in git machanism.
+* When do adding in parent git folder, submodule will present as {path}/{submodule_name} as a standalone item, then no details inside submodule will be revealed in the parent folder git console.
+* When submodule has some uncommited change (staged or not), the parent folder git status will note the changes in red item as below:
+    > modified:   {path}/SUBMODULE1 (modified content, untracked content)
+    > modified:   {path}/SUBMODULE2 (modified content)
+And user cannot stage above "changes" unless going inside submodule and clean the directory.
+(p.s. the error message when try to add the submodule in parent like: Git: fatal: Pathspec is in submodule )
+	Git Stash	Working on master but need a quick reference to branch, stash can temp save the change and recover later on	Save dirty workings on branch #1 
+> git stash -u    //And now can switch to branch #2, while at this moment branch#1 status is clean 
+View Stash:
+> git stash list
+Recover stash after switch back from branch#2:
+> (at branch#1) git stash pop
+	Git Log	Present the graph	>git log --oenline --decorate --graph
+	Git Log	Show n recent commit	>git log -n
+	Git Ignore	git ignore system	1. Edit {home}/.git/info/exclude to ignore files, Every line regex the file that should (not) be ignored:
+# *.java    <- ignore javas globally
+# !*.java  <- don’t ignore java globally
+2. Put .gitignore file in any folder to state the ignore target in that folder.
+REF-- https://git-scm.com/docs/gitignore
+	Git Ignore	git ignore system (2)	If some files are already under tracking, use below command to remove them from the working area:
+> git rm --cached -r target        //recursively remove files under target folder
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Sheet2
+
+
+Sheet3
+
+

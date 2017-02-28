@@ -1,0 +1,1224 @@
+index
+	Date	Category	Description	Tag	Items
+
+	2/27/17	java	JBOSS Concept	#concept	JBOSS and WildFly
+* WildFly is the JBOSS new version name, they are same.
+JBOSS standalone mode vs. Domain mode 
+* Standalone mdoe is for different config on different jboss instance, while domain mode is for central management
+* In domian mode, server instance are divided to Server Groups, and each machine has a Host Controller, and One of the many Host Controller is selected as the Domain Controller that central manage all Host Controller. Refer to the pic->
+JBOSS AS vs. EAP (Enterprise Application Platform 
+* AS is free community version sponsored by redhat, while EAP is a pay and support product.
+	2/21/17	java	Test framework in Java	#fact	* Junit is the must known framework
+* Mockito is a famous framework for mocking, powered by Junit
+* PowerMock: provide util to test extenal binary executables or other legacy code.
+	2/21/17	android	Test framework in Android	#fact	* Espesso 提供白盒層面的測試(內容, 以用戶互動和框架內動為界)
+* Monkey 提供黑盒層面的測試(是一個可以仿真用作點擊及相關操作之工具)
+	2/21/17	test	Stub, Fake, Mock	#concept	Udemy 上學習如何做軟工測試, 以及簡單的TDD (test driven development)教學:
+* 有一個Walk through video series, 贊!
+* 先設計體系大概, 利用SOLID, DRY和問自己將來的假設性問題(這點是我自己想出來的), 來設計OO關係
+* 再由Unit test 寫起, 一步一步建Code, 以及微調設計大網
+* 遇上需要injection 來測試的method時:
+    - Stub是指一些Hardcode, 比如有個提供當前日期的類DateProvider, 在測試時以StubDateProvider取代, 這Stub類則提供一個你hardcode的日期, 以此方提供自變量。
+    - Fake是指一些能提供要求功能, 但是簡化版的injection dependency, 為的是應付可能還未開發完成的組件部份, 是不變量。
+    - Mock是指有期待值的對像, 亦即因變量。我做出一個log對像, 我希望他通過測試方法後可以寫出我希望寫的log, 那麼其他Stub隨即成為一張自變量網, 而Mock經處理出來後, 我就可以從其身上看結果了。
+p.s 有些測試沒那麼複雜, injection就是自變量, 返回值就是因變量。
+	2/18/17	design pattern	SOLID解讀	#concept	SOLID中的Single Resp,  Dependency Injection是之前已理解了, 今在UDEMY上, 以及在書本中又讀到相關內容, 就開始對Liskov substitition, Interface Segregation,和Open/close也有所理解: 
+* Open/Close系指Open- 可擴展, 即他日可繼承出一新類, 在Main中修改成new這新類, 就完成新增功能了. Close的意思是不需改變現有的庫(即不需再編譯)即可達成新增功能
+* Liskov是指子類不應該從性質上"改變" 父類的行為, 只應該 "發展" 父類的行為, 這發展可以是延續﹑細化﹑選擇等等。
+* Interface seg是指接口應該盡量不可分割化, 因為Interface在語義層面上來說, 他是一種知識, 我們設計者(即類的上帝)讓一個類可以學習這種知識是有代價的: 這個類得到了權利(能加+知名度), 也需要負上義務(忠實地落實所有方法+服從框架的支配)
+	2/18/17	design pattern	Software Engineering Summary	#concept	語境: 這幾天一直在思考如何漂亮地重寫FOXPRO那個中間件, 讀馬丁福納的重構, 讀四人幫的DP和SOLID等材料, 並一天有下述領悟。
+Software Engineering不是為了創造出永不需要修改的軟件, 而是追求穩建/Modify-friendly/可維護的，即:
+ * 出了事了能快速修改
+ * 要加功能了能在不大改原有體系下漂亮修改。
+所以可以說在SE的領域中, 修改是前堤。
+	1/23/17	as400	Compile Some Service(Process Server Component)	#fact	Some ICBS internal programs or process server component programs has to compile with binding to I700B*/CBSBIND, this file CBSBIND is a *CBSBIND type file. It plays a binary dependency library's role. 
+*NO / *CALLER
+BNDDIR > I700BCM/CBSBIND
+	1/19/17	design pattern	Refactoring / Martin Fowler	#concept	The basic idea from Refactoring - Martin Fowler:
+0. 重構的名/動詞定義
+1. 重構可以幫助軟件開發 (重構後節省的時間比重構所花的時間多)
+2. 重構可間接提高性能
+3. 心態: XP極限編程-先做出再重構而非預先設計
+4. 時機: 除上述 "起始重構", 可於when code stinks 再次進行重構
+4. 一系列重構指引/工具
+	1/19/17	java	File intputing for java utilities	#fact	Use System.getProperty("user.dir") can empower java utilities to take file input from relative filepath
+	1/19/17	java	Java powered EXE	#fact	If want to publish a window executable (exe) from jar, use maven plugin Launch4J
+	1/14/17	else	Kaggle	#concept	Kaggle is a data scrience competition online platform. It is related to keywords like Big data, Data Mining(DM), Machine Learning (ML), Deep learning (DL). Quote from zhihu.com talks about kaggle:
+首先说，绝大部分的Kaggle比赛是Data Mining(DM)比赛（除少数是和Discrete Optimization还有Computer Vision(CV) 有关），最重要的是和Machine Learning(ML)关系不大。这是很多人一个误区，往往希望在Kaggle上学到很多ML的知识。Kaggle教给我的第一件事情，就是让我清晰领会到了这两者之间的不同：ML一般从模型或者算法出发，讲的是模型或者算法本身存在的不合理的地方，然后提出新的假设，从而去优化模型或算法。在这个过程中并不针对某一个具体的特殊的问题。而DM恰恰相反，它是从数据本身问题本身出发，希望针对问题的特性来设计最适合的方案。关键是在于对问题和数据的理解。之前总是觉得，DM/CV的paper都好水，到处找一个应用套。在我想明白这个问题之后，我就开始懂得欣赏DM/CV的paper。
+
+作者：Naiyan Wang
+链接：https://www.zhihu.com/question/24533374/answer/34631808
+来源：知乎
+著作权归作者所有，转载请联系作者获得授权。 
+	1/14/17	else	conda vs anaconda	#concept	Conda is a package manager created mainly for data-scrience pakcages and Anaconda is one distribution (which can be understood as a well-defined and packed standard packages set)
+	1/14/17	else	conda vs pip	#concept	conda and pip are both package manager, but pip for python and conda for not only python. When it comes to installing python package, the 2 are competers, but generally, they are not. 
+And also conda is package manager for data-science field.
+	1/14/17	else	jupyter	#concept	Jupyter is using the notebook server on a machine, so this web server can pass the code request to kernel, run it and return to the webpage just like we embed the code into contents and articles. This really helps to abstractize the way it run code and also it implement the idea of "Literate Programming" (and there is a language Eve developemtn for Literate Programming)
+	1/14/17	as400	My Framework2 	#concept	Add law: SOLID principle (single responsibility, open to enrich but close to modify, liskov substitution, interface deaggregation, Dependency injection)
+law: DRY don’t repeat yourself
+law: state clear what you want in condition other than using else all the time
+	12/22/16	as400	My Framework	#concept	LAW#1. SR should be CHK-DO-END, and logic that involve CHK-DO-END should seperated to a SR--- only classic routine can break the law: inzsfl, wrtlog
+LAW#2. Diff screen should be seperated along with program
+LAW#3. Use check pattern in CHK, 
+LAW#4. try the best to reduce embed
+LAW#5. Good pattern, seperate checking and operation even within a sr do part
+LAW#6. If a branch is not big (like the option that a screen can have)
+LAW#7. Spool file member initial D, screen field initial S
+	12/22/16	as400	Reason of having framework	#concept	* Introduction to the necessarity of having common ground on programming style
+** There are a lot of different ways to a common goal of logic, 2 best examples here would be provided. When we are trying to have multi condition, we can do it like:
+    > if (cond a){
+ >  if(cond b){
+ >   action
+ >  }
+ > }
+ Or do it like:
+ > boolean err0 = off;
+ > boolean err1 = off;
+ > boolean err2 = off;
+ > if (cond a) {
+ >  seton err1
+ > }
+ > if(cond b) {
+ >  seton err2
+ > }
+ > if (err1 or err2){
+ >  seton err0
+ > }
+ > if (err0 is off){
+ >  action
+ > }
+** The first way is spontaneous but the structure gets fat easily. The second way keeps a thin structure then though not being super savvy. In another example, we need to do a loop in a pgm that has a subroutine, we can do the loop in mother routine:
+ > void mother(){
+ >  while(cond a) {
+ >   son();
+ >  }
+ >  return;
+ > }
+ > void son(){
+ >  actions
+ > }
+ Or we can let the son handle it:
+ > void mother(){
+ >  son();
+ > }
+ > void son(){
+ >  while(cond a){
+ >   actions
+ >  }
+ > }
+* The decision falls to our common style shared. 
+** As you can see, the writing achieves same goal and none of them is absolutely better than the other. But with a same style(or philosophy) of coding, a team can maintain their code in a easier way and the code would become more friendly, robust and less mis-leading.
+	12/19/16	java	Contribute to FOSS	#resource	The entrance of FOSS can be started from here:
+https://helpwanted.apache.org/
+	12/9/16	as400	RPG Call vs Callb	#concept	CALLB PGMA  绊定PGMA 的 SOURCE，在编译时嵌入代码，如果PGMA改变，则该程式需要重新编译； 
+CALLP/CALL PGMA  不绊定PGMA 的SOURCE，如果PGMA改变，则该程式不需重新编译；
+CALLB is a static bind, while CALL is a dynamic bind which framework will scan current library list to see if PGMA exists.
+	12/7/16	as400	RPGLE Subroutine differs from Subprocedure	#concept	A. 概念:
+ *  Subroutine是子例程，是程序代码中按功能处理的、人为划分的一段代码。
+ *  Subprocedure是一个H表中定义no main的procedure，组成一个独立的module。
+B. 从功能实现上讲，Subroutine与Subprocedure可以实现同样的功能。
+C. 代码维护角度来说, Subprocedure维护方便, 一处维护更新, 多处可以直接使用。Subroutine则需使用到的程序都要重新编译, 虽然可以通过/COPY或/INCLUDE代码一次性维护。
+D. 环境变量来说, Subroutine中定义的变量可以在程序范围内; Subprocedure定义的变量只能在本身的Subprocedure范围中使用
+E. 从运行速度来说，Subroutine的速度比Subprocedure快。
+F. 从多线程并行处理角度来说，Subroutine不能规范于线程模块处理；Subprocedure则可以。
+G. 从传递参数来说，Subroutine没有传参的问题；Subprocedure则有以下传参问题
+	12/7/16	web	Httpbin Util API	#resource	Http bin is a handy http testing tool written in flask framework (python)
+$ curl http://httpbin.org/ip
+$ curl http://httpbin.org/user-agent
+$ curl http://httpbin.org/get
+$ curl -I http://httpbin.org/status/418
+For others, see: http://httpbin.org/
+	12/7/16	web	Python 3 popular web framework (resource)	#resource	Demos to accompany an article comparing the Flask, Django, and Pyramid web frameworks.
+https://github.com/ryansb/wut4lunch_demos
+	12/7/16	web	Python 3 popular web framework	#concept	Some fact that lay among these 3 framework:
+1. Flask positioning small and simple website or web application
+2. Django (pr. Jungle) is positioning for large application, most popular and with "batteries included" design mindset.
+3. Pyramid is also aim for large webapp but more flexible than Django.
+4. On github, flask and django both get 11k stars on their repo. 
+5. Flask 2010, Django 2006, Pyramid 2005
+6. Django included a lot of modules and has its own ORM, while the other 2 dont (they go for developer's own choice)
+7. Pyramid powered Dropbox website
+8. Django powered Pinterest, Instagram...
+	12/7/16	web	redis basic usage	#concept	Redis server is a pupolar key-value pair server, it has client terminal which accept command like below:
+$ redis 127.0.0.1:6379> SET name "tutorialspoint"
+$ OK
+$ redis 127.0.0.1:6379> GET name
+$ "tutorialspoint"
+	12/7/16	web	AWS host linux instance	#concept	AWS provides close env to build linux instance base on their selected image, there are tutorials on the internet. Once setup the instance with EC2 (Amazon Elastic Compute Cloud) you can SSH your linux instance. And for this instance, amazon provide an "IP address" in format like this -http://example.com.s3-website-us-east-1.amazonaws.com- instead of a real IP address provided by VPS provider such as Linode/DigitOcean
+	12/7/16	web	AWS host static website	#concept	AWS provides:
+- Amazon S3 (Simple Storage Service) to save webstie resource
+- Amazon Route 53 as the DNS of your website domain
+- Amazon CloudFront as CDN
+	12/7/16	web	AWS (EC2)	#concept	AWS pros:
+* block level backups (called snapshots) only pay for what you use. Auto saved to S3.
+* lots of options for scalability (more than an individual will need, it's more for larger companies)
+* flexible storage options. Pay for what you use.
+* Dedicated, swappable IP address, aka "elastic" IP
+* security profiles let you control firewall settings without using iptables (but I still do both). This has been very nice, especially since it is possible to lock yourself out of your server if you don't setup iptables correctly. For example, I can set up ssh port 22 to only accept my own IP address, then if I am out of the office, I can change it from the web interface easily.
+* scalable: its like all components (IP address, SSD, network interface, and CPU/RAM) are swappable and changeable. Whereas Linode just has "packages" of pre-set nodes to choose from (I.e. 24GB SSD, 2g RAM, 2 core CPU) The down side of the Amazon way is only the added complication of understanding it.
+AWS cons:
+* flexible pricing really becomes complicated pricing. You're paying for every GB of storage and bandwidth. This alone drives the price up quickly, especially if your websites get a lot of traffic.
+* doesn't benchmark as well as Linode, but hey, the differences are subtle
+* their web portal is more complicated, but not impossible to figure out. I actually like it now.
+* support costs 50 USD per month and up
+Linode pros:
+* simple billing, and its cheaper (AWS is only cheaper if you pay 3 years up front). The more I use Linode the nicer it is. I know what my bill is every month = peace of mind.
+* simple web portal, and mobile app. I love this actually.
+* clean, clear documentation (DigitalOcean also has this)
+* their servers just feel faster to me, less lag in the terminal
+* the lish console is cool, And VERY helpful for recovery operations
+* live support. Every ticket I open with them is responded to within 10 minutes tops.
+* they are trusted by large companies as well (wpengine for example)
+Linode cons:
+* I miss the security groups that Amazon has, with Linode, its just your old firewall solution via terminal.
+* upgrades take 18 minutes, Amazon is much faster to swap out a better instance with
+* your IP address changes if you move data centers, or delete your node. But with Amazon, your IP address is its own entity, so you can easily swap out any instance underneath it.
+
+	12/7/16	else	MicroService Architecture Pattern	#resource	NGINX 系統教程: www.nginx.com/blog/introduction-to-microservices/
+Microservice之父的官方教程: microservices.io/patterns/microservices.html
+Microservice的容器平台Eventuate的Hello World: github.com/eventuate-examples/eventuate-examples-java-spring-todo-list
+	12/7/16	else	MicroService Architecture Pattern	#concept	微服務於2002由亞馬遜CEO向下屬要求將內部結構呈現成SOA API方式起逐漸形成其概念, 雖有指MSA只是SOA的衍生概念(甚至只是不一樣的說法而已), MSA仍在最近到達其Gartner Hype Circle的頂端, 如下簡述數個特點:
+1. 六角形結構是圖表MSA的方式, 在整體結構的設計完成後, 設計師會將功能細分至N個微服務, 如右圖所示
+2. MSA一大好處是在AGILE DEVELOPMENT中的有力幫助
+3. 實現MSA有各種做法, 傳統的TOMCAT-RUN WAR APP, JBOSS-SPRING, SPRING-BOOT, RAILS 等等都可以拼湊成這些API, 但比較流行的做法是用DOCKER運行, 並以LOAD BALANCER作導流
+4. MSA只是工具而非目的, The goal of microservices is to sufficiently decompose the application in order to facilitate agile application development and deployment.
+	11/29/16	as400	Convert RPG to RPGLE	#fact	Convert Old RPG program source to RPGLE equivalence:
+CVTRPGSRC FROMFILE(ZCARCOMM/QRPGSRC) FROMMBR(CCRTREC) 
+              TOFILE(ZCARCOMM/QRPGSRC) TOMBR(CCRTREC) EXPCPY(*YES) 
+                          SECLVL(*YES) LOGFILE(D5377/QRNCVTLG)         
+	11/29/16	as400	Compile SQL related program	#fact	All but not limit to CLP contains RUNSQLSTM and SQLRPGLE should set the commitment control (for SQLRPGLE it should be set during compilation) to *NONE
+	11/29/16	as400	Error Message System	#fact	In AS400, there are message files (separate from the definition of physical file) which are made specifically for centralized message management. 
+> GET MESSGAE DESCRIPTION BY MSGID: IMODULE/QCLSRC( MSGSND)
+> MESSAGE FILE: IMODULE/IHDMSGF
+	11/29/16	as400	Shadow Keys	#fact	Shift + Esc> 1: Trun to shadow client
+Shift + Esc> 2: Stop thread
+Shift + Esc> 3: Check program stack& call log & etc
+	11/29/16	as400	Position to a subfile	#fact	當在DSPF啟用Record level function "SFLRCDNBR(*TOP)" 後, 假設登記此Function的變量為TRRN, 則在RPGLE程序中, 只要在EXFMT指令前賦于TRRN某一值, 則EXFMT會自動將紀錄跳至該SFL位置顯示. 
+	11/29/16	as400	Process of write sfl on scn	#concept	當在寫SFL時, 會把WRITE時刻的RRN和*IN53一併寫入每條Subfile的Record作為 "行數" 和 "結束符". 此兩值通過DSPF中用Record level function "SFLRCDNBR(*TOP)" 和 "SFLEND(*MORE)" 來登記入系統.
+	11/29/16	as400	Subfile chain	#fact	CHAIN {Factor1} {factor2} 前者為4S數字, 即每條RCD的行數, 後者為SFL的名稱.
+	11/24/16	as400	Great Blog	#resource	A great blog that introduce a lot of knowledge of AS400. 
+http://blog.chinaunix.net/uid/20328593.html
+	11/10/16	design pattern	Observer	Nothing special, just the push and pull option sounds interesting. And the role play at mvc is also important.
+	11/10/16	design pattern	Common dp in android	#concept	With the 3 famous category of design patterns, belows are common use dp in android:
+1. Creational Patterns: Build + Dependency Injection + Singleton
+2. Structural Patterns: Adapter + Façade
+3. Behavioral Patterns: Command + Observer + MVC + MVV
+	11/10/16	linux	Window/ Linux Driver Framework	看不太懂, 但看是希望累積以後可以看懂的基礎. 兩者的分別大概是Windnow有更完整的框架及利用AddDevice此程序應激地回調系統而進行外置設備的操控; 而Linux雖無框架, 但可塑性更高, 且正因為沒有Framework所以減少了向後兼容的壓力, 使代碼更簡潔及Driver通常包含更新式的內容.
+	11/10/16	spring	Spring webapp security	在Spring.IO上學習: Spring 對Webapp security的支持方式是以org.springframework.boot:spring-boot-starter-security包中的類WebSecurityConfigurerAdapter 為出發點, Override其內的Configure方法, 用OO的語法定義哪些url path需要何種Authority. 其優點是完全不需修改 existing 的webapp 代碼
+	11/10/16	else	Deep Learning	Deep Learn很大程度和Machine Learning和Artifical Intelligence相關, 一篇入門文章介紹了最基礎的通過加權矩陣來對多點input 計算並得出單點output (理論上這個practice絕對有強大的推廣空間), 而這個橾作(感應器) 若增加為多重操作(即有多重" 思考") 被證實是可以增強計算的準確性和目標可朔性的. "Deep" 這個形容詞就是形容"多重" 這個特點. 
+* 第一個例子是利用單重感應器實現AND的邏輯計算 y= sum(xi * wi) +b
+* 第二個例子是判斷給定的二維點位於綫性方程的哪一側.
+* 上述兩例都涉及用一套數据來 "訓練" 感應器從而找出最有效的參數(權重W的矩陣和偏移量b) 的過程
+	11/10/16	design pattern	Design pattern	Learn on source-make website: 學習動機來自Android Udacity課程中學到用ArrayAdapter 可以將ListView 和 ArrayList 以系統建議的Best Practice方式互聯, 並額外提供View回收重用的功能. 由此章我很想系統地理解Adapter模式的作用, 而現在則可以理解了, 基本上Adapter的作用是:
+* 重用舊的可靠的組件(目的) 
+* 通過將Client的calling interface和Adaptee的function interface同時包括在一個新建的Adapter類中握手完成 (方式)
+	11/8/16	google	Google Codelabs	Google Codelabs provides different tutorials for google products like Android, Web, Firebase, Wear and many others.
+https://codelabs.developers.google.com/
+	11/8/16	android	Android Transition Framework	2016年最值得學習的五大Android開源項目- 項目1:
+Easy to use, action and presentation seperated design, manager handle the implementation.
+	11/8/16	else	Object Oriented	面向對像的內核是:
+* 實現臣服於邏輯 (缺點是不務實, 優點是可以最大限度重用)
+	11/7/16	google	Google Firebase	Firebase is a cloud platform that provide different aspect of functionality including:
+* Mobile-app testing tool: help developer to mock different machine version of user to the app
+* Online-database: allow developer to get/set value to the database easily
+* Firebase Cloud Messaging (FCM): listen on the state change of a certain value from the database so that when it changed
+* AdMob: advertisement for mobile
+	11/7/16	google	Google VR	A demo/example of google vr sdk is Treasure Hurt(can visit on github). The manifest xml should add intent-filter, landscape mandation etc. And MainActivity should inherit GVRActivity and implement StereoRenderer so that developer use ability gained from GVRActivity to fulfill StereoRenderer's abstract method to define application behavior (onDrawEye method and etc).
+	11/7/16	else	IBM Watsons	IBM Watson is the lab that provides 
+	11/7/16	else	IBM Bluemix	Bluemix is a cloud platform for developer to run their application. The application can be webapp, mobile backend, web-service etc. Bluemix is more automated and dominated than VPS(virtual private server) so that it can provide its unique characteristic to users.
+	11/7/16	else	Thinking about Framework	Framework is the basic model of governence? Framework must have a manager(or equivalent role)?
+	9/29/16	java	Java API example	When I am searching for jt400 programcall class example, I come across this AWESOME website:
+http://www.programcreek.com/java-api-examples/index.php
+This is mind-blowing. Awesome!
+	9/1/16	else	關於重構與框架的關係	這兩天在重構寫好的ECSDAPP, 一開始的方向是沿著美的角度, 比如將流動結構和MODULE有效區域和命名等規則定靚定死. 但再看CODE, 發覺很複雜. 
+今天早上改變方向, 從目標"Easy & quick to add-new/ change feature" 出發, 是一個更好的思路, 由此發散出的規定(LAW)也更貼近現實. 下午繼續改卻發現還是有點離地, 因此再將LAW簡化, 且對AS400 RPG PGMMING原有的特性進行量身訂做, 並OUTPUT了一些LAW, 感覺這就是我需要的東西.
+	8/31/16	as400	AS400 Security System	[generic]
+AS400的OS權限機制是有:
+*USER  *GROUP  *PUBLIC  
+而它們對PGM/PF的使用權限分別有:
+*ALL  *USE  *CHANGE  *EXCLUDE
+其權限可於OBJ的OPTION:EA或DSPOBJAUT 查看
+[owner]
+有些PGM可以設定為以*CALLER的權限使用還是以*OWNER的權限使用
+	8/31/16	as400	check call stack	#fact	When running any jobs, press shift+esc->3 to the "display job" screen, then navi to 11. Display Call Stack/
+	8/31/16	as400	Check job log	#fact	1. WRKUSRJOB USER(BG60) STATUS(*ACTIVE)
+Can be used to view job failure point (in my case, check time deposit level up function failure point that the authority of itrtchk & itrprotyp & itrmaincl)
+2. Shift + Esc > 3 … option 10 to display job log
+3. DSPJOBLOG
+	8/31/16	as400	CLLE compile way	When 14(compile) make sure:
+1. Default activation group(DFTACTGRP) *NO
+2. Activation group        (ACTGRP)    *CALLER
+	7/20/16	else	Learning Point	Testing Environment Building 和 Rapid code reading 是我這個工作最大的兩個learnning point	migrate list
+	7/19/16	else	callback的理解	Callback是A叫B做事, B在做的過程中或做完了都要通知回A, 若B非A的從屬機構, 則用一個兩者地位對等的方法Callback返A, 相當於打電話回電A一樣.
+所以Callback號碼/地址會存在於受託人那里, 而委託人也會有相應的接聽Callback的機制.
+	7/19/16	else	Interface的抽象意義	前面提到interface的進一步抽象表述可以是這麼一把KEY和根据KEY打造的門鎖s. 這個比喻通俗, 但信息量和抽象可塑性較低, 若把Interface比喻為病毒, class為生命體. 接入interface相當於是感染病毒, Inherit相當於是把病毒代代相傳, 知道這個病毒結構的, 即可以在活體中依靠特徵來追蹤到病毒本身.
+	7/18/16	linux	Kernel	Kernel 在kernel.org上是開源的, Linus Torvalds把i386的硬件仿照MINUX(UNIX的一個開源衍生版)開發的內核, 包含各種manager, 這就是linux的核心.
+	7/18/16	else	Interface的抽象意義	Interface是一種機制, 他相當於是兩個不同世界的類的溝通橋樑, 比如A不知道B的類名和祖先, 所以不能在A里CALL B, 這時只能通過接口來調用B的資源/特殊能力. 這是解耦的一個方法. 他的再一層抽象就是Keying 鑰匙, 有人制作了一把KEY, 願意交流的人根據KEY打造鑰匙孔鎖, 其他只要知道此匙的外型(其存在)的人可以均開鎖.
+	7/18/16	design pattern	Design pattern	Decorator 這些有趣的Design pattern好像DNA的樣子, 也和DNA(病毒)很像(在抽象的意義上). 有個網站介紹不錯: https://sourcemaking.com/design_patterns/factory_method
+	7/18/16	networking	Bridge Network	只要可以相互ping到, 也可以通過gateway外出, 就是bridge network的有效檢驗方式了.
+	7/16/16	vmware	Vmware	Vmware在上網時遇到的問題: 環境Host Win10+VM player 4-6, Client Kali Linux(base on Debian)都有Ping不到gateway的問題, 原來是要extract其VM的安裝檔在其中找尋小工具vmnetcfg.exe來添加virtual NIC(Vm的三種連接方式分別對應三張virtual nic- bridge:enet0;nat:enat1;?:enet8)
+此問題到vmware workstation player 12解決.
+	7/16/16	networking	Network for PC	對於個人電腦, 幾個變量設好就可以上網了: IP, SUBNETMASK, GATEWAY, DNSNAMESERVER, 而在Linux下, 設定文件大多在etc里, 而Network interface card的運行進程則在/etc/init.d/network
+	7/14/16	android	Android	To learn android application development, open-source app is the best way to go:
+1. On android developer official website page, there are lots of sample
+2. On wikipedia search Open-source Android App, there would be a list and those projects can be found on github.
+	7/13/16	else	docker	昨晚看完書中最後一個應用例子, 以Crefits作為支持分布式的平台分別安裝在三台Docker host 上(我的設備也足以做到PI+EPC+ASUS), 然後安裝一處APP_SERVER, 另一處為APP_CLIENT, 該APP_SERVER端以已有的Plugin和Crefits連接, 那就可以享受Crefits提供的分布式服務啦.
+	7/11/16	android	Android concept	Android is a smart phone framework build on Linux, different managers live in the framework and collaborate android behavior. Every app run on the system is build seperately and each has 4 main componenet:
+1. Activity 
+2. Service
+3. Content provider
+4. Broadcast provider
+The interaction between each components are carried by the Intent system. I am working on a notebook for android developemnt learning. Detail refers to it.
+	7/11/16	web	Spark the neat web app framework	Spark web framework(java) is always confused with the apcahe spark (which is a distributed storage strategy). Spark is a simple web framework and it can run alone as the web server itself to listen on ports and return informations.
+* It can also work with servers such as tomcat.
+	7/11/16	web	Popular server-end open-source tools	In the "Docker book", I learn about these useful tools:
+1. Redis: A key-pair database
+2. Sanatra: A server tool to receive http request and JSONize parameter.
+3. Jenkins: 管家for continural integration
+4. Jekyll: 化身博士 for css/ content seperated website/blog builder.
+	7/11/16	else	docker	* Main component:
+    1. Docker file: The author, the environment vars, the action, the entrypoint, etc.
+* Deployment process:
+    1. Build the container using docker command
+    2. Run the container with docker command(定何port, 何卷, 連接, priviledge等)
+* Docker important feature:
+    1. Volume(卷): A way to mount a folder to container from host machine(this allows awesome code-environ seperation)
+    2. Link(連接): Simulate a LAN within the host machine and containers so that the communication is secured.
+    3. Priviledge: Grant priviledge to container to run docker on itself recursively.
+	7/6/16	else	可擴展性	可擴展性的本質是向未來隱藏部份信息, 隱藏得愈多, 則愈可擴, 但同時犧牲了效率.
+	7/6/16	android	Android Studio	Android Studio安裝時之MSG:
+C:\Program Files\Android\Android Studio
+Android SDK Installation Location:
+C:\Users\user\AppData\Local\Android\sdk
+
+Running Intel® HAXM installer
+HAXM installation failed. To install HAXM follow the instructions found at: https://software.intel.com/android/articles/installation-instructions-for-intel-hardware-accelerated-execution-manager-windowsCreating Android virtual device
+Unable to create a virtual device: Unable to create Android virtual device
+
+p.s 要安裝HAXM, 需到SDK Manager的SDK Tool中勾選installer並安裝.
+	6/19/16	else	Virtualization	為了運行Android studio的Simulator, 我進入了UEFI Firmware(BIOS的替代品)來Enable VT-X(是HAXM這個工具的一個低層的前提條件), 步驟如下:
+1. Win8的右邊彈出Setting>Change PC Setting>Update & Recover>Recover>Restart Now進入另一視窗, 選Virtulization中的Boot with UEFI就可以重啓至UEFI
+2. 於UEFI找到Intel Virtualiztion Technology (有時Wording不一樣, 如VTX等)Enable佢
+3. F10 Save and Restart 就可以了
+且另外誤打誤撞, 在Enable完VTX後之前行不了的VMWare player也可以運行kali linus了!
+	6/18/16	android	Android Studio	在物理機上安裝Android Studio(AS)太慢, 主要在Gradle的自動rebuild平均一次要5分鐘, 且過度頻繁, 又遇上一個叫Intel HAXM Not installed的問題(在試運行Hello world時). 還未搞懂原因為何, 先試下用Linode 4GB做下Virtual ide setup, 打算如果PoC得了的話, 就在阿里云上按需地配一台4核8G VPS. 但Linode上的PoC結果是:
+1. 安裝速度超快, 因為網速很快, 計算能力也很強
+2. 不能進入Run的功能, 因為需要VT-D或SVM這種virtualize的工具來Estimate Android Machine但在VPS上不能再Virtuall了(理論上可但十分艱鉅)
+3. 結論是不行
+現在回頭理解HAXM那個問題, 其實是只要安裝了, 再在BIOS時Enable了VT-X這個功能就可以在我的物理機上run 到了. 
+	6/18/16	else	PenTest	在兩三周前看完了這本英文書, 感覺世界改變, 對於很多網絡安全的事情清淅了也更恐懼, 就像初入行的小醫生看到處處都是病機一樣的感覺. 書大概介紹了Kali linux, Metasploit, 各種Module及其相容Payload, 市面上(見光的) 漏洞數據庫. 又順道介紹了小工具如Netcat, nmap, wireshark, 等等, man-in-the-middle原理, stack-overflow-attack原理等等. 分兩個入侵理念的server side attack和client side attack.. Wireless hacking及Mobile Hacking都有講解. 
+	6/13/16	as400	AS400	RPGUnit.org is an open-source framework of unit test for RPG and can be used as Test-Driven-Development (TDD) (TDD is simply write just enough codes to pass the test written after the user requirement).
+Its latest update is on sourceforge.net and updated on 2007. 
+	5/27/16	as400	AS400	There are message file (MSGF), and ibm build interface in CL control language to fetch MSG body by MSGID (key).  For example, refer to IMODULE/RCVMSG, IMODULE/IHDMSGF
+	5/24/16	as400	rpg	When I try to read through a file CDBLST and I encounter error CPF5029 (data-mapping error) in the message RNQ1299. The error keep showing up even there is only READ operation. It turns out the pf CDBLST has NULL value in it (allow null statement in the dds).
+I learn about:
+1. The important and confidence Delta Development Style (DDS) brings
+2. For details error job log, F1 to the msg page and F10 to details job log
+	5/17/16	as400	rpg	I prove that "MOVE" can cause problem again. In my sample program YMYLES1/QRTSTCSRC, I move 99999 to a variable and then move 0 to it, but its never works anymore. So we need to use the Z-ADD to ensure a value is written
+	5/12/16	as400	rpg	1. Move can hide error, so eval is preferred. 
+2. In DSPF, SEU provide support (F1) to functinos  
+3. We don’t use 17 on dspf editting because it might erase the remark/comment, so we only */? A certain field to know its name and quit without saving.
+	4/25/16	web	HttpComponents	Apache的HttpComponent是其Common Http的第二代產品, 包括HttpClient, HttpServer等等幾個package. 在Linode 4GB Server上試用了HttpClient包的Demo, 包括Get, Post, Basic Auth. 其抽像機制是把Client, RequestAction(HttpGet, HttpPost..), Request, Response 都抽象成個體, 針對reponse的解釋不再使用String, 而是有EntityUtils用靜態方式處理Response (官方文檔用了consume這個字眼)
+	4/25/16	web	Http	原來金數据那種以curl -u傳入的Key/secret 是典型的Http Basic Authentication. 是一種傳統機制, 所以各種語言均有相應support.
+	4/25/16	as400	RPG	RPG有其補充功能的API: ILE Bindable APIs Available
+Most bindable APIs are available to any HLL that ILE supports. ILE provides the following bindable APIs:
+Activation Group and Control Flow Bindable APIs
+Abnormal End (CEE4ABN)
+Find a Control Boundary (CEE4FCB)
+Register Activation Group Exit Procedure (CEE4RAGE)
+Register Call Stack Entry Termination User Exit Procedure (CEERTX)
+Signal the Termination-Imminent Condition (CEETREC)
+Unregister Call Stack Entry Termination User Exit Procedure (CEEUTX)
+Condition Management Bindable APIs
+Construct a Condition Token (CEENCOD)
+Decompose a Condition Token (CEEDCOD)
+Handle a Condition (CEE4HC)
+Move the Resume Cursor to a Return Point (CEEMRCR)
+Register a User-Written Condition Handler (CEEHDLR)
+Retrieve ILE Version and Platform ID (CEEGPID)
+Return the Relative Invocation Number (CEE4RIN)
+Signal a Condition (CEESGL)
+Unregister a User Condition Handler (CEEHDLU)
+	4/19/16	as400	RPG	SETLL理解: 
+1. 無論多少個KEY, 會從第一個開始找, 找到>= arg的值, 在前停; 從ptr所在位置開始進行下一個arg的search, 直到結束. (有key的PF, 本身已是有序體)
+2. %FOUND(71-72): 1=*ON 0=*OFF
+3. %ERROR IN(73-74)
+4. %EQUAL(75-76):1=*ON 0=*OFF
+5. *START, *END
+6. SETLL本身不讀RECORD, 要靠READ, 所以比CHAIN快得多
+相關試用CODE在YMYLES/QSETLLSRC
+	4/18/16	web	Nginx	關於NGINX的分流選擇方式, 官網上寫明:
+When nginx selects a location block to serve a request it first checks location directives that specify prefixes, remembering location with the longest prefix, and then checks regular expressions. If there is a match with a regular expression, nginx picks this location or, otherwise, it picks the one remembered earlier.
+優先正則擊中, 次為最長匹配
+	4/17/16	web	Nginx	安裝Nginx的步驟:
+1. 下載nginx.org上的nginx_signing.key, 並加到apt-key 工具中
+2. sudo apt-get nginx (此處為pre-build package installation)
+3. 使用sudo service nginx start/stop/reload
+其相關目錄如下:
+/etc/nginx/ 放置設置文檔
+/usr/sbin/nginx 軟件的不變程式
+/usr/share/nginx 預設放置網站之處 (也可以通過設定放到別處啦)
+	4/17/16	web	photoshop	雖然不算code, 也是學習的一部份, 更是網站建設的一個工具. 如何調彩圖為單色圖? 在色相/飽和度中, 選著色, 然後調整其他參數即可.
+	4/13/16	as400	AS400	To know more, study the caller-replyer relationship graph
+	4/13/16	as400	AS400	WRKJOBNSCDE 是控制Job定時運行的工具, 由此溫故了相關的概念: Job是標準單位, Thread是其中最小粒度的單位, Job可在多個Queue中換來換去.
+	4/9/16	web	css	https://css-tricks.com/
+	4/3/16	else	Docker	Docker像Java 的VM, 只不過JVM是單獨地騙java application, Docker是聯同其他environment一起騙所有的application. 例如一個裝了tomcat和mysql的docker作為一個container, 可以有多個版本適用於linux呀win呀Mac呀, 而只要設備安裝了相應的Docker Container, 那我寫的app則可以安裝到其上。
+	4/3/16	web	Http Session	Http session 是web server 在http/1.1(1999年發佈)後得到的新能力, 能以一個connection接收多個request, 減低cpu在調度和建立connection時花的運算時間, 而Http session還帶來另一副產品, 即是State狀態概念. 比如Servlet接受個request可以在request上建立一個httsession, 那麼攜帶此session的request會被送回用戶面前? 參考javatpoint的servlet login logout profile
+	4/3/16	web	css: font	https://www.google.com/fonts#
+	4/3/16	java	Eclipse, tomcat	分兩步:
+1. 添加tomcat runtime: eclipse mebu>window>preferecnes>server>Runtimes>Add.. 選擇$CATALINA_HOME即可, 若在eclipse.ini設定好了VM, 則其會出現在可選的JRE表中.
+2. 在Console的Server Tab按link 新增Tomcat instance, 選上述建立的runtime即可
+3. 使用: 在你的App上右擊Run on Server即可
+4. (optional) 右在JSP頁的Import tag上出現Syntax error reminder, 在Project的Library中Add library>Server Runtime>選Tomcat, 再Refresh就可以解決, 然而這不影響runnign
+	4/3/16	java	Tomcat	Install Tomcat is simple:
+1. download package from tomcat.apache.org
+2. set catalina_home in your ~/.bashrc 
+3. set java-home if your don’t have
+4. (optional) make a link to /etc/init.d links to $CATALINA_HOME/bin/catalina.sh
+5. /etc/init.d/tomcat start OR stop OR restart
+	4/3/16	linux	Ubuntu	Ubuntu每個版本都會有版本代號, 12.04是Precise Pangolin (精準穿山甲), 11則用了N和O此兩個首字母.
+	4/3/16	else	Mysql	Install script:
+1. sudo apt-get install mysql-server
+2. 後續還可以有其他更多的security harden
+3. 針對/etc/mysql/my.cnf中的Client, mysql, mysqld添加character-set的propoerties, 其中mysql的比較特別, 可參考網上或churchill server
+4. 上述為設定MYSQL的整體Encoding, 接下來在創建每個DB時都注意把Charset和collation都設好, 就萬無一失了.
+	4/2/16	java	Eclipse	若是手動安裝Java(其實linux都只能手動安裝…), 那麼Eclipse會認不到JVM, 雖入$eclipse_home/eclipse.ini來加入:
+…
+--launcher.defaultAction
+openFile
+-vm
+/home/myles/jdk1.8.0_77/bin/java
+-vmargs
+-Dosgi.requiredJavaVersion=1.5
+…
+	4/2/16	linux	Java, Linux	在linux上安裝java也是有分別的, 此處安裝JDK8:
+1. Linux有分RPM-based platform如Redhat, Ubuntu 則屬Non-RPM-Base的
+2. Installation of the 64-bit JDK on Linux Platforms: This procedure installs the Java Development Kit (JDK) for 64-bit Linux, using an archive binary file (.tar.gz).
+3. Download jdk-8uversion-linux-x64.tar.gz from oracle.com
+4. % tar zxvf jdk-8uversion-linux-x64.tar.gz
+5. Set $PATH and $JAVA_HOME($JAVA_HOME) and $CLASSPATH
+前兩者根据Initial Procedure Launching, 可以在~/.bashrc中加入語句, 至於classpath, oracle在官網也建議最理想還是individual set with -cp
+	4/2/16	linux	Linode	Linode新點Setup全過程:
+1. Deploy an image (Ubuntu 12.04)
+2. Connect with SSH to root
+3. apt-get update && apt-get upgrade
+/* set hostname for ubuntu*/
+4.1 echo "robusto" > /etc/hostname
+4.2 hostname -F /etc/hostname
+4.3. comment the SET_HOSTNAME='yes' property in file /etc/default/dhcpcd if it exists.
+4.4 add line to /etc/hosts: "139.162.48.85 robusto" 
+4.5 add dns record (see get start tutorial on linode)
+/* setting the timezone */
+5. dpkg-reconfigure tzdata
+/* add user */
+6. adduser myles
+7. adduser myles sudo
+	4/2/16	linux	Linode	Linode設定VNC全過程:
+1. 由於沒有完備的14.04設定vnc教程在linode上, 故都選用12.04系統安裝:
+2. 安裝default desktop env: sudo apt-get install ubuntu-desktop
+3. sudo apt-get install vnc4server
+4. 此刻連接, 會看到只有bash的desktop, kill 掉再修改 ~/.vnc/xstartup 文件, 把末行 x-window-manager & 改為gnome-session & 後再vncserver :1即可
+5. 第一次vncserver :1會自動問密碼
+6. vnserver -kill :1 殺
+	3/31/16	else	Mysql	終於解決Mysql問題了, 原因在:
+1. JSP post的request是UTF8的
+2. Tomcat收Request並無添加encoding(ServletRequest.setCharacterEncoding()), 所以亂碼
+3. Servlet向mysql伸出的Connection是set了UTF8
+4. Mysql內部無論my.cnf或內部Db都好, 都設定了UTF8
+5. Mysql的Client也設定了UTF8
+8. 連Ubuntu 和bash也是中文OK的.
+	3/31/16	else	Game Engine	Two game engine:1. libGDX base on java(find from www.slant.co) 2. monkey-x.com: has its own language and translate to other vm
+	3/31/16	else	mysql	今晚折騰了很多, 從八點半到十二點半, 在兩個維度做了mysql的charset設定: /etc/mysql/my.cnf, 另一維度則是進程內client的Alter database character set & collate. 已經從根本上解決了亂碼問題. 但奈何為了遠程管理mysql的jsp在用戶端老是不能將中文寫入Mysql (mysql client顯示不出), 雖失望但也學到java原來針對select 和 insert都有不同的Statement要創建這個知識點, 也熟習了以Ajax方法請求Servlet, 更加實行了Agile的理念(不然一晚是做不了這麼多東西的). 現總結下可能性:
+1. mysql client顯示不出只由於bash沒有中文, 下載下來就可以看到效果
+2. 問題也可能出在connection上, 但仔細檢查JS射出的post以及Servlet對mysql射出的statement的encoding
+	3/31/16	else	encoding	Encoding分三個層次, ASCII, BIG5, GB等是屬於將二三層一一映射的方案, 而Unicode是將二三層作函數映射, 這是主要分別. 也由於此, 因這函數的變化出了UTF-32, UTF-8, UTF-16, UCS等, 以UTF-8最為常用, (而Unicode的字符集也到了十萬級, 不用担心有不支持的字的問題)
+	3/30/16	else	Encoding	之前已有總結Encoding的結構, 再結合今天在Java上的String Encoding測試, 更加深了認識. Java的String.getByte方法會以字符的內容為基準, 按你注入的Charset Name返回相應的Byte值, 換句話講, 是面向字符內容而非面向Byte的, 不變的是內容, 變的是Byte值, 這是他的邏輯. 
+* 信息弄失在以某種大信息集的字符轉換到小信息集時, 小信息集會把不能承載的信息弄棄.
+	3/30/16	as400	RPG	系統內有一些可以用的Utility, 他們以Copy的形式附著到源碼上, 如下:
+D/COPY CFSORC,SRW000
+C/COPY CFSORC,SRP001
+那麼在源碼中便可直接用EXSR SRP009來使用了, 當然必先設定Input的值.
+	3/29/16	else	Encoding	https://www.w3.org/International/articles/definitions-characters/
+	3/27/16	java	Java JSON	JSON是javascript的對像結構, 由於其輕量性, 更多的人接受其於某些場景取代笨重的XML. 在Java的領域中, 主要有以下幾個JSON的相應Library:
+1. javax.json- J2EE的官方Handler
+2. org.json.simple- JSON.org的出品
+3. Jackson
+4. GSON- Google的內部用品
+	3/27/16	networking	Http protocol	* HTTP Protocol是可運行在TCP/IP傳輸框架下的其中一種Protocol (其同伴還有FTP, POP3等等).
+* 在Web developing中, Http的幀由其Header分成兩種: Request 和 Response, 各有結構相似之處.
+	3/27/16	else	MIME	多媒體格式的結構化表示形式, Tika呀, Http Request的Request header中都會有要求你給出當前處理的數据是哪種MIME的要求, 常見的有text/html, application/json, 等等
+	3/27/16	java	Maven	Great Maven Repo Search Site: search.maven.org
+	3/27/16	google	GSON	* Gson 在少量數据量的JSON翻釋速度較其他同類library快, 但巨量數据下則最慢(最快為Jackson)
+* Gson 的fromJson方法允許input的Json有數据不完整性存在.
+	3/24/16	linux	patch	Patch是指補丁, 打補丁其實便是針對某一個程序漏洞的修補, 原理是將像git的diff一樣的delta文件(稱為補丁), 打進(根据補丁內說明的delta量來修改源碼)原程序當中. 一個例子是linux的distribution會有很多補丁需要打, 使用linux bash的diff和patch指令來輸出和輸入補丁. 可參考:  https://linuxacademy.com/blog/linux/introduction-using-diff-and-patch/
+	3/24/16	linux	log	(鳥哥) Linux的log放在/var/log中, 由Daemon (service/守護進程) Syslog進行寫操作. 有其設置文件, 放於/etc/syslog.conf中.
+	3/23/16	linux	bash	(鳥哥) Bash是Bourne Again Shell的縮寫, 是Bourne shell (sh)的第二代, 指的就是我們常見的那個linux黑視窗. A great site to learn bash fast: learnxinyminutes.com
+	3/22/16	java	Upward Compatible/ backward compatible	针对JDK1.4平台开发的程序A能在JDK1.5平台上进行正常运行，那么此时我们就说：程序A向上兼容JDK1.5平台，而JdK1.5平台向下兼容程序B。
+针对JDK1.4平台开发的程序A不能在JDK1.5平台上正常运行，那么此时我们就说：程序A不向上兼容JDK1.5平台，而JdK1.5平台不向下兼容程序B。当然这种情况不发生。JDK平台向下兼容所有java程序。
+针对JDK1.5平台开发的程序B并没有使用JDK1.5平台的新特性而能在JDK1.4平台上正常运行，那么此时我们可以说：程序B向下兼容JDK1.4平台，而JdK1.4平台向上兼容程序B。
+针对JDK1.5平台开发的程序B因为使用JDK1.5平台的新特性或其他原因而不能在JDK1.4平台上正常运行，那么此时我们可以说：程序B不向下兼容JDK1.4平台，而JdK1.4平台不向上兼容程序B。
+	3/22/16	java	Java8	New feature in jdk1.8:
+1. Lambda function and its pre-defined functional method: An OO mindset wrapped funcational programming.
+	3/22/16	as400	RPGLE	Enlarge the screen to 118:
+F4 in CL command "CRTSRCPF"
+	3/22/16	else	Frontend framework	What can be said about Normalize.css (used in "How to Make a Website" by Nick Pettit) as compared to BootStrap as far as their purposes and usabilities are concerned?
+Normalize.css is for making browsers display elements consistently—it's up to you to choose the way you do your CSS, whether you make a grid or whatever; you don't even have to make a grid.
+Bootstrap is CSS and jQuery already made for you. The idea (as far as I understand) is to avoid writing CSS as much as possible and let Bootstrap handle all the alignment, floating, etc. You just choose which Bootstrap CSS classes to include in your div tags.
+
+	3/22/16	else	Frontend framework	Website developing的框架出名的有兩個bootstrap和Normalize. Bootstrap已定義好很多好用的類, 你只需挑選使用; Normalize更像軟件開發意義上的框架, 其不與bootstrap沖突 (其實Bootstrap也用normalize開發). Open source website on github with normalize framework: www.bash.academy
+	3/18/16	git	Git	GIT狀態學習總結: 
+1. Unmodified 狀態就像打印成書白紙黑字
+2. Staged 狀態像模具
+3. Modified狀態像模具草稿
+4. Staged模具-(commit)->Unmodified白紙黑字-(edit)->Modified草稿-(add)->Staged模具
+	3/11/16	as400	DBU	DBU中按Shift+F2可以查看當前PF有哪些LF指著它, 以及這些LF的篩選條件。
+	3/7/16	as400	AS400	WRKQRY:
+1. 通過WRKQRY進入, 是一個CONNECT SQL和PRINTER FILE的功能
+2. 在WRKQRY中沒有GROUP BY, 只能為某一個Field設成count mode: 5, 然後在 "Define report breaks" 中把該Field設定為break
+3. 在library尋找時, 以*QRYDFN作為類型
+	3/2/16	spring	Spring AOP	Spring AOP原來比Spring本身需要更多dependency, 比如Spring.xml的Header有變(run-time報"aop element xxx"的錯), Aspectj的 Dependency, 以及CGLIB的Dependency. 今天成功Demo! Project請參見my_maven_projects/spring2_basic_demo
+	3/2/16	java	Maven	Maven 中, 只要在和java 文件夾並肩處加上resources文件夾, 則可在java 代碼中直接 new File("abc")調用
+	3/1/16	else	Wordpress	wordpress 是基於php的, 只要在一個可以支持翻釋php的web server上, 就可以安裝wp (同時須有mysql). 而如果想和tomcat 協作, 可以直接在tc上安裝php翻釋器, 但比較麻煩, 所以一般做法是在tomcat和apache web server中以tomcat connector 把java servlet請要route 到tomcat server上
+	2/28/16	java	Tomcat	在Eclipse的Web project中不知道應將resources folder放在哪, 若在java代碼中調用"abc.txt", 則會直指/home/myles
+	2/26/16	as400	ICBS	i700SMS/ZSTRCBS中, Program 002569 可輸入90可以查看各個自定義PF欄的意義
+	2/26/16	java	jndi	JNDI(Java Naming and Directory Interface) 是可以把針對"數据源"的代碼抽離到XML中, 使用像Spring的ApplicationContext那種方法調用出來的形式, 一個最常見的應用對像就是JDBC的連接. 
+JNDI的意義從一開始純為了解耦JDBC, 發展到後來, 也可以針對其他"數据源", 比如EJB呀等等的抽像"數据源", 其意義在J2EE中愈來愈重要, 可以說是一個lookup naming&directory的框架了.
+	2/25/16	as400	RPG	加了QUALIFIED關鍵字才可以用*.*的形式調用Data structure
+	2/25/16	as400	Search object	WRKOBJ 以搜尋
+	2/25/16	java	tika	Tika在parse時默認了十萬字的文字限制, 所以導致了我在parse某個pest.pdf (還只有那50K+)時java thread就無聲無息的停了(也沒有報錯)
+	2/25/16	java	tika	使用時需加載tika-core和tika-parser, 不然有Core沒有parser會導致parse不出東西來
+	2/25/16	java	maven	若在POM文件中少了關於build的描述, 很可能package時maven不會把dependency加到包里, 導致各種找不到類現像
+	2/24/16	as400	RPGLE/ Debug	Debug step by step:
+1. Compile: 14 + F4 + DBGVIEW(*SOURCE)
+2. STRDBG {LIBRARY}/{PGMNAME} UPDPROD(*YES)->會進入設定Break point 界面
+3. 只要還沒有ENDDBG, 每次CALL都會進入DBG模式
+4. 一系列有用的Key:
+    a) F6: break point- 可動態設定
+    b) F10 小跳
+    c) F12 大跳
+    d) F11 指定變量名查動態值
+    e) Eval *=* 在某切面動態賦值
+x. ENDDBG
+	2/23/16	as400	RPGLE	A very good reference that covers almost everything we need in rpgle:
+- ZNOTELIB/AUTCAPSRC
+內有: SQL, RPGLE, PF, LF, CLP, SQLRPG, PRTF
+	2/23/16	java	tomcat	可以url control之, 詳見tomcat kindle bok
+	2/22/16	as400	Search	Full-Text Search:
+ Step0/ For report file(PRINTER FILE), target IPROD & IEOM first
+ StepI/ Use WRKOBJ (2 in STRPDM) utility to allocate PF-SRC
+ StepII/ Option 25 (shiftF1 to spread an option to all) to launch full-text search
+ StepIII/Key in search argument to identity source file.
+
+	2/19/16	as400	Screen	For setting keyboard-function mapping, simply enter the setting by clicking the button on the menu bar which looks like a keyboard. For example, to map function "edit-copy" to Ctrl-C, highlight C on the "keyboard" and type in [edit-copy] in the textfield after the "Ctrl" label. For others the setting remain the same.
+	2/18/16	as400	AS400	Website ITJungle has a great list of newsletter topics 400 related news, technology trends and codes. The name and content of newsletter are:
+1. The Four Hundred: This newsletter tracks IBM, its OS/400 platform, third party products, and other events of significance for the OS/400 community
+2. Four Hundred Stuff: focuses on new hardware, software, and services products in the iSeries and AS/400 marketplace, featuring case studies, product spotlights, and vendor profiles.
+3. Four Hundred Guru: provides tech tips, programming how-to, free code, and systems administration advice for OS/400 techies. Their motto is: "You Have Questions.  We Have Answers."
+4. Four Hundred Monitor: provides a weekly snapshot of news, product developements, professional events, and industry happenings in the IBM midrange.
+	2/3/16	as400	Kill Job	Kill Job: 
+1. WRKACTJOB
+2. Inside STRSQL: Shift+Esc> Option2
+	2/3/16	as400	PF-lock	PF在被某程序閱讀時會鎖住某一條RECORD, 解LOCK的大概方法是:
+1. 找出鎖的來源程序: WRKJOB> (12) Work with Job Locks< (F10) Dsipaly job records locks
+(詳細見ATSAOP3: Advanced System Operation- Ch. DataBaseFiles)
+2. 終止該程序: .
+	2/3/16	as400	Device File:
+1. Dsiplay file: DSPF
+2. Printer File: PRTF
+3. Diskette File: DKTF
+4. Tape File: TAPF
+5. Communication File: ICFF
+	1/29/16	as400	RPGLE	This program verifies that:    (YMYLES/QRPGLESRC(TESTINS)                                   
+1. EXFMT is a procedure that present a screen, it exits itself when it feels key press including (not eclusively) ENTER and any function keys that specified in DSPF, but carrying the changed indicator value.                                                
+2. When EXFMT is invoked in the loop again, it will digest the input indicator value first and then set the indicator value back to default value.                                          
+	1/29/16	as400	DSPF	在DSPF中定義Function Key (F1-F24):
+Caxx(xx) 和 CFxx(xx) 的分別在於CA不會把修改過的內容傳出procedure, 而CF則會。
+	1/28/16	as400	Ref	Wine's project reference (w/ display file): ZCHQLIB/QSCHQSRC
+	1/27/16	as400	RPGLE	讀文件最怕被鎖住了, 經過推測, 每個RPG在準備閱讀文件時, 會鎖定及COPY一個IMAGE到自己的POOL中, 所以每次IMPLICITLY開文件時, 記得結束加上 *INLR=*ON; 如果是EXPLICITLY手動開關文件, 則沒有這個顧慮
+	1/27/16	as400	SEU	SEU, key in your search argument at the top textfield. Press shift+F4 to search through the document.
+	1/17/16	linux	Linode/ Tomcat	Install Tomcat success:
+1. Install tomcat6
+2. to control tomcat6:
+    ../etc/init.d/$ sudo ./tomcat6 start
+    ../etc/init.d/$ sudo ./tomcat6 stop
+    ../etc/init.d/$ sudo ./tomcat6 restart 
+3. If you type $whereis tomcat6, it will show:
+    /etc/tomcat6  ---> 也是Catalina_home, 設置Tomcat6的配置
+    /usr/share/tomcat6 ---> 主體文件, Web application 框架
+4. 設置了myles:myles擁有4種manager的權限
+	1/17/16	else	Wifi	Window provide tool to share internet access as a wireless hotspot, the utility is called "ICS(internet connectivity sharing", but unfortunatly win 7 starter edition is not supporting this feature. 
+The basic idea of ICS is to share the network from a local network input to a "virtual miscrosoft network whatever"
+	1/15/16	as400	QRY	Query 參考文件
+QRY : IPROD/ ICBSDPT
+也可以以 GO QUERY 指令進入建造介面
+	1/13/16	java	Java/ XML	/** Factorying**/
+DocumentBuilderFactory -> DocumentBuilder  -> new Document
+TransformerFactory -> Transformer  -> transform (DOMSource, StreamResult)
+
+/**Create elements**/
+public Element Document.createElement(String)
+public TextNode Document.createTextNode(String)
+public void Element.appendChild(Element)
+public void Document.appendChild(Element)
+
+/**Content Making**/
+Element.appendChild(Element)
+	1/13/16	java	Java Command Line	To call a java program on a command line, there are 2 ways:
+1. Call the runnable jar: >java -jar NameOfJar.jar arg1 arg2...
+2. Call the class: >java -cp {jar_path} com.myles.ClassName 
+
+arg1 arg2...
+	1/12/16	java	Java	A great site demostrting basic java util source code(e.g. Log4j & Properties):
+http://www.mkyong.com/java/java-properties-file-examples/
+	1/11/16	as400	DBU	* 在DBU中, 若某Field 是Key Field, 在其任一行數据的該Field上按F6, 可快速跳轉至輸入的查找目標處。
+* 在DBU中, 按F4顯示Field 詳情。
+	1/11/16	java	JTOPEN	JAVADOC:
+http://javadoc.midrange.com/jtopen/index.html?com/ibm/as400/access/ProgramCall.html
+Source Code:
+http://jt400.cvs.sourceforge.net/viewvc/jt400/src/com/ibm/as400/?pathrev=MAIN
+	1/11/16	java	JTOPEN	JTOpen Samples of code:
+http://jt400.cvs.sourceforge.net/viewvc/jt400/jtopenlite/com/ibm/jtopenlite/samples/?pathrev=MAIN
+Including below topics:
+1. AccessIfsFile.java & AccessIfsFileSSL.java
+2. CallCommand.java & CallCommandSSL.java
+3. CallCreateUserSpace.java & CallCreateUserSpaceSSL.java
+4. CallRetrieveAuthorizedUsers.java
+5. CallRetrieveJournalEntries.java
+6. DDMRead.java & DDMReadSSL.java
+7. RunSql.java & RunSqlSSL.java
+8. package-info.java 
+	1/11/16	else	Apache	Today I accquire the basic knowledge of verifying the integrity of an Apache binary distribution. And verify my latest Axis binary distribution. There are 2 ways to verify a distribution:
+1. MD5/SHA1: They are hash code generate from an integral copy of the binary distribution using MD5/SHA1 agreement. To verify them, for example, a MD5 document named "axis2-1.6.4-bin.zip.md5", use fsum.exe(or other equivalences) utility to generate a MD5 code from a newly downloaded copy "axis2-1.6.4-bin.zip" with MD5 hashing protocol, then compare it with an official copy of MD5 doucment from Apache website. 
+2. PGP signature: a signature is different from a hash code, it involves more complicated organism. Basicly just download the PGP signature from Apache website and use GnuPG utility (or other equivalences) and invoke command "gpg --verify xxx.zip.asc xxx.zip"--> get the public key ID -->"gpg --keyserver ..."retrieve the public key from pgpkeys.mit.edu --> compare the 2 files with gpg command again --> 99% done.
+p.s. 99% is because the public key has a minor possibilities that its fake uploaded from a hacker in order to fake your that your newly downloaded software is real. But most of the cases its reliable.
+p.s.2: referece this:<http://www.apache.org/info/verification.html> for more information.
+p.s.3: related utility is filed in this drive in technical library
+	1/9/16	else	WSDL	WSDL Consists of following elements:
+1. Type: define data structure (可以是一個字符串或一個數列或其他)
+2. Message: comprise some types (一個Msg可以持有0或多個type)
+3. portType: like a function definition, in which input message and output message are defined (一條Input, 一條Output)
+4. binding: 說明在不同的模式下(SOAP1.1, SOAP1.2, HTTPGET, HTTPPOST) 應怎樣呼叫portType. 若有n 個PortType, 則會有4個Binding tag, 每個tag入面有相應的n 條 PortType tag.
+	1/9/16	else	SOAP	SOAP facts:
+1. SOAP is sent within HTTP protocal (passing port 80), so that it can avoid firewall blocking when it does happen on RPC(remote procedure calls)
+2. SOAP XML consists of :
+    a) A envelope element
+    b) A header element
+    c) A body element
+    d) A Fault element
+	1/9/16	else	Webservice	Webservice (aka WS) concept is brought in to solve below 3 problems:
+1. How to make internet callout from a client to a server without knowing its technical spec?
+2. How a client application knows the interface of such a callout?
+3. How do client know if there is already such service that it is looking for?
+WS solved above problem respectively with 3 important components:
+1. SOAP: Simple Object Access Protocal: an xml that package your request and the response from a WS provider
+2. WSDL: Web Service Description Language: an xml document that tells you in what format should the SOAP request & repsonds be
+3. SOAP Discovery (aka Disco): Tells what WS is available \\
+	1/9/16	else	Webservice	網絡上有不少公共的Web Service 可以使用, 比如free-web-services.com 就提供了許多此類WS. 每個WS的頁面都有SOAP和HTTP Request的參考調用方式, 使用Telnet 便可輕鬆地嘗試。比如以下指令:
+1. telnet wsf.cdyne.com 80
+2. GET /WeatherWS/Weather.asmx/GetWeatherInformation? HTTP/1.1
+    Host: wsf.cdyne.com
+	1/9/16	else	Telnet	關於Telnet的幾點:
+1. Win7 由於安全考慮一開始是disable了Telnet, 可以參考網上的enable方式
+2. 在CMD輸入 telnet www.google.com 80 則可與目標網站建立TCP Connection
+3. 在建立TCP Connection後畫面全黑, 按Ctrl + ] 進入Telnet 接收返回信息的畫面 (若時間過長Telnet會自動斷開TCP Connection)
+4. 在Telnet接收返回信息的畫面上按Enter, 可進入指令輸入編輯器, 輸入GET /index.html HTTP/1.1 可以返回該html
+5. 在Telnet 接收返回信息的畫面輸入q退回CMD
+	1/8/16	as400	Shortcut	At the top of SEU, there is "Columns . . . :   SEU==>__________ " which allows different function:
+1. Define Search: f {keyword}           
+2. Search: Shift + F4
+	1/7/16	linux	Python on Linux	Usually, On linux we have below habbit when using python:
+1. We check where python is installed using : $whereis python
+2. Executable scripts of python (or other languages) go either in /usr/bin/ or /usr/sbin/ depending on whether they should be available to all users, or for root only.
+3. Config files ought to go to /etc/, and log files to /var/log/.
+4. Other python files should be deployed to /usr/share/pyshared/.
+	1/6/16	as400	ERROR	In RUNSQLSTM command, everytime the file will be clear before running the SQL TXT in source file. That’s why I cannot run the update statement or select statement in the head of the SQL TXT.
+	12/31/15	as400	Shortcut	Shift F9 will prompt command line inside a SEU.
+	12/30/15	as400	RPGLE	MOVE和EVAL的分別:
+1. MOVE是一個賦值操作, 過程中系統會進行隱式(Implicit) 的類型轉換, RPG針對變量的類型是非常嚴格的. 所以MOVE為開發人員提供很大便利。
+2. EVAL的來源是解決多項式(Expression) 賦值的麻煩, 以往進行 N=X*X+Y+Z 必須行以下代碼, 而一句EVAL即可搞掂, 所以EVAL的副作用使我們可利用他來賦值, 但注意由於EVAL不會進行隱式(Implicit) 的類型轉換, 所以須利用: %dec() or %editc() 等顯示轉換函數。
+C   X    MULT X     N
+C   N    ADD  Y     N
+C   N    ADD  Z     N
+is equivalent to 
+EVAL N = X*X + Y + Z
+	12/30/15	as400	WRKQRY	Steps:
+1. Use AS400 utility WRKQRY to open *QRYDEN file {IPROD/ICBSDPT}
+2. *QRYDEN stands for query definition file. It comprise of sql and report generator which output PF and PRTF.
+3. {IPROD/ICBSDPT} output report that sum up top ten depositor and statistic of all depositor in BCM.
+4. The request is to enlarge the analyse pool by including customer with status '7'. So the operation is to dive into *QRYDFN file and remove the "TMSTAT NE '7'" condition.
+	12/30/15	as400	READ	In RPG IV, the READ operation will update the imported field value variables, the RPG will import the declared file's fields into the PGM so if the physical file is updated, the RPG needs to be compiled again or it will fire error.
+	12/28/15	as400	SQL	SQL learn Column Function, Scalar Function and Selection Syntax (group, having, order)
+	12/28/15	as400	SQL	There are useful table about SQL/400 Scalar Function (like Char() & Substr() functions), Please reference SQL/400 Developer's Guide P.89
+	12/23/15	as400	Built-in function list and usage:
+1. %ADDRESS: Retrun the address of a variable.
+2. %BINARY: 
+3. %CHECK: Return the location of the first char that is not exist in the comparator
+4. %OFFSET: Return the offset attribute of a pointer
+5. %SCAN: Return whether a string exist in another string
+6. %SST: Return the sub-string of a string
+7. %SWITCH: Use 8-digit to manage jobs. IF %SWITCH(11XXXX)-> CALL PGM11, IF %SWITCH(10XXXX)-> CALL PGM10
+8. %TRIM
+	12/23/15	as400	SQL Practice Ref.xlsx Stores the file description and the sample records of PFSAMPLE and PFSAMPLE2.
+	12/23/15	as400	ICBS	[REQUEST] For a request from marketing department on: Returns customers' job title whose age is within 25-45 according to the given CIF list
+[SOP]
+1. Create the CIF key file on AS400
+    a) Use FTP shell to upload a single column txt to AS400 Testing Scenario(S657274B:172.18.255.20)
+    b) Use utility STRSQL and command SELECT DISTINCT * FROM {filename} (for a non-duplicated key file)
+    c) Use F13 in STRSQL to create file bases on the SELECT output
+2. Create the request data file according to the CIF key file
+    a) ICBSBCMDB1/CUP00301 個人資料, ICBSBCMDB1/CUP00601 職業資料
+    b) Use the STRSQL to select request data and output
+3. Download data from AS400 to PC
+    a) Use the PC utility "data transfer from iSerie Server"
+4. Modify data and submit request
+    a) Use VLOOKUP function to joint the original file and the newly created file
+    b) Get the age through birth year and omit non-qualified datas.
+    c) Email the request data back
+	12/23/15	as400	DBU	View field desciption: F14
+View database relation: F4
+	12/23/15	as400	ICBS	ICBSBCMDB1/TMP009 is a model of joint DDS logical file.
+	12/23/15	as400	ICBS	[REQUEST] Increase the ATM limit according to document provided by Branch Management Department
+[SOP]
+1. Get the ITR and CHG #
+2. Make backup for testing 場 IPROD/BRNINSUR 
+3. Use BCMGPL/BRNCTLCL to modify ATM limit
+    a) input 002(Branch#) and ATM
+    b) delete line 3,4,6 and modify line 1,2,5
+    c) F9 is save and F12 is clear
+4. Description in CHG should be writen:
+    PF: IPROD/BRNXXX
+    Incread the ATM Cash limit(brancgh xxxxx_)
+    implmeantion:
+    1. backup up xxx ile
+    2. use xxx to modifu xxx
+	12/23/15	as400	SQL	 insert into mylhist (CUSTHS,STATHS,PGRPHS,PTYPHS,AMTHS)  select CUSTHS,STATHS,PGRPHS,PTYPHS,AMTHS from mylhist#1     
+ 9 rows inserted in MYLHIST in ATSADB1.      
+可用的INSERT SQL語句, 注意後半句的SELECT後是沒有括號的。
+	12/23/15	as400	RPGLE	There are 2 concepts involved with RPGLE creation:
+1. Compile: use WRKSPLF to learn more about the compiler's message
+2. Debug: if the compiler creates the program but it still goes wrong, user can set CRTBNDRPG command's parameter DBGVIEW to *LIST, then when you call the program, the system will present the program with breakpoints. (for detail, please refers to IBM developerWorks RPG IV Hello World web page)
+	12/23/15	as400	RPGLE	The first Hello World of RPGLE: 
+https://www.ibm.com/developerworks/community/wikis/home?lang=en#!/wiki/We13116a562db_467e_bcd4_882013aec57a/page/Coding%20in%20RPG%20IV%20-%20Chapter%203%20Variables%20and%20procedures
+	12/22/15	as400	JTOPEN	Succeed to login using com.ibm.as400.access.AS400
+	12/22/15	as400	JTOPEN	Succeed to create data area using com.ibm.as400.access.CharacterDataArea
+	12/22/15	as400	JTOpen	JTOpen is a bridge between Java and AS400:
+1. Toolbox for Java and JTOpen- Using Java to Access IBM i 
+http://www.ibm.com/developerworks/ibmi/library/i-javatoolbox/
+2. JTOpen jdbcClient – simplifies Java SQL development- Open source utility makes JDBC testing quick and easy
+http://www.ibm.com/developerworks/ibmi/library/i-jtopen-jdbc-client/
+3. Using IBM Toolbox for Java to access the integrated file system
+http://www.ibm.com/developerworks/ibmi/library/i-ifs/
+	12/18/15	as400	ERROR	今天在CL中嘗試用Built-in function %CHAR 時, 不斷彈出Error, 原因竟然是因為原來%CHAR是屬於V7R2的新增功能, 所以在V7R1是用不了。
+	12/18/15	as400	Shortcut	In CL, Press Shift + F7/F8 to swift the whole program from left/rigth
+	12/18/15	as400	Ref	Library IPROD and ZCIFLIB both contain referencable QCLSRC and QRPGSRC.
+	12/18/15	as400	In any production code source file, if there are *#1 files, they are backups for the * program. There would also be reference inside this program.
+	12/17/15	as400	Success	在CL1教程的CH9, 我已可以利用DCLF和RCVF 構建一個指針ITERATE 一個DB FILE 的程序 (MYLDCLFCL), 並且用基本的字符串處理 (直接轉換成字符串及調用%SST操作) 將結果輸出至通用Data area 檔案: MYL00ARA
+	12/17/15	as400	Command	Go Printer 直接到Printer 
+	12/17/15	as400	Command	how to check the system version information:
+1. There are many ways to check the system version but accordingly there would be authority blocks. With limited user authority, DSPSFWRSC (Display Software Resource) and you can view most of the software version on your AS400.
+2. DSPPTF and WRKLICINF are command requires higher authority.
+3. There are a few diff. ver. in this machine: 
+V7R1: Most of the software
+V5R2: QRDARS | V5R1: QVI
+V6R1: QAPS, QRJE, QJAVA, QJVM[d]*
+V4R2: QFNT[d]*
+	12/17/15	as400	Printing	Output queues are used to manage spooled files. Spooled files in output queues can be:
+•Printed
+•Kept as records
+•Used as input to other applications
+•Transferred to other output queues
+•Sent as e-mail
+•Used to create PDF files
+	12/17/15	as400	AS400	如果說OS400上哪部份最面向對像, 應該就是其Object Description 和 Object的關係, 通過OD創建O, 而D又可以被OVERRIDE.
+	12/17/15	as400	MSG	Every user profile and workstation has a message queue associated with it.
+	12/17/15	as400	ERROR	很多次CRTCLPGM或是Option 14 來Compile CL的程序會出現 Program not created 提示, 而F1進去也只是說找不到Printer device, 其實問題多數出在以下幾點:
+1. 變量: 可能名字打錯
+2. 類型: 可能類型轉換做錯
+	12/17/15	as400	iNavigator	How to export file from AS400:
+1. Open iNavigator Utility "Data Transfer From iSeries Server"
+2. Select your target System name: S657274B
+3. Output device: File
+4. File Name: %data csv output path%
+p.s. The *.FDF is a PC File Description File, it store the summary & Field desc.
+p.s. Sometimes we need to check "Convert CCSID 65535" option in the Properties>Conversions
+p.s. If the target object is a member, type the name in: YMYLES/QCLSRC(MYL01CL)
+	12/17/15	as400	iNavigator	How to import file to AS400:
+1. Open iNavigator Utility "Data Transfer To iSeries Server"
+2. Anyway nothing different.
+P.s. The *.FDF is critical in importing, make sure your export your target object first so you get the *.FDF file. Use the same file for importing.
+	12/17/15	as400	iNavigator	因為在上述兩個Utility的設定中都是根隨iNavigator的設定, 所以有關用戶的設定得在後者的System上按右鍵中的Property中調校.
+	12/17/15	as400	在Terminal 中按Ctrl + Home可以Activate mouse positioner
+	12/17/15	as400	通常五點半後理論上可以修改Poduction的代碼
+	12/17/15	as400	在compile physical file時一定注意設定其Record上限數為*nomax
+	12/14/15	as400	Debug	How to debug a file: 
+1. On the error page, cusor on the msg and press F1
+2. Base on previous F1, press F10
+3. The MONMSG should be place according to its syntax (top, somewhere in between)
+	12/14/15	as400	QUSRWRK is the System defined subsystem that runs all connection between AS400 and PC client.
+	12/14/15	as400	How to read a data file's field:
+1. DBU + F21
+2. STRSQL + F4
+3. DSPFFD
+4. DDS ?
+	12/14/15	as400	Shortcut: c as an option for compiling source file
+	12/14/15	as400	Shortcut: WRKMBRPDM Shift + F6 可以調校是否放入Batch
+	12/14/15	as400	DDS	STRSEU ymyles/qddssrc myl01dds
+	12/14/15	as400	Type IPPF at the top-left corner
+	12/14/15	as400	Every DDS srcfile, there is "Description" part and "Member" part.
+	12/14/15	as400	Data types: 
+A = Character/ S = Zoned Decimal/ P = Packed Decimal/ B = Binary/ F = Floating Point
+	12/14/15	as400	一天看完ATSADB1一本書的第一到第五章, 第四五章的Reference關係並末明白, 需多看幾次及參考其他資料。	 
+	12/14/15	as400	ERROR	../QCLSRC/MYL01I Cannot be compiled because of the lines related to SCRN01 parameter calling. Cannot find the solution yet and the call of SCRN01 is still okay w/o these lines.
+	12/14/15	as400	目前接觸到的源文件都是Physical file的Member, CL的源文件是member with CLP type, PF的源文件是member w/ FP type, 螢幕文件的源文件是member w/ DSPF type.
+	12/14/15	as400	在Physical file 的源文件中, 如果在Field類的欄目留空, 則預設為A (即Char); 若為空, 且後有數字, 則按預設為P (packed number)
+	12/14/15	as400	ODP 和 Access Path的概念: 
+1. ODP (Open data Path): 是連系Application 和 Physical file 間的機制, 按目前理解, 應該其算比較隱閉。
+2. Access Path: 分兩種, 反正就是定義Application 引用Data 時, Field 的預設返回順序( 在PF源文件中以K代表)。
+	12/14/15	as400	Q?A!	在每次退出SEU時, Resequence member的意思是什麼? CLP的Member 代碼行, Resequence 的意思是針對那些0009.01作重新編號的意思, 其存在意義是為了分辨新加插之代碼, 通常我們選N。
+	12/14/15	as400	Field Referencing的概念是將各類Field的定義本體放到同一個Reference file里, 而新需定義的Physical file field 即可重用代碼。
+	12/14/15	as400	 以下常用Validation Function, 使用時可以參考DB1第6章6.17, 以多行形式寫入file source mbr:
+ALIAS, COLHDG, EDTCDE, EDTWRD, COMP/CMP, RANGE, VALUES, CHECK
+	12/14/15	as400	DBU	DBU的Shift + F9正正是驗證Keyed Sequenced Access Path的好方式, 如果是Keyed的欄目, 顯為白色字體, 若為Arrival Seq的欄目, 則是正常顏色
+	12/14/15	as400	Command	總的來講, KEY是基於我擁有的數据內容來拒絕, 而FUNCTION則是你提供的數据來拒絕的。
+	12/14/15	as400	Q?	Access Path的設定不明白, *IMMED, *REBLD
+	12/11/15	as400	Some learnings:
+1. Go CMDXXX: Very useful tool suggested by Edward that display all XXX releated command.
+2. DBU is a great tool that replace DFU, it can be call by DBU at command line or call as an option "DB"
+3. In library IMODULE, there are a lot of code for reference.
+4. To search for field information, use F4 in STRSQL, if details needed, go to DSPFFD
+5. WRKMBRPDM is a short cut for typing 3 in the pdm
+6. EDL and AJ is the customize shortcut for command: EDTLIBL and WRKACTJOB
+	12/11/15	as400	DBU	DBU Usage:
+1. Add library list entry of DBU10
+2. DBU xxx / DB xxx 
+3. F21 is a summary display mode
+	12/11/15	as400	ICBSBCMDB1 stands for International Commerical Banking System- BCM Database #1
+	12/11/15	as400	AS400	Error Message (CDIR and CDFG):
+* C refers Cancel
+* D refers Creates a dump for the program
+* I refers Ignore
+* R refers Retry
+* F refers Creates a full format dump
+* G refers the system starts the *GETIN function means the program will  start execute again.
+	12/11/15	as400	CHKOBJ 夾 MONMSG 的Exception Handling Mechanism:
+1. CHKOBJ can try to access a target object and then return below escape messgae:
+    *CPF9801Object &2 in library &3 not found. 
+    *CPF9802Not authorized to object &2 in &3. 
+    *CPF9810Library &1 not found. 
+    *CPF9815Member &5 file &2 in library &3 not found. 
+    *CPF9820Not authorized to use library &1. 
+    *CPF9830Cannot assign library &1. 
+    *CPF9899Error occurred during processing of command. 
+ 2. MONMSG MSGID(CPF9801...) EXEC(DO)...ENDDO
+	12/11/15	as400	ERROR	I fail to activate the MYL09CL  (about SNDUSRMSG, MONMSG, CHKOBJ), so I fly first and then return.
+	12/11/15	as400	ERROR	CHGJOB, CHKOBJ, MONMSG, SNDUSRMSG, ALCOBJ, DLCOBJ
+	12/11/15	as400	Chapter 10 overcome! An 
+	12/11/15	as400	STRSDA is the entrance for DDS member's record creation.
+	12/11/15	as400	DDS stands for Data Description Specifications
+	12/11/15	as400	This is a website about new trends and technology regards AS400:
+	12/11/15	as400	http://search400.techtarget.com/
+	12/11/15	as400	Printing	How to print a file:
+WJS (work with job spooled files?)
+WRKSPLF (work with all spooled files?)
+CHGSPLFA DEV(PRTCCB)
+	12/7/15	as400	AS400	Organism "Library list" is a way to solve classpath collapse. For any command, the system will iterate libraries according to below sequence:
+* System library list (define above)
+* Production library list
+* Current library
+* User Library List (which can be edit by below cmd)
+	12/7/15	as400	AS400	Edits Library list:
+* DSPLIBL * ADDLIBLE(add lib list entry) * CHGLIBL *CHGCURLIB * EDTLIBL * RMVLIBL
+	12/7/15	as400	Operation	Add library list entry "YALVIN" to the first place.
+	12/7/15	as400	Operation	Crtlib YMYLES
+	12/7/15	as400	Operation	In STRPDM, Work with Members and target QCLSRC and use F6 to create a member called "MYL01CL"
+	12/7/15	as400	Command	Common command:
+* Command structure is like [Action][Adjective](optional)[Noun]
+* signoff (sign off)
+* strpdm (same as press 2 in main menu, it stands for 'START PROGRAM DEVELOPMENT MANAGER')
+* wrkactjob (run the thread manager)
+* strsql (Start SQL interactive session) 
+* strdfu (start the data file utility)
+* strsda (screen design aid) 
+* wrklib LIB() //go to the target library
+* Go LibraryName/ObjectName (Only menu type object will be detected)
+* crtpf : create physical files (flexible) 
+* crtsrcpf : create source type physical file (quick)
+	12/7/15	as400	ATS	ATS is a company that provided AS/400 course. The course includes paper document and electronic documents (library on AS/400). The course generally includes:
+a. ATSASOP- ATS AS/400 System Operation Lession1-16
+b. ATSAOP3- ATS AS/400 Advanced System Operation Lession1-15
+c. ATSACL1- ATS AS/400 Command line Lession1-12
+d. ATSADB1- ATS AS/400 Database 1 Lession1-17
+e. ATSADB2- ATS AS/400 Database 2 Lession1-19
+f. ATSARG2- ATS AS/400 RPG/400 1
+g. ATSARG3- ATS AS/400 RPG/400 2
+	12/7/15	as400	ATS	Electronic education kit usgae:
+* The electronic education kit is given as a library object in AS400
+* To start with any of them, activate the ATSMNU in regarded library and use admin account "ATS" to create user account.
+* Use the user account to sign in and start with it
+	12/7/15	as400	Command	* dsplib : display library
+* go [command menu such as CMDLIB, CMDFILE, CMDCMD, CMDCFG, CMDWhatever]
+* dsppfm file() mbr()  Display the file member no matter its data or source 
+* Call PGM()
+	12/7/15	as400	AS400	Among all different types of objects, only physical files and source file are able to own members.
+	12/7/15	as400	SEU	In the SEU, input I to the last line of program and press enter, comes a new line.
+	12/7/15	as400	SEU	F13 to edit the SEU setting like case sensitivity and syntax checking.
+	12/7/15	as400	SEU	Compiling:
+* In the wrk with memebr menu, F18 to change compiling options, 14 to compile a file. The output program will be saved as an object with type PGM in a target library.
+	12/7/15	as400	ERROR	Error record:
+Q: [YMYLES/QCLSRC(MYL01CL)]I wrote a program which source file in YMYLES/QCLSRC[MYL01CL], and change the compile default (F18) to a certain compilation destination ATSACL1, I call the program ATSACL1/MYL01CL and it runs ok the first time. But after the first running, it occurs error on every I/O lines. 
+A: I tried to compile the file in my library YMYLES, and even I created the PGM file, I dont have autority to run it in YMYLES. And when I try again to build the program with the same structure but different target file names, it still goes error. For the problem happened above, there might be 2 reasons behind:
+    * Maybe authority not enough for IO operation and stuck on a create action.;/
+	12/7/15	as400	SEU	Success Case:
+1. I create a CL program that copy a member's value to another member in the same library using the CPYF command.
+	12/7/15	as400	ERROR	Error record:
+Q:[YMYLES/QCLSRC(MYL03CL)] I fail to compile it, the msg I got is "Program XXX is not created" which I totally not be able to explain. When I delete all other msg and just leave a DSPMSG in the CL body, it can be compiled again.
+	12/7/15	as400	AS400	Object types
+1. Data Area (*DTAARA): Data area is like a small file that you can only store one record. Suitable for constants.
+2. Data Queue (*DTAQ): Like data area, and can be access by diff pgm at the same time. w/o any structure at all.
+3. File (*FILE): PF-DTA, PF-SRC, Logical File, Device File
+4. Job Descrip (*JOBD): its like an running-config file 
+	12/7/15	as400	SQL	In AS400 Physical data file is a single-member file.
+	12/7/15	as400	SQL	To check a database file's fields, use DSPFFD (Display File Field Description)
+	12/7/15	as400	SQL	Success Case:
+1. I use PAU to add some sample record into a table (YALVIN.CUP05101)
+2. I use CL command DSPFFD to get the field name of the table
+3. I create CL program using this command: RUNSQL  fasdfa4f43fcwe34 (MYL04CL) It can run even its not in the same directory with the target library.
+	12/7/15	as400	DBU	DBU is a file access utility which can be used to locate and update records. Use DBU command to call the UI. There is menu at the head of the UI allows you to select your working mode accordingly.
+	12/7/15	java	Hibernate	Successfully run an application using hibernate framework, here is the route:
+1. Load jars in hibernate/lib directory
+2. Prepare the hibernate.cdg.xml and {ObjectName}.hbm.xml (the pain is the header syntax, when you see theres error saying hibernate cannot parse the xmls, that would be xml synax, and be very aware that both header are different from each other)
+3. Put these xml file into the root directory of your classpath (i put them into the {project_root}/build/classes folder and it works)
+4. Prepare the database, make sure you align and prepare tables accordingly (There must be primary key and it must activate the auto_increment feature, and the primary key should also be declare in the mapping xml file)
+5. Prepare the bean and client for management.
+	12/3/15	as400	AS400	Relationship between Native and IFS in AS400:
+1. To obtain AS400 (testing usage)'s IP address from >>ping S657274B (the testing machine's name)
+2. The testing machine's IP address is 172.18.255.20
+3. We can access the IFS through FTP in windows and it looks like a window directory (and it is)
+4. We can also access the IFS in Emulator.
+	12/3/15	as400	Emulator	Common Shortsout:
+* F12: backward
+* F4: help/list
+* F12+N: Shift+FN
+* PageUp/Down: scrolling
+* Else: read the options reminder at the bottom of the terminal body.
+	12/3/15	as400	Emulator	Common options(type into the beginning underscore to call operation toward different kinds of target):
+* 5: Display
+* 12: Enter
+* Else: read the options reminder on top of the terminal body.
+	12/3/15	as400	Emulator	The AS400 Terminal Emulator can be find in the BI77 user: C:\Program Files\IBM\Client Access\Emulator\Private\DS0MS1.ws
+	12/3/15	as400	Emulator	So far I don’t have my personal library on AS400 built, and I would be using Library: YALVIN temporally
+	12/3/15	as400	Emulator	Create a access account to AS400 terminal emulator:
+- User name : BI77PGM
+- Pwd: suntil8
+	12/3/15	as400	IBM iSeries Access for Windows	In BI77 User Desktop ProgramFiles\IBM\Client Access, there are utilities for Windows to operate AS400 remotely as some of them shown below:
+* Emulator (The terminal emulator we use most)
+* iSerie Navigator (An gui for AS400 Server management)
+* AFPViewr
+* Else… 
+	12/3/15	as400	Emulator	In some certain place, we can use * for generic directory name we try to visit, for example, we use A* to search for any files which name starting at A.
+	12/3/15	as400	Emulator	Below table display most common object types and their attribute:
+Objt        Type       Attr          Text
+----------------------------------------------------------------------------------------------------------------------------------------------
+SAM1      *FILE      PF-DTA   This is a sample object which its members are datas.
+SAM2      *FILE      PF-SRC    This is a sample object which its members are source code like CL, RPG, COBOL etc.
+SAM3      *FILE      DSPF
+SAM3      *FILE      PRTF
+SAM3      *FILE      LF
+	12/3/15	as400	Emulator	SAM3      *DTAARA   n/a       Data area
+SAM3      *QRYDFN   QRY      Query Definition
+SAM3      *PGM     CLP            Programs, it’s a program compiled from CLP
+SAM3      *PGM     RPGLE       Programs, it’s a program compiled from RPGLE
+SAM3      *PGM     CLLE           Programs, it’s a program compiled from CLLE
+	12/3/15	as400	AS400	Almost everything on AS400 is an Object(except for source members). Each object differs from each other by names and types. Each type of object has it unique characteristic and purpose in the system. Main types of objects are:
+* programs, files, libraries, commands, user profiles, job descrips, folders, subsystems
+* job queues, message queues, output queues.
+	12/3/15	as400	Emulator	Built-in menus overview( Entry 9 from main menu/ or type GO can help):
+|| go main (system supplied menu)|| go user(User tasks)|| go ofctsk( office task)|| go system || Go data|| Go program || Go CMN (communication) || Go Define|| Go Problem|| Go Support|| Go PCSTSK(client access tasks)
+	12/3/15	as400	AS400	Library has 2 kinds of Attribute: "PROD(production)", "TEST"
+	12/3/15	as400	Emulator	ShortCut: F9 (last code line) F1 (help)
+	12/3/15	as400	Emulator	CL command finder of AS400: (For System version V7R1 aka 7.1)
+	12/3/15	as400	Emulator	https://www-01.ibm.com/support/knowledgecenter/ssw_ibm_i_71/rbam6/SS1.htm?lang=en
+	12/3/15	as400	Emulator	http://www-01.ibm.com/support/knowledgecenter/ssw_ibm_i_71/welcome.html
+	12/3/15	as400	Emulator	CL Command can be perform manually from:
+1. Free form entry at any command line from the menu/list
+2. Type out the name of command and press F4 to prompt to the "Command Entry"
+2. Type "CALL QCMD" or press F10 (if page allows) to prompt to the "Command Entry"
+	12/3/15	as400	AS400	Libraries are divided into 3 types:
+1. System lib, such as: QSYS, QHLPSYS, QRECOVERY
+2. Production lib: such as QCBL, QRPG, QSQL
+3. User Lib: such as QGPL, QPDA, QTEMP
+	12/2/15	as400	AS400	Document reading overview:
+1. Project management 
+2. Information Security
+3. Removable device usage
+	12/2/15	as400	Account	Create a user desktop account:
+- User name : BI77
+- Pwd:suntil8
+	12/2/15	as400	AS400	AS400 infrastructure vs windows:
+1. Native and IFS(integrated file system) in AS400
+2. AS400 native's file system is comprose by "LIBRARY", "OBJECT", "MEMBER"
+3. Native and IFS are dynamicly sharing the physical capacity
+	12/1/15	as400	AS400	General Induction of infrastructure
+	12/1/15	as400	AS400	General Induction of employing condition
+	11/26/15	networking	Apache Server	Apache Tomcat and Apache http server differences: 1, Apache is a general-purpose http server, which supports a number of advanced options that Tomcat doesn't. 2, Although Tomcat can be used as a general purpose http server, you can also set up Apache and Tomcat to work together with Apache serving static content and forwarding the requests for dynamic content to Tomcat. 
+	11/26/15	else	Linode	Linode provide Linux cloud server service. And there is a lot about Linus system administration skill documentation.
+	11/26/15	java	Maven	Maven, a project management tool and a build tool. It defines a POM so all project is arrange and build according to a project repository template. Maven is a command line tool and it's very easy to invoke such as: >mvn compile >mvn package >mvn test
+	11/25/15	java	Tomcat	1. Install the zip package and put it under java directory
+2. Three prerequisites: 
+    a. Set the %CATALINA_HOME% in window command line as tomcat folder root (可以手動在環境變量處新增)
+    b. Set the %JAVA_HOME% and %JRE_HOME%
+3. Run the root\bin\startup.bat to turn on the server
+4. Browser localhost:8080 to visit the default index page of Tomcat Container.
+p.s 為了即場試改tomcat自帶的servlet例子helloworld, 教程示範修改tomcat folder下的example中helloworld的源java文件冄嘗試編釋, 其中使用了javac -classpath "{address}\＊" helloworld.java 十分有用, 可以在編釋時動態設置classpath
+	11/25/15	java	Java	In the windows command line, type: java -jar "xxx.jar" can run java projects package with a main method. For such a project, inside the "xxx.jar" there is an mf file with state the location of the main class that JVM should run. Usually, we just simply package the dist folder build be the IDE and distribute it.
+	11/23/15	IK Analyzer	中文分詞中最受歡迎的開源工具, 作為lucne的插件角色(其analyzer的一個子類)來使用。
+	11/21/15	java	Lucene	Lucene is a text searching engine library. The main idea is that target data is package as Document. We config and use IndexWriter to write index and IndexSearcher to searcher index.
+	11/20/15	java	JDK	JDK has a Hugh architecture which contains a lot of API like security, math, networking... Please see the excel file in the tech folder named "JDK architecture" to know more about every API.
+	11/20/15	android	Android SDK	The most common and official SDK for android application development is the Android SDK. For more information, refers here: developer.android.com/training/index.html
+	11/20/15	else	LOG	Introduction to log4j:
+1. log4j's website is [logging.apache.org], there are many log4j siblings designed for languages.
+2. There are 3 main component: Logger (寫log的人), Appender(存儲log的人), Layout(制定log格式的人)
+3. Log4j provide factory method to create Logger Singleton Instance, so the best way is to plan your logger naming structure first.
+4. It has a log level system: TRACE < DEBUG < INFO < WARN < ERROR < FATAL < OFF
+	11/20/15	else	XML	The differences between DOM parser and SAX parser are:
+ * 1. DOM parser loads whole XML doc in memory while SAX only loads a small part.
+ * 2. DOM is faster than SAX because it access whole XML doc in memory.
+ * 3. SAX in java is better suitable for large XML file than DOM beasuse of the memory issue.
+ * 4. DOM parser works on document object model(DOM) while SAX is an event based xml parser.
+	11/20/15	else	XML	Introduction to XML processing in Java:
+1. There are generally 4 common way to process XML, they are DOM parser, SAX parser, JDOM, DOM4J
+2. DOM and SAX are 2 different mindset to read the XML files built upon different mindset. DOM stands for document object model and SAX stands for simple api for xmlparsing.
+3. DOM classes are in w3c.dom package while DOM Parser for Java is in JAXP (Java API for XML Parsing) package.
+ SAX needs classes in sax.xml.org and JAXP classes.
+4. JDOM is a project that improves DOM parser, it need to be download from [www.jdom.org]
+5. DOM4J is even a step forward on DOM parser, originally its based on JDOM, but now its regarded as the best DOM parser. [dom4j.sourceforge.net]
+	11/16/15	else	SQL	JAVA, SQL, MYSQL等概念的關係:
+1. SQL是為查找RDMS所設計的語言, 現今流行的RDMS有很多, 如DB2, MS SQL Server, MySQL, Oracle (Apache derby也是), 所以各家公司也走一點小後門, 各自為自家的SQL語言做了些私人的擴展, 這導致某些SQL在另的系統會有水土不服
+2. Java 要使用各家公司提供的sql server, 必須通過各家公司提供的相應的jdbc driver (此driver其實就是各公司按照oracle 給出的api標準而寫出的driver), 而java內部實現功能時, 其機制是先使用sdk自帶的java.sql包, 而此包會智能地找尋到該調用的driver.
+	11/13/15	google	guava	GUAVA對於不可變集合型有這樣的見解: It is almost always a bad idea to modify an element (in a way that affects its {@link Object#equals} behavior) while it is contained in a collection. Undefined behavior and bugs will result...所以其Immutable familiy將所有可以在充實集合後針對元素修改的方法都在繼承中棄用了(override the method and throws NotSupportException). 有三種創建方法, 創建之後基本上無法不改整數組而只改變某元素 (當然把內容拷出來, 改變一元素再整個拷回去也算改變了ImmutableCollection整個數組)
+	11/13/15	google	guava	GUAVA建議對有可能返回null的方法使用optional<E> 類作為返回值, 功能性意義不大, 精神性意義更大。
+	11/10/15	google	Google TensorFlow	* Google 昨天開源了TensorFlow Project, 該Project提供一個Machine Learning的Library, 目前只支持Linux 和Mac, 可以用Dockor來作Virtual Machine 運行在Window上
+* TensorFlow.org上提供的Hello World例子是一個MNIST問題簡解, 用簡單的Method imported (Python為例) 就可以達到91%的判斷確率 (以一組Yann LeCun的標準MNIST Database為訓練基礎)
+* 未對我的EeePC進行任何安裝
+	11/3/15	java	Java	Java MVC模型有傳統(MV交互, C協作)以Modified MVC (C在MV之間掌握全部信息)，在研究相關文章時 (Oracle上的文章Java SE Application Design With MVC by Robert Eckstein), 里面提出以下幾個類是相關的可應用的︰
+* AbstractModel(cont PropertyChangeSupport), AbstractController(impl PropertyChangeListener)
+* PropertyChangeEvent
+* Controlloer的Set和JavaBeans的關係很大, 以Reflect Class的Methor類作為實現方式。
+* java.awt.event.ActionListener
+* javax.swing.event.ChangeListener
+	11/2/15	java	Java	關於閱讀JAVA源代碼, 有以下幾點注意︰
+1. 源代碼src.zip通常跟隨在Oracle官網下載的JDK包的根目錄處
+2. 對JKD的目錄具體說明可查看Oracle上的JDKx.x Readme, 內容非常詳細
+3. (轉自網絡) 可先從Java.Util入手(List, ArrayList etc.), 後Java.Core(String, StringBuffer等), Java.io(File等, 非常重要且優雅, 相關書本:Java In A NutShell)
+4. 在IDE中, 通常可以用Ctrl點擊類名而跳至其Java源碼檔.(Eclipse和Netbean均適用)
+	10/29/15	java	Java, Heritrix, IDE	以Netbean針對Heritrix 1.14.4以源代碼包在Netbean IDE中調用Heritrix:
+參見(https://www.ibm.com/developerworks/cn/opensource/os-cn-heritrix/)和http://blog.sina.com.cn/s/blog_8fe80cf901016ekf.html, 特別參見前者的最底的常見問題。
+
+
+https://www-01.ibm.com/support/knowledgecenter/ssw_ibm_i_71/rbam6/SS1.htm?lang=enhttp://search400.techtarget.com/http://www-01.ibm.com/support/knowledgecenter/ssw_ibm_i_71/welcome.htmlhttps://www.w3.org/International/articles/definitions-characters/https://www.google.com/fontshttps://css-tricks.com/
+options
+	Category options	Tag options
+	java	#concept
+	linux	#resource
+	android	#fact
+	design pattern
+	vmware
+	spring
+	else
+	google
+	networking
+	web
+	git
+	test
+	as400
+
+
+AS400 Version
+	Type	Library	Release
+	*CODE	##MACH#B	V7R1M0
+	*CODE	#RPGLIB	V7R1M0
+	*LNG	#RPGLIB	V7R1M0
+	*CODE	QAFP	V7R1M0
+	*LNG	QAFP	V7R1M0
+	*CODE	QAFPLIB1	V7R1M0
+	*CODE	QAFPLIB2	V7R1M0
+	*CODE	QAPS	V6R1M0
+	*LNG	QAPS	V6R1M0
+	*CODE	QCA400W	V7R1M0
+	*LNG	QCA400W	V7R1M0
+	*CODE	QCAEXP	V7R1M0
+	*LNG	QCAEXP	V7R1M0
+	*CODE	QCBLLE	V7R1M0
+	*CODE	QCBLLEP	V7R1M0
+	*CODE	QCCA	V7R1M0
+	*LNG	QCCA	V7R1M0
+	*CODE	QCPPLE	V7R1M0
+	*LNG	QCPPLE	V7R1M0
+	*CODE	QCPPLE	V7R1M0
+	*LNG	QCPPLE	V7R1M0
+	*CODE	QDEVTOOLS	V7R1M0
+	*LNG	QDEVTOOLS	V7R1M0
+	*CODE	QDEVTOOLS	V7R1M0
+	*CODE	QDNS	V7R1M0
+	*LNG	QDNS	V7R1M0
+	*CODE	QFNT00	V4R2M0
+	*LNG	QFNT00	V4R2M0
+	*CODE	QFNT60	V4R2M0
+	*LNG	QFNT60	V4R2M0
+	*CODE	QFNTCPL	V7R1M0
+	*CODE	QGDDM	V7R1M0
+	*LNG	QGDDM	V7R1M0
+	*CODE	QHLPSYS	V7R1M0
+	*LNG	QHLPSYS	V7R1M0
+	*CODE	QHTTPSVR	V7R1M0
+	*LNG	QHTTPSVR	V7R1M0
+	*CODE	QICSS	V7R1M0
+	*LNG	QICSS	V7R1M0
+	*CODE	QIJS	V7R1M0
+	*LNG	QIJS	V7R1M0
+	*CODE	QIWA2	V7R1M0
+	*LNG	QIWA2	V7R1M0
+	*CODE	QIWS	V7R1M0
+	*LNG	QIWS	V7R1M0
+	*CODE	QJAVA	V6R1M0
+	*LNG	QJAVA	V6R1M0
+	*CODE	QJVM1464	V6R1M0
+	*CODE	QJVM50	V6R1M0
+	*CODE	QJVM5064	V6R1M0
+	*CODE	QJVM6032	V6R1M0
+	*CODE	QJVM6064	V6R1M0
+	*CODE	QLBL	V7R1M0
+	*CODE	QNAE	V7R1M0
+	*LNG	QNAE	V7R1M0
+	*CODE	QPASE	V7R1M0
+	*LNG	QPASE	V7R1M0
+	*CODE	QPDA	V7R1M0
+	*LNG	QPDA	V7R1M0
+	*CODE	QPFR	V7R1M0
+	*LNG	QPFR	V7R1M0
+	*CODE	QPFR	V7R1M0
+	*LNG	QPFR	V7R1M0
+	*CODE	QQRYLIB	V7R1M0
+	*LNG	QQRYLIB	V7R1M0
+	*CODE	QRDARS	V5R2M0
+	*LNG	QRDARS	V5R2M0
+	*CODE	QRDARS	V5R2M0
+	*LNG	QRDARS	V5R2M0
+	*CODE	QRDARS	V5R2M0
+	*CODE	QRJE	V6R1M0
+	*LNG	QRJE	V6R1M0
+	*CODE	QRPG	V7R1M0
+	*LNG	QRPG	V7R1M0
+	*CODE	QRPG38	V7R1M0
+	*LNG	QRPG38	V7R1M0
+	*CODE	QRPGLE	V7R1M0
+	*LNG	QRPGLE	V7R1M0
+	*CODE	QRPGLEP	V7R1M0
+	*CODE	QSHELL	V7R1M0
+	*LNG	QSHELL	V7R1M0
+	*CODE	QSQL	V7R1M0
+	*LNG	QSQL	V7R1M0
+	*CODE	QSR	V7R1M0
+	*LNG	QSR	V7R1M0
+	*CODE	QSSP	V7R1M0
+	*LNG	QSSP	V7R1M0
+	*CODE	QSYS	V7R1M0 L00
+	*CODE	QSYS	V7R1M0 L00
+	*LNG	QSYS	V7R1M0 L00
+	*CODE	QSYS2	V7R1M0
+	*LNG	QSYS2	V7R1M0
+	*LNG	QSYS2987	V6R1M0
+	*LNG	QSYS2987	V7R1M0
+	*LNG	QSYS2989	V6R1M0
+	*LNG	QSYS2989	V7R1M0
+	*CODE	QSYS38	V7R1M0
+	*CODE	QSYSDIR	V7R1M0
+	*LNG	QSYSDIR	V7R1M0
+	*CODE	QSYSINC	V7R1M0
+	*CODE	QSYSV6R1M0	V7R1M0
+	*CODE	QTCP	V7R1M0
+	*LNG	QTCP	V7R1M0
+	*CODE	QUSRTOOL	V7R1M0
+	*LNG	QUSRTOOL	V7R1M0
+	*CODE	QUTL	V7R1M0
+	*LNG	QUTL	V7R1M0
+	*CODE	QVI	V5R1M0
+	*LNG	QVI	V5R1M0
+	*CODE	QVI	V5R1M0
+	*LNG	QVI	V5R1M0
+	*CODE	QVI	V5R1M0
+	*LNG	QVI	V5R1M0
+
+
+Apache Overview
+	Apache Software Foundation
+	Top level projects	Abdera Accumulo ActiveMQ Ambari Ant Aries Apache HTTP Server APR Avro Axis Axis2 Bloodhound Buildr Camel Cassandra Cayenne Chemistry Click CloudStack Cocoon Continuum Cordova CouchDB cTAKES CXF Deltacloud Derby Directory Drill Empire-db Felix Flex Flume Forrest Geronimo Gora Gump Hadoop Hama HBase Hive Jackrabbit James JMeter Kafka Lucene.Net Mahout Marmotta Maven MINA mod_perl MyFaces Nutch ODE OFBiz Oozie OpenEJB OpenJPA OpenNLP OpenOffice PDFBox Phoenix POI Pig Pivot Qpid River Roller Samza ServiceMix Shindig Shiro Sling Spark Stanbol Storm SpamAssassin Sqoop Struts Subversion Tapestry Thrift Tiles Tomcat Trafficserver Turbine Tuscany UIMA Velocity Wave Wicket Wink Xalan Xerces XMLBeans ZooKeeper
+	Commons projects	BCEL BSF Daemon Jelly
+	Lucene projects	Lucene Java Solr
+	Hadoop projects	Hadoop HDFS
+	Other projects	Batik Chainsaw FOP Ivy Log4j Log4Net XAP
+	Incubator projects	XAP
+	Apache Attic	AxKit Beehive Bluesky Cactus Jakarta Excalibur Harmony HiveMind Lenya Slide Shale stdcxx iBATIS
+	Licenses standards	Apache License
+
+
+Apache Details
+	Name	Items
+	Apache是開源項目基金, Jakarta项目 是ASF(The Apache Software Foundation)的一部分。Apache中的Common Project是主要為了提供Java Developer有用的Library。Top level project是比較有需求的Porject, 而Attic則是"項目回收筒"。
+	Apache Cordova	TLP	Framework	Apache Cordova, aka PhoneGap from Adobe, is a mobile application dev framework enables developer to build phone application with HTML5, CSS3, Javascript instead of using standard SDK from IOS,WP or Android.
+	Apache CouchDB	TLP	Database	Apache CouchDB is a NoSQL database.
+	Apache Derby	TLP	System	Apache Derby is a RDBMS that can be embedded in Java programs.
+	Apache Directory	TLP	Server	Apache Directory Server is an embeddable directory server entirely writen in Java.
+	Apache Drill	TLP	Framework	Apache Drill is a framework supports data-intensive distributed application for large-scle dataset (support NoSQL)
+	Apache Empire-db	TLP	Library	Apache Empire-db is a Java library provides API for accessing RDBMS through JDBC. (so developers can access SQL in a object-oriented way)
+	Apache Flex	TLP	SDK	Apache Flex is a SDK for Adobe flash developing.
+	Apache Geronimo	TLP	Server	Apache Geronimo is an open source application server.
+	Apache Gump	TLP	System	Apache Gump is a every-night-runnung system on Sun JVM, with its intention to test all Apache Projects.
+	Apache HBase	TLP	Database	HBase is an open source, non-relational, distributed database modeled after Google's BigTable and written in Java. It is developed as part of Apache Software Foundation's Apache Hadoop project and runs on top of HDFS (Hadoop Distributed Filesystem), providing BigTable-like capabilities for Hadoop.
+	Apache Hive	TLP	Warehouse	Apache Hive is a data warehouse built on the top of hadoop for providing data summarizatio, query and analysis.
+	Apache Jackrabiit	TLP	Repository	Apache Jackrabbit is a content repository for the Java platform.
+	Apache James	TLP	Server	Apache James aka Java Apache Mail Enterprise Server, is a SMTP and POP3 mail transfer agent and NNTP news server.
+	Apache JMeter	TLP	Tool	Apache JMeter is a load testing tool for web application(JDBC db connection, FTP, LDAP, JMS, HTTP, TCP...)
+	Apache JavaServer Faces	TLP	Framework	JSF is a Java specification for building component-based user interfaces for web application.
+	Apache Kafka	TLP	Kafka was originally developed by LinkedIn, its an open-source message broker project, The project aims to provide a unified, high-throughput, low-latency platform for handling real-time data feeds.
+	Apache Lucene	TLP	Library	Lucene is a free and open-source information retrieval software library, originally written in Java by Doug Cutting. Nutch 和 Solr 都引用了Lucene Library.
+	Apache Marmotta	TLP	Platform	Apache Marmotta is a Linked Data platform that comprises several components. In its most basic configuration it is a Linked Data server. Linked Data is a seperate concept.
+	Apache Maven	TLP	Tool	Apache Maven is a build automation tool used primarily for Java projects. The word maven means "accumulator of knowledge" in Yiddish.Maven addresses two aspects of building software: First, it describes how software is built, and second, it describes its dependencies. 他和Ant在實踐方式上有很大差別。
+	Apache OFBiz	TLP	System	Apache OFBiz (The Apache Open For Business Project) is an open source enterprise resource planning (ERP) system. It provides a suite of enterprise applications that integrate and automate many of the business processes of an enterprise.
+
+	Apache Oozie	TLP	System	Apache Oozie is a server-based workflow scheduling system to manage Hadoop jobs.
+	Apache OpenEJB	TLP	System, Server	Apache OpenEJB is an open source, embeddable and lightweight EJB Container System and EJB Server. EJB是Java EE的一個標準配件, 除了名稱以外, EJB和JB基本上沒有太大關係。
+	Apache OpenJPA	TLP	Apache OpenJPA is an open source implementation of the Java Persistence API specification. It is an object-relational mapping (ORM) solution for the Java language, which simplifies storing objects in databases.
+	Apache OpenNLP	TLP	Library	The Apache OpenNLP library is a machine learning based toolkit for the processing of natural language text.
+	Apache OpenOffice	TLP	Software	Apache OpenOffice (AOO) is an open-source office productivity software suite.
+	Apache PDFBox	TLP	Library	Apache PDFBox is an open source pure-Java library that can be used to create, render, print, split, merge, alter, verify and extract text and meta-data of PDF files.
+	Apache POI	TLP	Library	Apache POI, previously a sub-project of the Jakarta Project, provides pure Java libraries for reading and writing files in Microsoft Office formats, such as Word, PowerPoint and Excel
+	Apache Roller	TLP	Server	Roller is a weblog server
+	Apache Samza	TLP	Samza is a project. It aims to provide a near-realtime, asynchronous computational framework for steam processing.
+	Apache Shiro	TLP	Framework	Shiro is Castle in Japanese. Its a security framework.
+	Apache Spark	TLP	Framework	Spark is a cluster computing framework.
+	Apache Storm	TLP	Framework	Storm is a distributed computation framework. A storm application is designed as a topology in the shape of a DAG with spouts and bolts acting as the graph vertices.
+	Apache Subversion	TLP	System	Subversion is a software versioning and revision control system.
+	Apache Tomcat	TLP	Server	Apache Tomcat is an open-source web server. It implements Java Servlet, JSP, Java EL and WebSocket, and provide a pure java HTTP web server environment for Java code to run in.
+	Apache Traffic Server	TLP	Server	TS is a modular, hegh-performance reverse proxy and forward proxy server
+	Apache Wave	TLP	Framework	Apache Wave is a software framework for real-time collaborative editing online. Google originally developed it as Google Wave
+	Apache Wicket	TLP	Framework	Apache Wicket, commonly referred to as Wicket, is a lightweight component-based web application framework for the Java programming language conceptually similar to JavaServer Faces and Tapestry
+	Apache Xerces	TLP	Library	Xerces is Apache's collection of software libraries for parsing, validating, serializing and manipulating XML
+	Apache XMLBeans	TLP	Framework	XMLBeans is a Java-to-XML binding framework.
+	Apache Hadoop	TLP	Framework	Apache Hadoop 分佈式存儲及分佈式處理的軟件框架
+	Apache Nutch	TLP	Nutch 可擴展爬蟲項目
+	Apache Ant	TLP	Tool	Ant 對JAVA進行封裝及編釋的包, Now its already embedded in JDK.
+	Apache Cassandra	TLP	System	Cassandra 分佈式DMS
+	Apache HTTP Server	TLP	Server	HTTP Server 在Server端的軟件
+	Apache CloudStack	TLP	CloudStack 一個建立雲端infrastructure的網站
+	Apache ActiveMQ	TLP	ActiveMQ message broker written in Java together with a full Java Message Service (JMS) client.
+
+
+	ps	For details, reference wikipedia "Apache Software Foundation" page or:http://mymobile.iteye.com/blog/1171068
+	ps	Top Java Web Framework:
+1. Spring/ 2. Vaadin/ 3. Grails/ 4. GWT Google Web Toolkit/ 5.JSF(JavaServer Faces)
+	ps	Web Framework Category:
+[Action-based framework]Apache Structs, Spring 
+[Component-based Framework]Apache Tapestry, Apache Wicket, JSF
+
+

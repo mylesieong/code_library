@@ -1,0 +1,101 @@
+Sheet1
+	Language	Desc	Code Ref
+	html	standard structure	<!DOCTYPE html>
+ <html lang="en">
+ <head>
+ <meta charset="utf-8" />
+ <title></title>
+ </head>
+ <body>
+ </body>
+ </html>
+	html	h1-6	<h1>Barcelona's Architect</h1>
+ <h2 lang="es">La Sagrada Família</h2>
+ <h2>Park Guell</h2>
+	html	class attribute	<p class="subhead">Animals WorldwideRejoice</p>
+	html	comment	<!-- ==== 开始页面级页眉 ==== -->
+	html	語義文件結構	<body>
+ <!-- ==== 开始页面级页眉 ==== -->
+ <header role="banner">
+ <!-- 站点标识可以放在这里 -->
+ <!-- 全站导航 -->
+ <nav role="navigation">
+ <ul> ... </ul>
+ </nav>
+ </header>
+ <!-- ==== 开始主要内容 ==== -->
+ <main role="main">
+ <h1>Arts & Entertainment: Museums
+ ➝ </h1>
+ <article>
+ <h2>Gallery Opening Features the
+ ➝ Inspired, Inspiring</h2>
+ <p>... [故事内容] ... </p>
+ </article>
+ <aside>
+ <h2>Other Stories</h2>
+ <!-- 没有包含在nav里 -->
+ <ul> ... [故事链接] ... </ul>
+ </aside>
+ </main>
+ <!-- ==== 开始附注栏 ==== -->
+ <aside>
+ <!-- 次级导航 -->
+ <nav role="navigation">
+ <ul>
+ <li><a href="/arts/movies/">
+ ➝ Movies</a></li>
+ <li><a href="/arts/music/">
+ ➝ Music</a></li>
+ ...
+ </ul>
+ </nav>
+ </aside>
+ <!-- ==== 开始页面级页脚 ==== -->
+ <footer role="contentinfo">
+ <!-- 辅助性链接并未包在nav中 -->
+ <ul> ... </ul>
+ </footer>
+ </body>
+ </html>
+	html	ul-li	<ul>
+  <li><a href="indexi.html">HOME</a></li>
+  <li><a href="joini.html">JOIN</a>
+  <ul>
+  <li><a href="joini.html">MAKE A QUEST</a></li>
+  <li><a href="joini.html">GET A MISSION</a></li>
+  </ul>
+  </li>
+  <li><a href="techi.html">TECH</a></li>
+  <li><a href="storyi.html">STORY</a></li>
+  <li><a href="heroi.html">HERO</a></li>
+  <li><a href="abouti.html">ABOUT</a></li>
+  </ul>
+	html	ARIA role 属性	<header role="banner">
+ <nav role="navigation">
+ <main role="main">
+ <aside role="complementary">
+ <footer role="contentinfo">
+	html	div通用容器	<div></div>
+	html	div+id+a	<a href="#gaudi">Barcelona's Architect</a>
+ <div id="gaudi">This is div element</div>
+	html	Class, id	HTML 文档中的每个id 都必须是唯一的。换句话说，一个页面里不能出现两个具有相同id 的元素，并且每个元素都只能有一个id。相同的id 可以出现在不同的页面里，同一id 也不一定每次都赋给同一元素，尽管这是惯常的做法。 相反，一个class 名称可以分配给页面中任意数量的元素，并且一个元素可以有一个以上的class。 在class 和id 名称中，通常使用短横线分隔多个单词，例如class="footer-page"
+	html	換行	<br/>
+	html	span	同div 一样，span 元素是没有任何语义的。不同的是，span 只适合包围字词或短语内容，而div 适合包含块级内容（参见3.12 节）。
+	html	progress	<p>Please wait while we save your data.</p>
+ <p>Current progress: 
+  <progress max="100" value="37">37% saved</progress>
+ </p>
+ 对progress 的完整说明已经超出了本书的范围。通常，你只能通过JavaScript 动态地更新value 属性值和元素里面的文本以指示任务进程（例如，指示已完成37%）。
+	html	img	<img src="stupas.jpg" alt="Two Stupas" width="220" height="170" alt="" />
+ Alt在不能顯示圖片時代為顯示
+	html	Retina	苹果的Ritina 显示屏就像第二张画。在相同的空间里，它拥有的像素数量是普通显示屏的像素数量的四倍, 如果你想让图像在所有的显示屏（并非只是Retina 显示屏）上都是40×30 的尺寸（此处及以下尺寸单位均为像素），就应该创建80×60 大小的图像，而代码写作<img src="photo.jpg" width="40" height="30" alt="" />。浏览器会将80×60 的图像缩小，以40×30 的尺寸显示
+	html	mailto	<a href="mailto:name@domain.com" >Mail</a>
+
+
+Sheet2
+
+
+Sheet3
+
+

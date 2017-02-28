@@ -1,0 +1,38 @@
+Sheet1
+	Language	Desc	Code Ref
+	FTP	Put	ftp                                    //enter ftp mode
+open                               //prompt ip address request
+to 172.18.255.20  //tell an address
+User: BI77PGM        //login
+lcd  C:\temp               //local change directory to C:\temp
+cd ymyles                    //remotely change directory to ymyles
+put a.txt                        //update a.txt under current local directory to current remote directory
+	FTP	example	>ftp 1?2.18.255.20
+Connected to 172.18.255.20.
+200-QTCP at S657274B.
+200 Connection will close if idle more than 5 minutes. 
+User (172.18.255.20:(none)): ZCSERUICE
+331 Enter password. 
+Password: xxxx
+230 ZCSERUICE logged on. 
+ftp> CD YMYLES
+250 ‘YMYLES’ is current library. 
+ftp> PWD
+257 ‘YMYLES’ is current library..
+ftp> LCD D:\
+Local directory now D:\. 
+ftp> PUT D:\20161205.TXT
+200 PORT subcommand request successful.
+150-Characters that are not recognized in file specification are changed to #.
+150 Sending file to member TXT in file 110161205 in library YMYLES.
+226 File transfer completed successfully.
+ftp: 1237 bytes sent in 0.27Seconds 4.67Mbytes/sec.
+ftp> quit
+
+
+Sheet2
+
+
+Sheet3
+
+

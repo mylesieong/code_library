@@ -1,0 +1,164 @@
+Sheet1
+	Language	Desc	Code Ref
+	DB2	SELECT 操作	SELECT dmacct,dmcmcn,dmcbal, B.DBJACN, B.DBJCCY FROM zusrlib/tap00201 a,ymyles/dbtspf b 
+WHERE dmacct= dbjacn and dmcmcn<>dbjccyV
+	DB2	UPDATE 操作	UPDATE YMYLES/DBTSPF SET DBNAR1 = 'ACL - CLOSE ACCOUNT'   V
+	DB2	INSERT操作	insert into mylhist (CUSTHS,STATHS,PGRPHS,PTYPHS,AMTHS)  select CUSTHS,STATHS,PGRPHS,PTYPHS,AMTHS from mylhist#1
+	DB2	UPDATE操作	UPDATE {tablename} 
+SET {field} = {value}
+WHERE {field} = {value}
+	DB2	INSERT操作	INSERT INTO {tablename} 
+              ({field}, {field}, {field}) 
+SELECT ({field}, {field}, {field})
+FROM {tablename}
+	DB2	INSERT操作	INSERT INTO {tablename} 
+              ({field}, {field}, {field}) 
+VALUES ({value}, {value}, {value}), 
+              ({value}, {value}, {value})…
+	DB2	DELETE操作	DELETE FROM {tablename}
+WHERE {field} = {value}
+	DB2	Cusor	CREATE PROCEDURE BCMUpdateBondValue
+As
+Begin
+Declare @@StockCode varchar(8)
+Declare @@StockPar real
+Declare Stock_cursor Cursor scroll
+for select stockcode,stockpar from BCMStock
+Open Stock_cursor
+Fetch first from stock_cursor into @@StockCode, @@StockPar
+while @@Fetch_Status=0
+begin
+Update itas_developers.itas_fmcldt set cls_rate=@@StockPar where code=@@StockCode
+fetch next from stock_cursor into @@StockCode, @@StockPar
+end
+close Stock_cursor
+deallocate Stock_cursor
+end
+GO
+	DB2	Group By 	select 'There are ',count(*),lrstatus,'in this table' 
+from ymyles.pf_a                                      
+group by lrstatus                                     
+having count(*)<10   
+	DB2	Recursive SQL	select 'There are ',count(*),lrstatus,'in this table'  
+from ymyles.pf_a                                       
+group by lrstatus                                      
+having count(*)<=(
+    select count(*) from ymyles.pf_a where lrstatus = 'CLOSE'
+)                              
+	DB2	Change JUL Date format into ISO Date format	SELECT date('1/1/'||substr(dsfdm,1,4)) +MOD(DSFDM,1000) DAY - 1 DAY
+FROM zusrlib/tap00101B                                                                         
+	DB2	Change JUL Date to YYYYDDMM	SELECT                                                   
+'20'
+||
+substr(char(date('1/1/'||substr(dsfdm,1,4))+MOD(DSFDM,1000)DAY-1 DAY),7,2)
+||                                                 
+substr(char(date('1/1/'||substr(dsfdm,1,4))+MOD(DSFDM,1000)DAY-1 DAY),4,2)
+||                                                 
+substr(char(date('1/1/'||substr(dsfdm,1,4))+MOD(DSFDM,1000)DAY-1 DAY),1,2)                            
+FROM zusrlib/tap00101B                                   
+	DB2	CIFs-map-ACCs model	SELECT C.LNNOTE, C.LNSTAT, C.LNBAL 
+FROM zusrlib/cup00901 A, ZUSRLIB/CUP00301 B, ZUSRLIB/LNP00301 C 
+WHERE CUNBR=CUX1CS AND CUX1AC = LNNOTE AND CUX1AP=50 AND CUXREL IN ('SOW','OWN','JAF','JOF') AND LNSTAT=' ' 
+ORDER BY LNNOTE     
+	DB2	Read Active LNP00301	SELECT CUNBR, CUSTAT, CUSHRT, CUSEX, LNNOTE, LNSTAT, LNFLG5, LNTYPE, LNbAL                                                        
+FROM CUP00301, CUP00901, LNP00301                                    
+WHERE CUNBR = CUX1CS AND CUX1AC=LNNOTE AND CUX1AP=50 AND CUXREL in ('SOW', 'OWN', 'JAF', 'JOF') AND LNSTAT=' '  	APP#=50
+	DB2	Read Active TAP00201	SELECT  CUNBR, CUSTAT, CUSHRT, CUSEX, DMACCT, DMCTL, DMCBAL, DMYBAL                                       
+FROM CUP00301, CUP00901, TAP00201 
+WHERE CUNBR = CUX1CS AND SUBSTR(DIGITS(CUX1AC),3,10)=DMACCT AND CUX1AP=20 AND CUXREL in ('SOW', 'OWN', 'JAF', 'JOF') AND DMSTAT NOT IN ('2','4')       	APP#=20
+	DB2	Read Active TMP003	SELECT CUNBR, CUSTAT, CUSHRT, CUSEX, TMSTAT, TMBRCH, TMEMP, TMFACE 
+FROM CUP00301, CUP00901, TMP003                                    
+WHERE CUNBR = CUX1CS AND CUX1AC=TMACCT AND CUX1AP=30 AND CUXREL in ('SOW', 'OWN', 'JAF', 'JOF') AND TMSTAT NOT IN ('2','4')                       	APP#=30
+	DB2	Table Name with .	select * from YMYLES/"PART1B.LJ"
+SELECT statement run complete.  
+	DB2	Left Join	SELECT A.*, E.CUCHA1, E.CUCHA2,E.CUCHB1,E.CUCHB2                 
+FROM (
+      SELECT                                                     
+      A.CUNBR, A.CUSTAT, A.CUSHRT||A.CUNA1||A.CUNA2               
+      FROM                                                       
+      XEDW1/CUP00301 A, XEDW1/CUP02701 C, ZUSRLIB/CUP01301 D     
+      WHERE                                                      
+      A.CUNBR=C.CUNBR AND A.CUNBR=D.CUNBR AND A.CUPERS='N' AND A.CUSTAT='R'
+      ) A                       
+LEFT JOIN ZCIFLIB/CUDFLDPF E                                     
+ON A.CUNBR = E.CUNBR                                             
+	DB2	Like statement	SELECT * FROM zusrlib/tap00201 WHERE DMSHRT LIKE '%LIO%' 
+                           AND  DMSHRT LIKE '%CHI%'      
+                           AND  DMSHRT LIKE '%PAN%'      
+	DB2	INSERT操作	INSERT INTO YMYLES/LNP00301 SELECT * FROM zusrlib.lnp00301 B WHERE 
+B.lntype NOT IN (161,162,163,164)                                  
+	DB2	取整	SELECT 
+INT((2016057-A.CUBDTE)/1000)                                    
+FROM                                                              
+CUP00301 A
+	DB2	map to payroll	SELECT A.CUNBR, B.CUZPVR                                        
+FROM CUP00301 A, CUP07001 B, CUP01901 C                         
+WHERE A.CUNBR=C.CUX1CS AND DIGITS(B.CUZSNR)=SUBSTR(C.CUXNAC,1,9)
+AND C.CUX1AP=83 AND B.CUZPVR LIKE '%PAYROLL%' 
+	DB2	Self-embedded sql	SELECT A.*                                
+FROM (                                    
+      SELECT                              
+      CUNBR, CUSTAT, CUSHRT||CUNA1||CUNA2 
+      FROM                                
+      CUP00301                            
+      ) A                                 
+	DB2	In statement	SELECT dmacct,dmcmcn,dmcbal,dmstat FROM zusrlib/tap00201 WHERE DMACCT in (1138568111, 1138568221)V
+	DB2	in/ embed select	SELECT dmacct,dmcmcn,dmcbal,dmstat FROM zusrlib/tap00201 WHERE  DMACCT in ( select  dbjacn from ymyles/dbtspf)   V
+	DB2	select * from zusrlib/tap00201 a,ymyles/dbtspf b where  dmacct= dbjacn V
+	DB2	SELECT dmacct,dmcmcn,dmcbal, B.DBJACN, B.DBJCCY FROM zusrlib/tap00201 a,ymyles/dbtspf b 
+WHERE dmacct= dbjacn V
+	DB2	SELECT dmacct,dmcmcn,dmcbal, B.DBJACN, B.DBJCCY FROM zusrlib/tap00201 a,ymyles/dbtspf b 
+WHERE dmacct= dbjacn and dmcmcn<>dbjccyV
+	DB2	UPDATE YMYLES/DBTSPF SET DBNAR1 = 'ACL - CLOSE ACCOUNT'   V
+	DB2	SELECT dmtyp, dmacct,dmcmcn,dmcbal, B.DBJACN, B.DBJCCY FROM zusrlib/tap00201 a,ymyles/dbtspf b 
+WHERE dmacct= dbjacn and dmcmcn<>dbjccy V                                             
+	DB2	multi group by	select cux1ap, cupoff, lnoff, count(*) from ymyles/judyacc 
+group by cux1ap, cupoff, lnoff                             
+order by cux1ap, cupoff                                    
+	DB2	count distinct	SELECT count(DISTINCT DGIBSSREF) FROM ymyles/imtransb  
+	DB2	Update Null	UPDATE YMYLES/LNSTLSACC SET LLSRACC = 0 WHERE LLSRACC is NULL 
+	DB2	BCM staff 	select cup00301.cunbr                 
+ from zusrlib/cup00301, zusrlib/cup027                
+where cup00301.cunbr=cup027.cunbr and cuten1 like 'B%'
+	DB2	Case expression	SELECT CUBK, CUNBR, CUSTAT,    
+  case custat                  
+  when 'R' then 'assigned'     
+  when ' ' then 'n/a'          
+  end                          
+FROM zusrlib/cup00301          
+	DB2	Trim	SELECT TRIM(LXMEMO)||'$' FROM ifrs201608/bdplkg0816  
+	DB2	Parse string/numeric to date	 select YEAR(TIMESTAMP_FORMAT(DIGITS(BDPPOSTD),'YYYYMMDD')) 
+ from iprod/bdppay                                          
+	DB2	Date diff	select BDPNOTE,                                                                 
+       DAYS(TIMESTAMP_FORMAT(DIGITS(BDPEFFD),'YYYYMMDD')) -
+       DAYS(TIMESTAMP_FORMAT(DIGITS(BDPDUED),'YYYYMMDD'))  
+from ymyles/bdppay                                         
+where bdpeffd - bdpdued >0                                 
+	DB2	Receipee: distinguish which file is bigger for 2 version of file with same structure 	1. Find out the key set of the file structure, if below 2 sqls are both 0, means the set can be used to key this 2 files:
+>    SELECT count(*)                       
+>    FROM zusrlib/lnp00701                 
+>    GROUP BY lhnote, lhrecn, lhpost        
+>    having count(*) > 1;
+>    SELECT count(*)                       
+>    FROM ieom/lnp00701                 
+>    GROUP BY lhnote, lhrecn, lhpost        
+>    having count(*) > 1                   
+
+2. Use the key set to calculation how much common record between 2 files:
+>    select count(*)                            
+>    from ifrs201110/lnp00701                   
+>    where (lhnote, lhrecn, lhpost) not in (    
+>        select lhnote, lhrecn, lhpost              
+>        from ifrs201111/lnp00701                   
+>    )  ;
+
+
+Sheet2
+
+
+Sheet3
+
+
+Sheet4
+
+
