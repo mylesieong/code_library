@@ -1,0 +1,63 @@
+Sheet1
+	Lang	Topic	Command
+	Default Mode	Move left	h
+	Move down	j
+	Move up	k
+	Move right	l
+	Move to next word	w
+	Move to next blank delimited word	W
+	Move to the beginning of the word	b
+	Move to the beginning of blank delimted word	B
+	Move to the end of the word	e
+	Move to the end of Blank delimited word	E
+	Move a sentence back	(
+	Move a sentence forward	)
+	Move a paragraph back	{
+	Move a paragraph forward	}
+	Move to the begining of the line	0
+	Move to the end of the line	$
+	Move to the first line of the file	1G or gg
+	Move to the last line of the file	G
+	Move to nth line of the file	nG
+	Move to nth line of the file	:n
+	Move forward to c	fc
+	Move back to c	Fc
+	Move to top of screen	H
+	Move to middle of screen	M
+	Move to botton of screen	L
+	Move to associated ( ), { }, [ ]	%
+	Search String with regex	/String
+	Search String with regex (next hit)	n
+	Delete character to the right of cursor	x
+	Delete character to the left of cursor	X
+	Delete to the end of the line	D
+	Delete current line	dd
+	Delete current line	:d
+	Insert Mode	Insert before cursor	i
+	Insert before line	I
+	Append after cursor	a
+	Append after line	A
+	Open a new line after current line	o
+	Open a new line before current line	O
+	Replace one character	r
+	Replace many characters	R
+	Command Mode	Exit, saving changes	:x
+	Exit as long as there have been no changes	:q
+	Exit and save changes if any have been made	ZZ
+	Exit and ignore any changes	:q!
+	Splite open / Vertical Splite Open	:sp / :vsp
+	Move among splites	Ctrl W + hjkl
+	Tab open	:tabnew {filename}
+	Move among tabs	gt / gT
+	Show all tabs	:tabs
+	Run command	:! Echo…
+	Search and replace	:s/foo/bar/g
+:%s/foo/bar/g (do all)
+
+
+Sheet2
+
+
+Sheet3
+
+

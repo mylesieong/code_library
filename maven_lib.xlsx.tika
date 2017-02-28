@@ -1,0 +1,285 @@
+Sheet1
+	Language	Desc	Code Ref
+	Maven	build a java project	$ mvn archetype:generate 
+        -DgroupId=com.mycompany.app
+        -DartifactId=my-app 
+        -DarchetypeArtifactId=maven-archetype-quickstart 
+        -DinteractiveMode=false
+	Maven	import project to eclipse	1. Generate necessary config file for eclipse:
+$mvn eclipse:eclipse -Dwtpversion=2.0
+2. Imports it into Eclipse IDE
+File -> Import… -> General -> Existing Projects into workspace
+	Maven	build a web project	$ mvn archetype:generate 
+        -DgroupId={project-packaging} 
+        -DartifactId={project-name} 
+        -DarchetypeArtifactId=maven-archetype-webapp 
+        -DinteractiveMode=false
+	Maven	jdk1.8 not compate	Maven assumes to build witih jdk1.5, add below code to pom for other jdk version:
+  <build>
+    <plugins>
+   <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.3</version>
+        <configuration>
+            <source>1.8</source>
+            <target>1.8</target>
+        </configuration>
+   </plugin>
+    </plugins>
+  </build>
+	Maven	Build with dependency
+(maven-shade-plugin)	By default, Maven doesn't bundle dependencies in the JAR file it builds, and you're not providing them on the classpath when you're trying to execute your JAR file at the command-line. This is why the Java VM can't find the library class files when trying to execute your code.
+
+You could manually specify the libraries on the classpath with the -cp parameter, or There is a Maven plugin called the maven-shade-plugin to do this. You need to register it in your POM, and it will automatically build an "uber-JAR" containing your classes and the classes for your library code too when you run mvn package:
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>1.6</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+	Maven	Build a jar	run "mvn package" under the target directory
+	Maven	Build with dependency
+(maven-shade-plugin) 2 	According to spring.io, there is another parameter for shade plugin:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.springframework</groupId>
+    <artifactId>gs-maven</artifactId>
+    <packaging>jar</packaging>
+    <version>0.1.0</version>
+
+    <!-- tag::joda[] -->
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.2</version>
+        </dependency>
+    </dependencies>
+    <!-- end::joda[] -->
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer
+                                    implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>hello.HelloWorld</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+	Maven	build a project with interactive mode	mvn archetype:generate
+	Maven	Build a executable JAR	<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.myles.util.ping</groupId>
+  <artifactId>LocationTeller</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>LocationTeller</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>com.myles.util.ping.App</mainClass>
+            </manifest>
+          </archive>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  
+</project>
+
+	Maven	Build a window executable (*.exe)
+** not compete, need further work
+** use the launch4j plugin	<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.myles.util.ping</groupId>
+  <artifactId>LocationTeller</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>LocationTeller</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  
+  <build>
+      <plugins>
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-compiler-plugin</artifactId>
+              <version>2.5.1</version>
+              <configuration>
+                  <source>1.6</source>
+                  <target>1.6</target>
+              </configuration>
+          </plugin>
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-shade-plugin</artifactId>
+              <version>1.7.1</version>
+              <executions>
+                  <execution>
+                      <phase>package</phase>
+                      <goals>
+                          <goal>shade</goal>
+                      </goals>
+                  </execution>
+              </executions>
+              <configuration>
+                  <shadedArtifactAttached>true</shadedArtifactAttached>
+                  <shadedClassifierName>shaded</shadedClassifierName>
+                  <transformers>
+                      <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                          <mainClass>com.myles.util.ping.App</mainClass>
+                      </transformer>
+                  </transformers>
+              </configuration>
+          </plugin>
+          <plugin>
+              <groupId>com.akathist.maven.plugins.launch4j</groupId>
+              <artifactId>launch4j-maven-plugin</artifactId>
+              <version>1.5.1</version>
+              <executions>
+                  <execution>
+                      <id>l4j-clui</id>
+                      <phase>package</phase>
+                      <goals>
+                          <goal>launch4j</goal>
+                      </goals>
+                      <configuration>
+                          <headerType>gui</headerType>
+                          <jar>${project.build.directory}/${artifactId}-${version}-shaded.jar</jar>
+                          <outfile>${project.build.directory}/myles.exe</outfile>
+                          <downloadUrl>http://java.com/download</downloadUrl>
+                          <classPath>
+                              <mainClass>com.myles.util.ping.App</mainClass>
+                              <preCp>anything</preCp>
+                          </classPath>
+                          <icon/>
+                          <jre>
+                              <minVersion>1.6.0</minVersion>
+                              <jdkPreference>preferJre</jdkPreference>
+                          </jre>
+                      </configuration>
+                  </execution>
+              </executions>
+          </plugin>
+      </plugins>
+  </build>
+  
+</project>
+
+	Udemy MooC	  -Lifecycle- clean
+  -Lifecycle- site
+  -Lifecycle- default	# Mvn assume every "project" as "Artifact"
+# Lifecycle has diff phases:
+  - clean has 3 phases: pre-clean/clean/post-clean, and it uses the maven-clean-plugin with goal: clean
+  - site has 4 phases: pre-site/site/post-site/site-deploy
+  - default has 21 phases: (some common phases)
+    i) process-resource: copy resources to target
+ ii) compile
+ iii) test
+ iv) package: create jar/wars
+ v) install: to local repo
+ vi) deploy: to remote repo
+# If run the lifecycle n, mvn will auto run lifecycle 1.. n-1
+	Udemy MooC	  -plugins
+  -plugins example	# Likewise, plugins has different goals.
+# Maven is a plugin execution framework
+# The way to run maven plugin is like:
+ $ mvn maven-clean-plugin:clean
+ $ mvn maven-jar-plugin:jar
+ $ mvn archetype:generate
+# Different type of plugins: clean, compiler, surefile, jar, war, javadoc...
+	Udemy MooC	  -Maven repo 	# central maven repo address: search.maven.org
+# local repo: default as .m2, and config setting.xml to change it.
+# remote repo is a custom repo specified in the pom.xml in the repositories tag.
+# search dependency seq: local>central>remote>error
+	Udemy MooC	  -Multiple modules
+  -Parent pom vs aggregator pom 	# module in a parent is useful to seperate packages but still remain the connection between different module in one big project
+# Parent mvn artifact pom.xml's pacakage is not jar but pom. And the module is some subfolder under parent directory using the module's artifact name.
+# Parent pom: son pom refers to parent pom
+# Aggregator pom: pom specify modules (And aggregator packaging turns into pom and it doesnt contain source by itself)
+# One more for aggregator mode, any mvn cmd run to aggregator, same mvn cmd auto apply to modules.
+
+
+
+Sheet2
+
+
+Sheet3
+
+

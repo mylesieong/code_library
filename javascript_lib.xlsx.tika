@@ -1,0 +1,396 @@
+Sheet1
+	Topic	Brief	Code
+	Ajax	Simple get	function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+      document.getElementById("demo").innerHTML = xhttp.responseText;
+    }
+  };
+  xhttp.open("GET", "ajax_info.txt", true);
+  xhttp.send();
+}
+	Ajax	Simple post	xhttp.open("POST", "ajax_test.asp", true);
+xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+OR
+xhttp.setRequestHeader("Content-type","application/json");
+xhttp.send("fname=Henry&lname=Ford");
+	Ajax	Manipulate Response	xhttp.responseText;
+OR
+xmlDoc = xhttp.responseXML;
+txt = "";
+x = xmlDoc.getElementsByTagName("ARTIST");
+for (i = 0; i < x.length; i++) {
+  txt += x[i].childNodes[0].nodeValue + "<br>";
+}
+	Javascript	HTML DOM	document.getElementById("demo").innerHTML = 
+	Javascript	Button Invoke	<button type="button" onclick="loadDoc()">Change Content</button>
+	Javascript	Parse JSON	<script>
+var text = '{ "name":"John Johnson",  "street":"Oslo West 16",  "phone":"555 1234567", "employees":[{"firstname":"Tom", "position":"Manager"},{"firstname":"Mary", "position":"Supervisor", "age":25}]}';
+
+var obj = JSON.parse(text);
+
+document.getElementById("demo").innerHTML =
+obj.name + "<br>" +
+obj.employees[0].firstname + "-" +
+obj.employees[0].position+ "<br>" +
+obj.employees[1].firstname + "-" +
+obj.employees[1].age+ "<br>" +
+obj.street + "<br>" +
+obj.phone;
+</script>
+	JSON	structure	{ "name":"John Johnson",  
+   "street":"Oslo West 16",  
+   "phone":"555 1234567", 
+   "employees":[
+          {"firstname":"Tom", "position":"Manager"},
+          {"firstname":"Mary", "position":"Supervisor", "age":25}]
+}
+注: 有時空行會影响JSON的解析(parsing)
+	Javascript	Method	<script>
+var person = {
+    firstName: "John",
+    lastName : "Doe",
+    id       : 5566,
+    fullName : function() {
+       return this.firstName + " " + this.lastName;
+    }
+};
+
+document.getElementById("demo").innerHTML = person.fullName();
+</script>
+	Javascript	String define in multi line	<script>
+document.getElementById("demo").innerHTML = "Hello \
+World!";
+</script>
+	Javascript	for	l = arr.length;
+for (i = 0; i < l; i++) {
+	Javascript	Sort with comparator	var array=[a,b,c,d];
+array.sort(function(I,j){ return i-j;});
+	Javascript	Default Object	Array.sort();
+Math.random();
+Date.getDay();
+…
+	Javascript	Events Handlers	onload="run js code here with ; seperating statements"
+onsubmit=""
+onclick=""
+	DOM	Get Element	document.getElementById("demo").innerHTML = "Hello World!";
+document.getElementById(id)
+document.getElementsByTagName(name) 
+document.getElementsByClassName(name) 
+	DOM	Chg element	element.innerHTML =  new html content
+element.attribute = new value
+element.setAttribute(attribute, value) 
+element.style.property = new style 
+	DOM	Add/rmv element	document.createElement(element) 
+document.removeChild(element)
+document.appendChild(element)
+document.replaceChild(element)
+document.write(text)
+	DOM	Add event handler	document.getElementById(id).onclick = function(){code} 
+	Javascript	define json	// Data
+var players = [
+  {
+    name: "Tom Chan",
+    score: 78,
+    pic: "http://placehold.it/150x150&text=FW"
+  },
+  {
+    name: "Steven Ku",
+    score: 73,
+    pic: "http://placehold.it/150x150&text=KW"
+  },
+  {
+    name: "Francis Wong",
+    score: 82,
+    pic: "http://placehold.it/150x150&text=TC"
+  },
+  {
+    name: "Ken Wong",
+    score: 98,
+    pic: "http://placehold.it/150x150&text=SK"
+  },
+];
+	Javascript	Dicky w HTML	// Data
+var players = [
+  {
+    name: "Tom Chan",
+    score: 78,
+    pic: "http://placehold.it/150x150&text=FW"
+  },
+  {
+    name: "Steven Ku",
+    score: 73,
+    pic: "http://placehold.it/150x150&text=KW"
+  },
+  {
+    name: "Francis Wong",
+    score: 82,
+    pic: "http://placehold.it/150x150&text=TC"
+  },
+  {
+    name: "Ken Wong",
+    score: 98,
+    pic: "http://placehold.it/150x150&text=SK"
+  },
+];
+
+// construct the list from data
+function createListFromData() {
+ // empty the container
+ $('#player-board').empty();
+   
+ // construct the list
+ $.each(players, function(){
+  var playerObj = this;
+  var clone = $('.template').find('.player').clone();
+  clone.find('.name').text( playerObj.name );
+  clone.find('.score').text( playerObj.score );
+  clone.find('.profile-pic img').prop( 'src', playerObj.pic );
+
+  $('#player-board').append(clone);
+
+  }
+ );  
+}
+
+
+// call the function once on start up
+//createListFromData();
+
+// View links handling
+$(document).on("click", '.sorting-controls > a', 
+ function(){
+  // determine which sorting
+  var sortBy = $(this).attr('href').substring(1); // get 'ascend' or 'descend'
+  var sortFactor;
+  
+  // tell the user that we are sorting.
+  $('.current-sorting-by').find('span').text( sortBy );
+  
+  // sort the data
+  if (sortBy=='ascend'){
+   alert ('in ascend sortFactor condition');
+   sortFactor=-1;
+  }
+  
+  if (sortBy=='descend'){
+   alert ('in descend sortFactor condition');
+   sortFactor=1;
+  }
+  
+  players.sort(
+   function(a, b){
+    if (a.score <= b.score) {
+       return sortFactor;
+     } else {
+       return sortFactor * -1;
+     }
+   }
+  );
+  
+  createListFromData();
+  
+  return false;
+ }
+);
+
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <!--Custom css style-->
+  <link rel="stylesheet" href="css.css">
+   
+  <!-- JQuery scripts and Bootstrap Core scripts -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script type="text/javascript" src="js.js"></script>
+  
+ </head>
+ <body onload="createListFromData();">
+  <p class='sorting-controls'>Sort by: <a href='#ascend'>Score Ascending</a> | <a href='#descend'>Score Descending</a></p>
+  <p class='current-sorting-by'>Currently sorting by <span>nothing</span>.</p>
+  <div id="player-board">
+  </div>
+  
+  <a href='#return'>Return</a>
+
+  <!-- Not for displaying. For JS to use -->
+  <div class="template">
+    <div class="player">
+   <div class="profile-pic">
+     <img src='' alt='profile pic placeholder'>
+   </div>
+   <p class="name"></p>
+   <p class="score"></p>
+    </div>
+  </div>
+ </body>
+</html>
+
+	JQuery	concept	The jQuery syntax is tailor-made for selecting HTML elements and performing some action on the element(s).
+
+Basic syntax is: $(selector).action()
+
+A $ sign to define/access jQuery
+A (selector) to "query (or find)" HTML elements
+A jQuery action() to be performed on the element(s)
+Examples:
+
+$(this).hide() - hides the current element.
+
+$("p").hide() - hides all <p> elements.
+
+$(".test").hide() - hides all elements with class="test".
+
+$("#test").hide() - hides the element with id="test".
+
+
+	JQuery	可以用其定義好的FUNC做FADE SLIDE等動作.
+	JQuery	有種叫CALLBACK的機構, 或許可以應用到AJAX上以除去複雜的來回Calling
+	JQuery	AJAX = Asynchronous JavaScript and XML.
+	JQuery	callback + jsonp + 跨域	<!DOCTYPE html>
+<html lang="zh-cn">
+ <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Home page of Handson, a social entreprise devoted on connecting technology and social issue">
+  <meta name="author" content="Myles Ieong">
+  <meta name="robots" content="index, follow">
+  
+  <!-- JQuery scripts and Bootstrap Core scripts -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+  <script>
+  function ws_results(obj) {
+   alert(obj.ResultSet.totalResultsAvailable);
+  }
+  
+  $(document).ready(function(){
+   $("p").click(function(){
+    $(this).hide();
+    jQuery.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?tags=cat&tagmode=any&format=json&jsoncallback=?", 
+     function(data) {
+      alert("response: " + data.title);
+     }
+    );
+   });
+
+  });
+  </script>
+ </head>
+ <body>
+  <p>If you click on me, I will disappear.</p>
+  <p>Click me away!</p>
+  <p>Click me too!</p>
+
+ </body>
+</html>
+	JQuery	getJson	    jQuery.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?tags=cat&tagmode=any&format=json&jsoncallback=?", 
+     function(data) {
+      alert("response: " + data.title);
+     }
+    );
+	JQuery	getJson equivalence- Ajax	    jQuery.ajax({
+     contentType:'application/json; charset=UTF-8',
+     //accepts: 'application/json',
+     crossDomain :true,
+     //username: 'e_DISiAJEY4IdwopGOjmDg',
+     //password:'SXuVEJtkqDqWL_DnPHOx0Q',
+     dataType: "json",
+     method: 'POST',
+     url: 'http://api.flickr.com/services/feeds/photos_public.gne?tags=cat&tagmode=any&format=json&jsoncallback=?',
+     success: function(data) {
+      alert("response: " + data.title);
+     }
+    }).done(function(){
+     alert("request sent.")
+    }).fail(function(){
+     alert( "error" );
+    }).always(function() {
+     alert( "complete" );
+    });
+	Javascript	Regex	String.search(regrex) -> returns the index number 
+String.match(regecc) -> returns strings hitten 
+String.replace(regex); ->operates the replacement
+regex.test(string); -> returns ture/false
+regex.exec(string); -> returns the hitten string 
+	Javascript	Regex Example	<p id="demo_i"></p>
+<p id="demo_g"></p>
+<p id="demo_m"></p>
+
+<script>
+function myFunction() {
+    var str = "Visit www.W3Schools.com";
+    var patt1 = /w/i;
+    var patt2 = /w/g;
+    var patt3 = /w/m;
+    var result = str.match(patt1);
+    document.getElementById("demo_i").innerHTML = result;
+document.getElementById("demo_g").innerHTML = result;
+document.getElementById("demo_m").innerHTML = result;
+}
+</script>
+	Javascript	Regex patterns	//select integers only
+var intRegex = /[0-9 -()+]+$/;   
+//match any ip address
+var ipRegex = 'bd{1,3}.d{1,3}.d{1,3}.d{1,3}b';  
+//match number in range 0-255
+var num0to255Regex = '^([01][0-9][0-9]|2[0-4][0-9]|25[0-5])$';
+//match number in range 0-999 
+var num0to999Regex = '^([0-9]|[1-9][0-9]|[1-9][0-9][0-9])$';
+//match ints and floats/decimals
+var floatRegex = '[-+]?([0-9]*.[0-9]+|[0-9]+)'; 
+//Match Any number from 1 to 50 inclusive
+var number1to50Regex = /(^[1-9]{1}$|^[1-4]{1}[0-9]{1}$|^50$)/gm; 
+//match email address
+var emailRegex = '^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$'; 
+//match credit card numbers
+var creditCardRegex = '^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35d{3})d{11})$'; 
+//match username
+var usernameRegex = '/^[a-z0-9_-]{3,16}$/'; 
+//match password
+var passwordRegex = '/^[a-z0-9_-]{6,18}$/'; 
+//Match 8 to 15 character string with at least one upper case letter, one lower case letter, and one digit (useful for passwords).
+var passwordStrengthRegex = /((?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,15})/gm; 
+//match elements that could contain a phone number
+var phoneNumber = /[0-9-()+]{3,20}/; 
+//MatchDate (e.g. 21/3/2006)
+var dateRegex = /(d{1,2}/d{1,2}/d{4})/gm; 
+//match date in format MM/DD/YYYY
+var dateMMDDYYYRegex = '^(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)dd$'; 
+//match date in format DD/MM/YYYY
+var dateDDMMYYYRegex = '^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)dd$'; 
+//match a url
+var urlRegex = '/^(https?://)?([da-z.-]+).([a-z.]{2,6})([/w .-]*)*/?$/'; 
+//match a url slug (letters/numbers/hypens)
+var urlslugRegex = '/^[a-z0-9-]+$/'; 
+//match a url string (Fixes spaces and querystrings)
+var urlRegex = /(https?://)?([da-z.-]+).([a-z.]{2,6})([/w.-=?]*)*/?/
+
+	Javascript	open new window	  <SCRIPT TYPE="text/javascript">
+   <!--
+   function popup(mylink, windowname){
+    if (! window.focus)return true;
+    var href;
+    if (typeof(mylink) == 'string')
+       href=mylink;
+    else
+       href=mylink.href;
+    window.open(href, windowname, 'width=520,height=530,scrollbars=no');
+    return false;
+   }
+   //-->
+  </SCRIPT>
+
+...
+
+       <div class="text-center margin-t-2"><a href="video.html" class="btn border-radius-5 border-color-white color-bg-purple" onclick="return popup(this,'南南的故事')" ><div class="padding-lr-3 color-ct-white">了解南南的故事</div></a></div>
+
+
+Sheet2
+
+
+Sheet3
+
+

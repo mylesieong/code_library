@@ -1,0 +1,26 @@
+工作表1
+	TOPIC	DSCP	CODE
+	window OS	checksum	$certUtil -hashfile pathToFileToCheck [HashAlgorithm]
+$CertUtil -hashfile C:\TEMP\MyDataFile.img MD5
+	Window OS	make a batch file	cd %JAVA_HOME%
+dir 
+pause
+	network	make a network share drive	1. Folder right click > properties > sharing tab > share > add everyone to write/read
+2. >net use a: \\pc-011-032\drivea
+3. >net use     **this can check whether the new netowrk shared folder is activated
+	ren	replace a char in filename	Set "Filename=BCMCP170204R_ZERO.PDF"
+Set "Pattern=_"
+Set "Replace=-"
+
+REM Call Echo %%Filename:%Pattern%=%Replace%%%
+Call Ren %Filename% %%Filename:%Pattern%=%Replace%%%
+
+PAUSE
+
+
+工作表2
+
+
+工作表3
+
+

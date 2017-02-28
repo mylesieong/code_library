@@ -1,0 +1,42 @@
+Sheet1
+	Language	Desc	Code Ref
+	Android	Use system provided size in XML layout file	android:layout_height="?android:attr/listPreferredItemHeight"
+	Use system defined color in XML layout file	android:textColor="@android:color/white"
+android:textColor="@color/textColorEarthquakeDetails"  <-- custom color
+	Use Custom Drawable Resource in XML layout file	android:background="@drawable/magnitude_circle"
+	Center an element	android:layout_gravity="center_vertical"
+android:gravity="center"
+	Restrict the lines of a text	android:ellipsize="end"
+android:maxLines="2"
+	ListView 中隠item間之分隔綫	     android:divider="@null"
+     android:dividerHeight="0dp"
+	Tablayout + CategoryAdapter 
+
+
+
+jdbc  connection properties
+	Where the URL is of the form:
+	jdbc:oracle:<drivertype>:@<database>
+	In addition to the URL, use an object of the standard Java Properties class as input. For example:
+	java.util.Properties info = new java.util.Properties();
+	info.put ("user", "scott");
+	info.put ("password","tiger");
+	info.put ("defaultRowPrefetch","15");
+	getConnection ("jdbc:oracle:oci:@",info);
+	Table 3-1 lists the connection properties that Oracle JDBC drivers support.
+	Table 3-1 Connection Properties Recognized by Oracle JDBC Drivers  
+	Name	Short Name	Type	Description
+	user	n/a	String	the user name for logging into the database
+	password	n/a	String	the password for logging into the database
+	database	server	String	the connect string for the database
+	internal_logon	n/a	String	a role, such as sysdba or sysoper, that allows you to log on as sys
+	defaultRowPrefetch	prefetch	String (containing integer value)	the default number of rows to prefetch from the server (default value is "10")
+	remarksReporting	remarks	String (containing boolean value)	"true" if getTables() and getColumns() should report TABLE_REMARKS; equivalent to using setRemarksReporting() (default value is "false")
+	defaultBatchValue	batchvalue	String (containing integer value)	the default batch value that triggers an execution request (default value is "10")
+	includeSynonyms	synonyms	String (containing boolean value)	"true" to include column information from predefined "synonym" SQL entities when you execute a DataBaseMetaDatagetColumns() call; equivalent to connection setIncludeSynonyms() call (default value is "false")
+	processEscapes	String (containing boolean value)	"true" if escape processing is enabled for all statements, "false" if escape processing is disabled (default value is "false")
+
+https://docs.oracle.com/cd/B10501_01/java.920/a96654/basic.htm
+Sheet3
+
+
