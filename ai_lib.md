@@ -6,18 +6,21 @@ Famous algorithm are:
 * Minimax decision 
 * Iterative Deepening
 
-### Problem to be solved
-Assume every player plays perfectly, and the information is complete and static
+Yet in game playing, assume every player plays perfectly, we will have problem like information is complete and static
 
-## State Search
+## Static State Search
 State search is a very generic topic, state statement can apply to lots of practical problem in real life such as ""Trip Planning"",  ""Sudoku/puzzle solving"", ""Finding best strategy"" and a lot more. 
 Famous algorithm are:
 * BFS/ DFS 
 * BFS+ (Uniform cost search)
 * A star search
 
-### Problem to be solving
-When there are local max, search algorithm will be trapped so we might introduce random algorithm.
+Problem to be solving: When there are local max, search algorithm will be trapped so we might introduce random algorithm like the simulate annealling, the beam search and etc.
+
+## Stochastic State Search (Planning problem)
+For stochastic problems, by its nature, there is 2 problems that traditional state search cannot tackle: multi-possible state and state-complexity-exploding. 
+Multi-possible state means there is more than 1 possible outcome for an action due to the stochastic. State-complexity-exploding means when we need to use n states to describe the world, the search space will become 3^n x possible actions and its too big.
+To solve them, **PDDL(Planning Domain Definition Language)** is invented to describe stochastic problems and with PDDL its easy to describt a belief state(a set of state) and its possible to reduce state-space size by PDDL's hidden assummsion. 
 
 # Hidden Markov Model
 
