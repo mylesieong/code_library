@@ -74,7 +74,8 @@ bindService(intent, ServiceConnection, int);
 
 ### General Service
 * You need to declare a <Service> in the manifest(and maybe an intent filter)
-* You need to override a service class
+* You need to override a Service class and return a Binder impl in onBind() so that client can perform the function w/ this Binder
+* Binder is the real impl of the aidl function
 
 ### AIDL introduction
 * AIDL is the only way that another app can access your service.
@@ -84,4 +85,12 @@ bindService(intent, ServiceConnection, int);
 	1. Create a Service class to expose the IBinder to client
 * Sample code for local Service can be found at: https://android.googlesource.com/platform/development/+/master/samples/ApiDemos/src/com/example/android/apis/app/LocalService.java
 * Sample code for aidl Service can be found at: https://www.protechtraining.com/blog/post/66 or at summit workstation path: ~/Desktop/ProjectGit/Samples/AIDLDemo
+* If you dont tell other how your aidl looks like, they would be able to use it!
 
+### When to use Service by CustomBinder/Messenger/AIDL
+* IPC & Concurrent -> AIDL
+* IPC & Not Concurrent -> CustomBinder ???
+* IPC & Not Concurrent -> Messenger ???
+
+### Diff between startService() and bindService()
+startService() can only create 1 instance but bindService() can create multi???
