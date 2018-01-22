@@ -78,7 +78,7 @@ bindService(intent, ServiceConnection, int);
 * Binder is the real impl of the aidl function
 
 ### AIDL introduction
-* AIDL is the only way that another app can access your service.
+* AIDL should be and should only be used when you need IPC (Interprocess Communicatio) and concurrency at the same time. 
 * Impl steps:
 	1. define IMyServiceInterface.aidl file
 	1. Impl IMyServiceInterface.Stub class
@@ -88,9 +88,67 @@ bindService(intent, ServiceConnection, int);
 * If you dont tell other how your aidl looks like, they would be able to use it!
 
 ### When to use Service by CustomBinder/Messenger/AIDL
+* Not IPC & Not Concurrent -> CustomBinder (say your own app using only)
+* IPC & Not Concurrent -> Messenger 
 * IPC & Concurrent -> AIDL
-* IPC & Not Concurrent -> CustomBinder ???
-* IPC & Not Concurrent -> Messenger ???
 
 ### Diff between startService() and bindService()
-startService() can only create 1 instance but bindService() can create multi???
+* startService(): service lifecycle can be start and stay forever until stopself or stopservice
+* bindService(): service lifecycle start at first bind and destroy at last unbind
+* if a service both impl the onStartCommand() and onBind(), the lifecycle follows the startService() situaion
+
+# Java
+
+## Exception handling
+* Throwable has 2 impl: Error and Exception, Exception has RuntimeException and other impl
+* UncheckedException: refers to Error(subclasses) & RuntimeException(subclasses) and it is not required to be either declared as throwing method or trycatch
+* CheckedException: refers to Exception's subclasses except RuntimeException, theys are all required to be handle. e.g. DataFormatException, RemoteException and etc.
+
+# Mockito
+
+## Dependency in gradle
+
+## Sample
+
+## Spy vs. Mock
+* Spy is used on an instance, while mock is used on a class.
+* We stub mock's behavior with: `when(mockee.foo()).thenReturn("bar");`
+* We stub spy's behavior with: `doReturn("bar").when(mockee).foo();` 
+* The reason we can't use when...thenReturn in spies is because spy actually do the job in its real object. What doReturn do is just stub the result, but what the mockee's real object does still been done internally.
+
+## Set the argument in a mock method
+* Generalize the argument with anyInt()/ anyString()/ any(Foo.class)
+`when(mockedMap.get(anyString())).thenReturn("foobar");`
+
+## Set private field with WhiteBox
+```java
+import org.mockito.internal.util.reflection.Whitebox;
+...
+Whitebox.setInternalState(testee, "mConnected", true);
+```
+
+## Stub a void method like List.clear()
+`doNothing().when(mockList).clear();`
+
+## PowerMock 
+PowerMock is extention that support both EasyMock and Mockito (these are 2 diff mocking framework) and so far I only need it for its *static method stubbing feature*.
+The simple step to use it(e.g. Stub the Math.random()):
+1. Replace @RunWith(MockitoUnitRunner.class) to @RunWith(PowerMockRunner.class) and it won't affect previous wriiten test.
+1. Add @PrepareForTest(Math.class)
+1. PowerMockito.mockStatic(Math.class); 
+1. Mockito.when(Math.random()).thenReturn(1.1);
+1. assertTrue(Math.random()==1.1);
+
+# RxAndroid
+1. This is a library to assist async methods. 
+1. It is based on RxJava, which is a JVM extension for the same purpose.
+1. In the aspect of user, it uses a simpler pub-sub pattern, or say, an observer pattern(w/o a middle layer in between) 
+1. Sample code: 
+```java
+Observable.just("one", "two", "three")
+	  .subscribeOn(Schedulers.newThread())
+	  .observeOn(AndroidSchedulers.mainThread())
+	  .subscribe(/* an Observer*/);
+```
+
+
