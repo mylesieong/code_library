@@ -17,7 +17,10 @@ Run liba.exe to view the workbook content in command line. Here are common-used 
 - Browse the 17th entry of git_lib.xlsx at a detail level:  `./liba -show git_lib.xlsx 17`
 - Search for a merge related snippets: `./liba -showfull git_lib.xlsx | grep merge --color`
 
-### liba.kts
+### liba.kts 
 Use kotlin to access java libraries content in a script. Here are common-used commands:
 - list all markdown files: `kotlinc -scripts liba.kts list`
 - list all markdown files and its top level topics: `kotlinc -scripts liba.kts tree`
+- help: `kotlinc -scripts liba.kts help`
+
+(note this requires kotlinc installed, see [here](https://kotlinlang.org/docs/tutorials/command-line.html) for more info)
