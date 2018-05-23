@@ -98,6 +98,15 @@ bindService(intent, ServiceConnection, int);
 * Sample code for aidl Service can be found at: https://www.protechtraining.com/blog/post/66 or at summit workstation path: ~/Desktop/ProjectGit/Samples/AIDLDemo
 * If you dont tell other how your aidl looks like, they won't be able to use it! For example, if you need to use the google donation feature, you need to include the google donation aidl in your project.
 
+### Support Library
+* Support Library has many version:
+	* support-library-v4: `com.android.support:support-compat:27.1.1`
+	* support-library-v7: `com.android.support:appcompat-v7:27.1.1`
+	* support-library-v13: `com.android.support:support-v13:27.1.1`
+* If you want to use a new feature on an old device so support library comes to resue. Say quick reply notification is after android N but we need it on android K, so we can use v4 support library.
+* Set back of support library:
+	* It might increase the apk size, but it can be solve by multi-version feature by Proguard
+	* It is developed quickly thus not that testible and stable
 
 # Java
 *TODO these domains should be moved to seperated markdown*
@@ -140,4 +149,3 @@ Observable.just("one", "two", "three")
 	  .observeOn(AndroidSchedulers.mainThread())
 	  .subscribe(/* an Observer*/);
 ```
-
