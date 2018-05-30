@@ -1,5 +1,81 @@
 # Android
 
+### Testing on Android
+* Small test aka Unit tests - 70%
+    * Is NOT a instrumented test
+    * We can use basic JUnit but without android.jar's power (so classes like android.text.TextUtils won't work as expect)
+    * Can use mockito
+    * Just on jvm
+    * Robolectric executes testing-friendly, jvm-based logic stubs that emulate the android framework. 
+* Medium test aka Integration tests - 20%
+    * Is a instrumented test
+    * e.g Tests for services, content providers, activities
+    * Firebase test lab can help on testing it with different combination of screen size and hw config
+* Large test aka UI tests - 10%
+    * Is a instrumented test
+    * We use AndroidJUnitRunner to run instrumented test. It loads (1) test package onto test devices, (2) runs tests and (3) reports results
+    * AndroidJUnitRunner supports JUnit4 Rules, Espresso, UI Automator and Android Test Orchestrator
+* [Test samples](https://github.com/googlesamples/android-testing)
+* Other libraries to make testing easilier are: mockito, powermock, Hamcrest(provides flexible assertions using Hamcrest matcher APIs)
+* How to setup a unit test:
+    1. Gradle dependencies:
+    ```groovy
+    dependencies {
+            testImplementation 'junit:junit:4.12'// Required -- JUnit 4 framework
+            testImplementation 'org.mockito:mockito-core:1.10.19'// Optional -- Mockito framework
+    }
+    ```
+    1. Declare the POJO test and its that simple:
+    ```java
+    public class EmailValidatorTest {
+            @Test public void emailValidator_CorrectEmailSimple_ReturnsTrue() { assertThat(EmailValidator.isValidEmail("name@email.com"), is(true)); }
+    }
+    ```
+    1. (Optional) To use mockito, you need to put @RunWith(MockitoJUnitRunner.class) and also add unitTests.returnDefaultValues = true into block build.gradle::android::testOptions
+* How to setup an instrumented test:
+    1. Gradle dependencies:
+    ```groovy
+    dependencies {
+            androidTestImplementation 'com.android.support:support-annotations:27.1.1' // Contains @Test @Before these stuffs
+            androidTestImplementation 'com.android.support.test:runner:1.0.2' //Contains the AndroidJUnitRunner
+            androidTestImplementation 'com.android.support.test:rules:1.0.2' //Contains ActivityTestRule, ServiceTestRule etc.(they replaced ActivityInstrumentationTestCase2/ ServiceTestCase)
+            androidTestImplementation 'org.hamcrest:hamcrest-library:1.3' // Optional -- Hamcrest library
+            androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'// Optional -- UI testing with Espresso
+            androidTestImplementation 'com.android.support.test.uiautomator:uiautomator-v18:2.1.3'// Optional -- UI testing with UI Automator
+    }
+    ```
+    1. Declare using AndroidJUnitRunner (do below in module-level build.gradle):
+    ```groovy    
+    android {
+            defaultConfig {
+                testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+            }
+    }
+    ```
+    1. Declare your test class with @RunWith(AndroidJUnit4.class) and use test annotations to indicate tests
+* To write an instrumented test for test a Activity:
+    1. import dependencies of instrumented test
+    1. declared to use AndroidJUnitRunner
+    1. Build testClass with @RunWith and @Test (and others)
+    1. Use ActivityTestRule in it (so no needs to extend any testcases parent classes)
+* To write an instrumented test for test a Service:
+    1. import dependencies of instrumented test
+    1. declared to use AndroidJUnitRunner
+    1. Build testClass with @RunWith and @Test (and others)
+    1. Use ServiceTestRule in it (so no needs to extend any testcases parent classes)
+* To write an espresso test for test a Activity:
+    1. import dependencies of instrumented test
+    1. declared to use AndroidJUnitRunner
+    1. Build testClass with @RunWith and @Test (and others)
+    1. Use ActivityTestRule in it (so no needs to extend any testcases parent classes)
+    1. Use espresso APIs like `onView()`, `withId()`, `perform()`, `check()` and etc.
+
+### Firebase  
+* FCM- Firebase Cloud Messaging, most famous firebase feature, dev setup their firebase key in firebase console and in project
+  they import firebase dependencies. Setup rules in firebase console.
+* Crashlytics- to monitor crash on release
+* Firebase Test Lab- for devs to test medium and large tests
+
 ### UI Layout XML
 
 * Use system provided size in Layout XML: `android:layout_height="?android:attr/listPreferredItemHeight"`
@@ -33,8 +109,8 @@ android:dividerHeight="0dp"
 * Code snippet:
 ```java
 mytask = new AsynTask<>...{
-	@Override
-	public void doInBackground(){...}
+    @Override
+    public void doInBackground(){...}
 };
 mytask.execute(...);
 ```
@@ -48,13 +124,13 @@ mytask.execute(...);
 * You need to override a Service class and return a Binder impl in onBind() so that client can perform the function w/ this Binder
 * Binder is the real impl of the aidl function
 * When to use Service by CustomBinder/Messenger/AIDL
-	* Not IPC & Not Concurrent -> CustomBinder (say your own app using only)
-	* IPC & Not Concurrent -> Messenger 
-	* IPC & Concurrent -> AIDL
+    * Not IPC & Not Concurrent -> CustomBinder (say your own app using only)
+    * IPC & Not Concurrent -> Messenger 
+    * IPC & Concurrent -> AIDL
 * Diff between startService() and bindService()
-	* startService(): service lifecycle can be start and stay forever until stopself or stopservice
-	* bindService(): service lifecycle start at first bind and destroy at last unbind
-	* if a service both impl the onStartCommand() and onBind(), the lifecycle follows the startService() situaion
+    * startService(): service lifecycle can be start and stay forever until stopself or stopservice
+    * bindService(): service lifecycle start at first bind and destroy at last unbind
+    * if a service both impl the onStartCommand() and onBind(), the lifecycle follows the startService() situaion
 * Access a external service by intent (By IntentFilter)
 ```xml
 <service
@@ -91,22 +167,22 @@ bindService(intent, ServiceConnection, int);
 ### AIDL
 * AIDL should be and should only be used when you need IPC (Interprocess Communicatio) and concurrency at the same time. 
 * Impl steps:
-	1. define IMyServiceInterface.aidl file
-	1. Impl IMyServiceInterface.Stub class
-	1. Create a Service class to expose the IBinder to client
+    1. define IMyServiceInterface.aidl file
+    1. Impl IMyServiceInterface.Stub class
+    1. Create a Service class to expose the IBinder to client
 * Sample code for local Service can be found at: https://android.googlesource.com/platform/development/+/master/samples/ApiDemos/src/com/example/android/apis/app/LocalService.java
 * Sample code for aidl Service can be found at: https://www.protechtraining.com/blog/post/66 or at summit workstation path: ~/Desktop/ProjectGit/Samples/AIDLDemo
 * If you dont tell other how your aidl looks like, they won't be able to use it! For example, if you need to use the google donation feature, you need to include the google donation aidl in your project.
 
 ### Support Library
 * Support Library has many version:
-	* support-library-v4: `com.android.support:support-compat:27.1.1`
-	* support-library-v7: `com.android.support:appcompat-v7:27.1.1`
-	* support-library-v13: `com.android.support:support-v13:27.1.1`
+    * support-library-v4: `com.android.support:support-compat:27.1.1`
+    * support-library-v7: `com.android.support:appcompat-v7:27.1.1`
+    * support-library-v13: `com.android.support:support-v13:27.1.1`
 * If you want to use a new feature on an old device so support library comes to resue. Say quick reply notification is after android N but we need it on android K, so we can use v4 support library.
 * Set back of support library:
-	* It might increase the apk size, but it can be solve by multi-version feature by Proguard
-	* It is developed quickly thus not that testible and stable
+    * It might increase the apk size, but it can be solve by multi-version feature by Proguard
+    * It is developed quickly thus not that testible and stable
 
 # Java
 *TODO these domains should be moved to seperated markdown*
@@ -118,10 +194,10 @@ bindService(intent, ServiceConnection, int);
 
 ### Mockito
 * Spy vs. Mock
-	* Spy is used on an instance, while mock is used on a class.
-	* We stub mock's behavior with: `when(mockee.foo()).thenReturn("bar");`
-	* We stub spy's behavior with: `doReturn("bar").when(mockee).foo();` 
-	* The reason we can't use when...thenReturn in spies is because spy actually do the job in its real object. What doReturn do is just stub the result, but what the mockee's real object does still been done internally.
+    * Spy is used on an instance, while mock is used on a class.
+    * We stub mock's behavior with: `when(mockee.foo()).thenReturn("bar");`
+    * We stub spy's behavior with: `doReturn("bar").when(mockee).foo();` 
+    * The reason we can't use when...thenReturn in spies is because spy actually do the job in its real object. What doReturn do is just stub the result, but what the mockee's real object does still been done internally.
 * Set the argument in a mock method and generalize the argument with anyInt()/ anyString()/ any(Foo.class)
 `when(mockedMap.get(anyString())).thenReturn("foobar");`
 * Set private field with WhiteBox
@@ -132,11 +208,11 @@ Whitebox.setInternalState(testee, "mConnected", true);
 ```
 * Stub a void method like List.clear(): `doNothing().when(mockList).clear();`
 * __PowerMock__ is extention that support both EasyMock and Mockito (these are 2 diff mocking framework) and so far I only need it for its *static method stubbing feature*. The simple step to use it(e.g. Stub the Math.random()):
-	1. Replace @RunWith(MockitoUnitRunner.class) to @RunWith(PowerMockRunner.class) and it won't affect previous wriiten test.
-	1. Add @PrepareForTest(Math.class)
-	1. PowerMockito.mockStatic(Math.class); 
-	1. Mockito.when(Math.random()).thenReturn(1.1);
-	1. assertTrue(Math.random()==1.1);
+    1. Replace @RunWith(MockitoUnitRunner.class) to @RunWith(PowerMockRunner.class) and it won't affect previous wriiten test.
+    1. Add @PrepareForTest(Math.class)
+    1. PowerMockito.mockStatic(Math.class); 
+    1. Mockito.when(Math.random()).thenReturn(1.1);
+    1. assertTrue(Math.random()==1.1);
 
 ### RxAndroid
 * This is a library to assist async methods. 
@@ -145,7 +221,7 @@ Whitebox.setInternalState(testee, "mConnected", true);
 * Sample code: 
 ```java
 Observable.just("one", "two", "three")
-	  .subscribeOn(Schedulers.newThread())
-	  .observeOn(AndroidSchedulers.mainThread())
-	  .subscribe(/* an Observer*/);
+      .subscribeOn(Schedulers.newThread())
+      .observeOn(AndroidSchedulers.mainThread())
+      .subscribe(/* an Observer*/);
 ```
