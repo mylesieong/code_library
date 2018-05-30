@@ -70,6 +70,11 @@
     1. Build testClass with @RunWith and @Test (and others)
     1. Use ActivityTestRule in it (so no needs to extend any testcases parent classes)
     1. Use espresso APIs like `onView()`, `withId()`, `perform()`, `check()` and etc.
+* @SmallTest vs @MediumTest vs @LargeTest:
+    * All three annotation are just for instrumented tests
+    * When annotation added, AndroidJUnitRunner will control system resource and total time allowance so to achieve 
+      to finish small test in max 60s, medium in max300s and large in max 900+s
+    * See [here](https://testing.googleblog.com/2010/12/test-sizes.html)
 
 ### Firebase  
 * FCM- Firebase Cloud Messaging, most famous firebase feature, dev setup their firebase key in firebase console and in project
