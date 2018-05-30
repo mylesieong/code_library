@@ -53,6 +53,7 @@
     }
     ```
     1. Declare your test class with @RunWith(AndroidJUnit4.class) and use test annotations to indicate tests
+    1. Create empty class defining the test suite, see [here](https://developer.android.com/training/testing/unit-testing/instrumented-unit-tests#test-suites) for how to template.
 * To write an instrumented test for test a Activity:
     1. import dependencies of instrumented test
     1. declared to use AndroidJUnitRunner
