@@ -1,22 +1,31 @@
 # Android
 
-### Testing on Android
-* Small test aka Unit tests - 70%
-    * Is NOT a instrumented test
-    * We can use basic JUnit but without android.jar's power (so classes like android.text.TextUtils won't work as expect)
-    * Can use mockito
-    * Just on jvm
-    * Robolectric executes testing-friendly, jvm-based logic stubs that emulate the android framework. 
-* Medium test aka Integration tests - 20%
-    * Is a instrumented test
-    * e.g Tests for services, content providers, activities
-    * Firebase test lab can help on testing it with different combination of screen size and hw config
-* Large test aka UI tests - 10%
-    * Is a instrumented test
-    * We use AndroidJUnitRunner to run instrumented test. It loads (1) test package onto test devices, (2) runs tests and (3) reports results
-    * AndroidJUnitRunner supports JUnit4 Rules, Espresso, UI Automator and Android Test Orchestrator
-* [Test samples](https://github.com/googlesamples/android-testing)
-* Other libraries to make testing easilier are: mockito, powermock, Hamcrest(provides flexible assertions using Hamcrest matcher APIs)
+### Testing on Android - TestRunners
+* What does an AndroidJUnit4 does:
+    * User then doesn't need to create an constructor in the test class
+    * Neither user needs to extend any TestCase in the test class
+    * It will find and run all method marked with @test annotation
+* What does a MockitoJUnitRunner does:
+    * User doesn't need to initMocks
+    * User can replace `Object obj = mock(Object.class)` with an annotation @Mock
+    * User can use @InjectMocks
+* Basically, these runners only provide convenience to users and which are totally replacable with doing the "old way"
+* Thus for example to use Mockito framework in Android Instrumented Test, we can ues either runner and explicitly do the work for another missing runner, 
+  or simple use no runners. Here is an example:
+  ```java
+  @SmallTest
+  @RunWith(AndroidJUnit4.class)
+  public class MessagingNotificationActionReceiverAndroidTest {
+    NotificationHelper mockHelper = mock(NotificationHelper.class);
+    @Test
+    public void test_mock() {
+        when(mockHelper.getIntZero()).thenReturn(3);
+        assertTrue(mockHelper.getIntZero() == 3);
+    }
+  }
+  ```
+
+### Testing on Android - Unit test
 * How to setup a unit test:
     1. Gradle dependencies:
     ```groovy
@@ -32,6 +41,8 @@
     }
     ```
     1. (Optional) To use mockito, you need to put @RunWith(MockitoJUnitRunner.class) and also add unitTests.returnDefaultValues = true into block build.gradle::android::testOptions
+
+### Testing on Android - Instrumented Test
 * How to setup an instrumented test:
     1. Gradle dependencies:
     ```groovy
@@ -75,6 +86,31 @@
     * When annotation added, AndroidJUnitRunner will control system resource and total time allowance so to achieve 
       to finish small test in max 60s, medium in max300s and large in max 900+s
     * See [here](https://testing.googleblog.com/2010/12/test-sizes.html)
+* To ues Mockito on Android Instrumented Test, we need to add dex-maker dependencies: 
+    ```groovy
+    androidTestImplementation 'com.google.dexmaker:dexmaker-mockito:' + UT_DEXMAKER_VERSION
+    androidTestImplementation 'com.google.dexmaker:dexmaker:' + UT_DEXMAKER_VERSION
+    ```
+* Dexmaker only works with Mockito framework version 1.x (not compatible with 2.x - 2018-06-01)
+* PowerMock can only work on JVM, not on Dalvik even with Dexmaker
+
+### Testing on Android - Overview
+* Small test aka Unit tests - 70%
+    * Is NOT a instrumented test
+    * We can use basic JUnit but without android.jar's power (so classes like android.text.TextUtils won't work as expect)
+    * Can use mockito
+    * Just on jvm
+    * Robolectric executes testing-friendly, jvm-based logic stubs that emulate the android framework. 
+* Medium test aka Integration tests - 20%
+    * Is a instrumented test
+    * e.g Tests for services, content providers, activities
+    * Firebase test lab can help on testing it with different combination of screen size and hw config
+* Large test aka UI tests - 10%
+    * Is a instrumented test
+    * We use AndroidJUnitRunner to run instrumented test. It loads (1) test package onto test devices, (2) runs tests and (3) reports results
+    * AndroidJUnitRunner supports JUnit4 Rules, Espresso, UI Automator and Android Test Orchestrator
+* [Test samples](https://github.com/googlesamples/android-testing)
+* Other libraries to make testing easilier are: mockito, powermock, Hamcrest(provides flexible assertions using Hamcrest matcher APIs)
 
 ### Firebase  
 * FCM- Firebase Cloud Messaging, most famous firebase feature, dev setup their firebase key in firebase console and in project
