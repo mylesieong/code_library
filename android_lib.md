@@ -1,5 +1,15 @@
 # Android
 
+### Align in Android
+* LinearLayout- `android:gravity="center|center_vertical|center_horizontal"`
+* LinearLayout's children- `android:layout_gravity="center|center_vertical|center_horizontal"`
+* RelativeLayout- `android:gravity="center|center_vertical|center_horizontal"`
+* RelativeLayout's children- `android:layout_centerHorizontal="true"` & `android:layout_centerVertical="true"` & `android:layout_centerInParent="true"`
+* FrameLayout- no gravity property
+* FrameLayout's children- `android:layout_gravity="center|center_horizontal|center_vertical"`
+* For ConstraintLayout, see [here](https://android.jlelse.eu/centering-views-in-android-layouts-547930621de7) for more
+
+
 ### Testing on Android - TestRunners
 * What does an AndroidJUnit4 does:
     * User then doesn't need to create an constructor in the test class
