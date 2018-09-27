@@ -35,7 +35,16 @@
 * Hooks reside in the .git/hooks
 
 ## Refs and the Reflog
-**TODO** see https://www.atlassian.com/git/tutorials/refs-and-the-reflog
+1. Refs is the internal system that git uses to alias commits under the hook of branchs and tags
+1. `git show master` equals `git show refs/heads/master` (the former is actually the wrapper of the latter)
+1. Look into .git/refs and all the refs structure can be found there
+1. Refspecs: A way to manipulate remote branch from local git repo
+	* Push a local commit/branch to remote: `git push origin {local_hash}:{your_new_branch_name}` or `git push origin {local_hash}:refs/heads/{your_new_branch_name}`
+	* Delete a remote branch: `git push origin :{your_target_branch}`
+1. *Operations mentioned above can all be performed with logging onto the git server and do the changing directly*
+1. Reflog: A safenet, basically a log of every action so that you can retrieve lost commit hash
+	* `git reflog` to check the hash of a detached commit
+	* `git checkout HEAD@{n} (or the lost commit hash)` to get back
 
 ## How to revert remote branch to previous stats 
 **TODO**
@@ -44,11 +53,6 @@
 1. `git stash`
 1. `git stash pop @stash{x}|drop @stash{x}|list`
 1. `git stash show @stash{x} -p`
-
-## Using Refs
-1. Refs is the internal system that git uses to alias commits under the hook of branchs and tags
-1. `git show master` equals `git show refs/heads/master` (the former is actually the wrapper of the latter)
-1. Look into .git/refs and all the refs structure can be found there
 
 # Gerrit
 * Gerrit is based on git. Similar to gitlab. Its goal is to add a CI layer and a Review System in a git host.
