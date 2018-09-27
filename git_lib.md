@@ -45,6 +45,11 @@
 1. `git stash pop @stash{x}|drop @stash{x}|list`
 1. `git stash show @stash{x} -p`
 
+## Using Refs
+1. Refs is the internal system that git uses to alias commits under the hook of branchs and tags
+1. `git show master` equals `git show refs/heads/master` (the former is actually the wrapper of the latter)
+1. Look into .git/refs and all the refs structure can be found there
+
 # Gerrit
 * Gerrit is based on git. Similar to gitlab. Its goal is to add a CI layer and a Review System in a git host.
 * When push a commit, gerrit will create a code review contains:
