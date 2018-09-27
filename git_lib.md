@@ -24,6 +24,7 @@
 1. Move 2 commit ahead & files discard: `git reset --hard HEAD~2`
 
 ## Submodule
+1. The submodule folder is just a hash to holder. Use `git submodule status` or `vim .gitmodules` to check
 1. Working on develop branch and want to import a submodule to mysubmodule
 1. `git submodule add https://github.com/<user>/whatever mysubmodule` 
 1. At this point, submodule will still be empty and should run fetch manually: `git submodule update --init --recursive`
@@ -38,6 +39,11 @@
 
 ## How to revert remote branch to previous stats 
 **TODO**
+
+## Stash
+1. `git stash`
+1. `git stash pop @stash{x}|drop @stash{x}|list`
+1. `git stash show @stash{x} -p`
 
 # Gerrit
 * Gerrit is based on git. Similar to gitlab. Its goal is to add a CI layer and a Review System in a git host.
