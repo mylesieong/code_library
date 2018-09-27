@@ -47,7 +47,7 @@
 	* `git checkout HEAD@{n} (or the lost commit hash)` to get back
 
 ## How to revert remote branch to previous stats 
-**TODO**
+1. See Refspecs above
 
 ## Stash
 1. `git stash`
