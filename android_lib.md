@@ -1,6 +1,6 @@
 # Android
 
-### Align in Android
+## Align in Android
 * LinearLayout- `android:gravity="center|center_vertical|center_horizontal"`
 * LinearLayout's children- `android:layout_gravity="center|center_vertical|center_horizontal"`
 * RelativeLayout- `android:gravity="center|center_vertical|center_horizontal"`
@@ -10,7 +10,7 @@
 * For ConstraintLayout, see [here](https://android.jlelse.eu/centering-views-in-android-layouts-547930621de7) for more
 
 
-### Testing on Android - TestRunners
+## Testing on Android - TestRunners
 * What does an AndroidJUnit4 does:
     * User then doesn't need to create an constructor in the test class
     * Neither user needs to extend any TestCase in the test class
@@ -35,7 +35,7 @@
   }
   ```
 
-### Testing on Android - Unit test
+## Testing on Android - Unit test
 * How to setup a unit test:
     1. Gradle dependencies:
     ```groovy
@@ -52,7 +52,7 @@
     ```
     1. (Optional) To use mockito, you need to put @RunWith(MockitoJUnitRunner.class) and also add unitTests.returnDefaultValues = true into block build.gradle::android::testOptions
 
-### Testing on Android - Instrumented Test
+## Testing on Android - Instrumented Test
 * How to setup an instrumented test:
     1. Gradle dependencies:
     ```groovy
@@ -104,7 +104,7 @@
 * Dexmaker only works with Mockito framework version 1.x (not compatible with 2.x - 2018-06-01)
 * PowerMock can only work on JVM, not on Dalvik even with Dexmaker
 
-### Testing on Android - Overview
+## Testing on Android - Overview
 * Small test aka Unit tests - 70%
     * Is NOT a instrumented test
     * We can use basic JUnit but without android.jar's power (so classes like android.text.TextUtils won't work as expect)
@@ -122,13 +122,13 @@
 * [Test samples](https://github.com/googlesamples/android-testing)
 * Other libraries to make testing easilier are: mockito, powermock, Hamcrest(provides flexible assertions using Hamcrest matcher APIs)
 
-### Firebase  
+## Firebase  
 * FCM- Firebase Cloud Messaging, most famous firebase feature, dev setup their firebase key in firebase console and in project
   they import firebase dependencies. Setup rules in firebase console.
 * Crashlytics- to monitor crash on release
 * Firebase Test Lab- for devs to test medium and large tests
 
-### UI Layout XML
+## UI Layout XML
 
 * Use system provided size in Layout XML: `android:layout_height="?android:attr/listPreferredItemHeight"`
 * Use system defined color in Layout XML: 
@@ -157,7 +157,7 @@ android:divider="@null"
 android:dividerHeight="0dp"
 ```
 
-### AsynTask
+## AsynTask
 * Code snippet:
 ```java
 mytask = new AsynTask<>...{
@@ -167,11 +167,11 @@ mytask = new AsynTask<>...{
 mytask.execute(...);
 ```
 
-### ListView and RecyclerView
+## ListView and RecyclerView
 * Easiest way to use ListView, just need to remember override a Adapter and set the adapter to listview and done.
 * For RecyclerView, except for creating an adapter, viewHolder is also needed (ref Verison one talk)
 
-### Service
+## Service
 * You need to declare a <Service> in the manifest(and maybe an intent filter)
 * You need to override a Service class and return a Binder impl in onBind() so that client can perform the function w/ this Binder
 * Binder is the real impl of the aidl function
@@ -216,7 +216,7 @@ startService(intent);
 bindService(intent, ServiceConnection, int);
 ```
 
-### AIDL
+## AIDL
 * AIDL should be and should only be used when you need IPC (Interprocess Communicatio) and concurrency at the same time. 
 * Impl steps:
     1. define IMyServiceInterface.aidl file
@@ -226,7 +226,7 @@ bindService(intent, ServiceConnection, int);
 * Sample code for aidl Service can be found at: https://www.protechtraining.com/blog/post/66 or at summit workstation path: ~/Desktop/ProjectGit/Samples/AIDLDemo
 * If you dont tell other how your aidl looks like, they won't be able to use it! For example, if you need to use the google donation feature, you need to include the google donation aidl in your project.
 
-### Support Library
+## Support Library
 * Support Library has many version:
     * support-library-v4: `com.android.support:support-compat:27.1.1`
     * support-library-v7: `com.android.support:appcompat-v7:27.1.1`
@@ -239,12 +239,12 @@ bindService(intent, ServiceConnection, int);
 # Java
 *TODO these domains should be moved to seperated markdown*
 
-### Exception handling
+## Exception handling
 * Throwable has 2 impl: Error and Exception, Exception has RuntimeException and other impl
 * UncheckedException: refers to Error(subclasses) & RuntimeException(subclasses) and it is not required to be either declared as throwing method or trycatch
 * CheckedException: refers to Exception's subclasses except RuntimeException, theys are all required to be handle. e.g. DataFormatException, RemoteException and etc.
 
-### Mockito
+## Mockito
 * Spy vs. Mock
     * Spy is used on an instance, while mock is used on a class.
     * We stub mock's behavior with: `when(mockee.foo()).thenReturn("bar");`
@@ -266,7 +266,7 @@ Whitebox.setInternalState(testee, "mConnected", true);
     1. Mockito.when(Math.random()).thenReturn(1.1);
     1. assertTrue(Math.random()==1.1);
 
-### RxAndroid
+## RxAndroid
 * This is a library to assist async methods. 
 * It is based on RxJava, which is a JVM extension for the same purpose.
 * In the aspect of user, it uses a simpler pub-sub pattern, or say, an observer pattern(w/o a middle layer in between) 

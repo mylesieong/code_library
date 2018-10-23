@@ -1,6 +1,8 @@
 # Install Environment
 On linux/cygwin, simply use apt-get/apt-cyg install clisp. In command line, `clisp target.lisp` to run.
+
 # Basic syntax
+
 ## Operators 
 ```lisp
 (write-line "Hello there")
@@ -13,6 +15,7 @@ On linux/cygwin, simply use apt-get/apt-cyg install clisp. In command line, `cli
 (defvar x 10)
 (print (type-of x))
 ```
+
 ## Define Marcos
 ```lisp
 ; definition
@@ -23,6 +26,7 @@ On linux/cygwin, simply use apt-get/apt-cyg install clisp. In command line, `cli
 (setTo10 x)
 (print x)
 ```
+
 ## If Clause
 ```lisp
 (defun demofunc (flag)
