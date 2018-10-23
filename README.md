@@ -19,8 +19,8 @@ Run liba.exe to view the workbook content in command line. Here are common-used 
 
 ### liba.kts 
 Use kotlin to access java libraries content in a script. Here are common-used commands:
-- list all markdown files: `kotlinc -scripts liba.kts list`
-- list all markdown files and its top level topics: `kotlinc -scripts liba.kts tree`
+- list all markdown files: `kotlinc -script liba.kts list`
+- list all markdown files and its top level topics: `kotlinc -script liba.kts tree`
 - help: `kotlinc -scripts liba.kts help`
 
 (note this requires kotlinc installed, see [here](https://kotlinlang.org/docs/tutorials/command-line.html) for more info)
