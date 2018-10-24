@@ -19,15 +19,13 @@ fun list() {
 	markdowns?.forEach { m -> println(m) }
 }
 
-fun handleTree(r: String){
-	File(r).readLines().forEach { pickHeadersAndPrint(it) }
-}
-
-fun pickHeadersAndPrint(line: String) {
-	when (getMarkdownSyntaxType(line)){
-		MarkdownSyntaxType.HEAD_POUND -> println(line)
-		MarkdownSyntaxType.HEAD_POUNDPOUND -> println("\t" + line)
-		MarkdownSyntaxType.OTHERS -> {}
+fun handleTree(r: String) {
+	File(r).readLines().forEach {
+		when (getMarkdownSyntaxType(it)) {
+			MarkdownSyntaxType.HEAD_POUND -> println(it)
+			MarkdownSyntaxType.HEAD_POUNDPOUND -> println("\t" + it)
+			MarkdownSyntaxType.OTHERS -> {}
+		}
 	}
 }
 
