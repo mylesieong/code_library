@@ -1,8 +1,7 @@
-#!/usr/bin/python
-
 import sys
 import enum 
-from os import listdir
+import os
+import re
   
 class MarkdownSyntaxType(enum.Enum): 
     HEAD_POUND = 0
@@ -13,12 +12,26 @@ FILE_ROOT = '.'
 MARKDOWN_EXTENSION = 'md'
 
 def listFilesWithExtension(directory, extension) :
-    files = (f for f in listdir(directory) if f.endswith('.' + extension))
+    files = (f for f in os.listdir(directory) if f.endswith('.' + extension))
     for f in files:
         print(f)
 
 def handleTree(f):
-    print("NA")
+    with open(f) as fo:
+        linesWithType = [ (l, getMarkdownSyntaxType(l)) for l in fo.read().splitlines()]
+        for (l, t) in linesWithType:
+            if t == MarkdownSyntaxType.HEAD_POUND:
+                print(l)
+            elif t == MarkdownSyntaxType.HEAD_POUNDPOUND:
+                print('\t' + l)
+
+def getMarkdownSyntaxType(line) :
+    if re.compile("^#[ A-Za-z0-9].*").match(line):
+        return MarkdownSyntaxType.HEAD_POUND
+    elif re.compile("^##[ A-Za-z0-9].*").match(line):
+        return MarkdownSyntaxType.HEAD_POUNDPOUND
+    else:
+        return MarkdownSyntaxType.OTHERS
 
 if sys.argv[1] == 'list' :
     listFilesWithExtension(FILE_ROOT, MARKDOWN_EXTENSION)
