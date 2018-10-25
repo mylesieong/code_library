@@ -17,7 +17,10 @@
 	* *apk* to *runtimeonly*
 	* *provide* to *compileOnly*
 	* A mandatory Product Flavoring is required
+	* Auto-fallback feature is added to Flavoring system
 * All above difference somehow improve the **speed** and **robusity** of building which, from what the official docs is said, the main focus of gap 3 release.
+* Gradle wrapper is just wrapper that call the real gradle commnad
 
-
-
+## Common-used command
+* Build a project: `./gradlew :my-project-name:assemble`    //ps. this will build all flavor
+* List tasks under a certain project: `./gradlew : my-project-name:tasks`
