@@ -148,6 +148,11 @@ Observable.just("one", "two", "three")
 * Main idea:
 	* Module: warehouse of the injectee
 	* Component: the dependency graph, with which we trace down the classes that we can inject
+
+## Android tools usage (logcat)
+* Set bigger buffer size: `logcat -G 2M`
+* Clear logs on device: `logcat -c`
+* Select devices to perform actions: `logcat -s $device_name $your_actions`
 	
 # Test 
 

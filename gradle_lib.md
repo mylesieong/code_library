@@ -24,3 +24,13 @@
 ## Common-used command
 * Build a project: `./gradlew :my-project-name:assemble`    //ps. this will build all flavor
 * List tasks under a certain project: `./gradlew : my-project-name:tasks`
+
+## Set and check gradle properties
+* To check properties, use: `./gradlew properties`
+* To set properties, open gradle.properties at the root where you run gradle command and add properties, for example:
+```
+org.gradle.daemon=true
+org.gradle.jvmargs=-Xmx3096m -XX:MaxPermSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8
+org.gradle.parallel=true
+org.gradle.configureondemand=true
+```
