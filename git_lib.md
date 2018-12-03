@@ -54,6 +54,46 @@
 1. `git stash pop @stash{x}|drop @stash{x}|list`
 1. `git stash show @stash{x} -p`
 
+
+## Trace down history
+* git log --follow {filename}
+* git show {commit hashcode}
+* git diff {branchnameA} {branchnameB}
+
+## 101
+* $git rm {file}
+* $git status (-s)
+* $git diff
+* $git diff --cached
+* $git clone https://github.com/mylesieong/my_maven_projects.git
+* git checkout {branch name or hashcode}
+* git branch
+* git branch new_branch
+* git branch -d new_branch
+* git push origin master 
+* git pull origin mastergit push origin master 
+* git pull origin mastergit push origin master 
+* git pull origin master
+* git log --graph --oneline --decorate
+
+## Establish a git repo and push to a remote repo
+* $git init
+* $git add {file}
+* $git config -global user.email "myles.ieong@gmail.com"
+* $git config -global user.name "myles"
+* $git commit -m "a project name"
+* $git remote add origin https://github.com/mylesieong/my_maven_projects.git
+* $git push -u origin master //mylesieong:sewshort
+
+## Different Ways to Host Git Server
+* Local Protocol: Local File System / Network File System
+* SSH Protocol
+* Http Protocol
+* Git Protocol
+* To use Local Protocol
+	1. Clone existing project to build: `git clone --bare my_project my_project.git`
+	1. Init an Empty project git: `git init --bare new_project.git`
+
 # Gerrit
 * Gerrit is based on git. Similar to gitlab. Its goal is to add a CI layer and a Review System in a git host.
 * When push a commit, gerrit will create a code review contains:
