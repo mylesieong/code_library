@@ -34,3 +34,9 @@ org.gradle.jvmargs=-Xmx3096m -XX:MaxPermSize=512m -XX:+HeapDumpOnOutOfMemoryErro
 org.gradle.parallel=true
 org.gradle.configureondemand=true
 ```
+
+## Common build errors and solutions
+* MergeDex Exception
+ To trouble shoot: (dependencies : clean project and build again) 
+ 		-> (cannot delete old jar : kill gradle daemon and build again) 
+ 		-> (try add multiDexEnable) ?

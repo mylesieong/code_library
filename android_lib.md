@@ -149,10 +149,29 @@ Observable.just("one", "two", "three")
 	* Module: warehouse of the injectee
 	* Component: the dependency graph, with which we trace down the classes that we can inject
 
-## Android tools usage (logcat)
+# Android tools 
+* All below mentioned tools are located under $ANDROID_SDK
+
+## Logcat
 * Set bigger buffer size: `logcat -G 2M`
 * Clear logs on device: `logcat -c`
 * Select devices to perform actions: `logcat -s $device_name $your_actions`
+
+## adb
+* `adb -s {target_devices} shell`
+* `adb shell pm list packages -p`
+* `adb shell setenforce permissive`
+* `adb -s {target_devices} -e emu kill`
+* `adb shell toybox date`
+* (to be continued)
+
+## emulator
+* `emulator @Pixel_2_API_28_Lancero -no-window -no-snapshot-save -verbose`
+* `emulator -list-avds`
+* For android virtual devices (avd), the instance name (e.g. emulator-5554) is composed by "emulator" and port number. Port number starting from 5554 and incre by 2
+
+## avdmanager
+* A tool to setup avd profiles and configuration
 	
 # Test 
 

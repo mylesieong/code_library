@@ -53,7 +53,7 @@
 1. `git stash`
 1. `git stash pop @stash{x}|drop @stash{x}|list`
 1. `git stash show @stash{x} -p`
-
+1. `git stash save "your alias to the stash"`
 
 ## Trace down history
 * git log --follow {filename}
