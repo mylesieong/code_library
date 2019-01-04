@@ -1,5 +1,14 @@
 # Android
 
+## SharedUserId
+1. SharedUserId is a way that android system put app in an user group with different authority. Like the concept of Linux user group.
+1. Apps need certain certificates to use certain sharedUserId
+1. Google defined some system sharedUserId, and Motorola does too.
+1. In our case, Motorola defined a sharedUserId "motorola.rcs":
+	- to be part of this sharedUserId: declare it and push to system app
+	- this sharedUserId can: access native sms/mms db
+1. We can use 4 old Motorola phones (android n) to test Kyocera since those phones don't need any sharedUserId to access native sms/mms db
+
 ## Proguard
 * To add proguard support, add `minifyEnable true` and `proguardFiles {customProguardFilesPath}` to project build gradle > buildType > debug/release
 * One can combine element identifier (e.g. `**`, `*`, `?`) and commands (e.g. `-keep`, `-keepnames`) to perform proguard actions.
