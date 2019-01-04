@@ -36,7 +36,14 @@ org.gradle.configureondemand=true
 ```
 
 ## Common build errors and solutions
-* MergeDex Exception
- To trouble shoot: (dependencies : clean project and build again) 
- 		-> (cannot delete old jar : kill gradle daemon and build again) 
- 		-> (try add multiDexEnable) ?
+* Identifying and merging files
+	- Symptoms: MergeDex Exception / cannot merge jar / duplicated classes/ duplicated classes `*.BuildConfig`
+	- Trouble-shoot: (dependencies : gradle clean && gradle build again)
+ 			-> (cannot delete old jar : kill gradle daemon and build again) 
+ 			-> (try add multiDexEnable) 
+
+* `!directory.isDirectory()`
+	- Symptoms: `!directory.isDirectory()` 
+	- trouble-shoot: becaues flavor name is too long so in build/intermediate folder name too long and gradle can't recognize
+
+* Android studio freeze after gradle buiild and before 3 tasks. -> rm .idea -rf && rm *.iml
