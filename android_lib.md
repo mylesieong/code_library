@@ -1,5 +1,23 @@
 # Android
 
+## Link Aar dependency
+* Aar won't be effective if put it in build.gradle like api fileTree...
+* Try below snippet:
+```
+dependencies {
+-    api 'com.summittech.android.api-new:service:' + SUMMIT_SERVICE_VERSION
++    api(name:'service-internal-latestApi-debug', ext:'aar')
+}
+
+repositories {
+     mavenCentral()
+     flatDir {
+        dirs 'libs'
+     }
+}
+```
+* Need gradle won't package all dependencies of an android lib into aar output for dependenciy version control reason. So make sure your aar has all it needs
+
 ## SharedUserId
 1. SharedUserId is a way that android system put app in an user group with different authority. Like the concept of Linux user group.
 1. Apps need certain certificates to use certain sharedUserId

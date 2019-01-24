@@ -46,4 +46,14 @@ org.gradle.configureondemand=true
 	- Symptoms: `!directory.isDirectory()` 
 	- trouble-shoot: becaues flavor name is too long so in build/intermediate folder name too long and gradle can't recognize
 
-* Android studio freeze after gradle buiild and before 3 tasks. -> rm .idea -rf && rm *.iml
+* Android studio freeze after gradle buiild and before 3 tasks. -> rm .idea -rf && rm \*.iml
+        - solution2 : upgrade android studio to 3.5 Canary kind of solve it 
+ 
+* Upgrade support lib to androidX
+	* Merge manifest related problem (Manifest merger failed : Attribute application@appComponentFactory from [com.android.support:support-compat:?] AndroidManifest.xml is also present at [androidx.core:core:?] AndroidManifest.xml ... Suggestion: add 'tools:replace="android:appComponentFactory"' to element at AndroidManifest.xml to override.)/ solution: add "android.userAndroidX=true; android.enableJetifier=true" to gradle.properties
+	* Above one, can use workaround (its suggestion and assign a random string) 
+	* DexArchiveBuilderException: fail to process jetifier-butterknife-runtime.aar / solution: update sourceCompatibility to JDK1_8
+	* Butterknife generate class `R2` is using legacy support lib as import (only happend when using butterknife 9 or 10) / solution: add "android.userAndroidX=true; android.enableJetifier=true" to gradle.properties (check butterknife changelog.md)
+	* After upgrade to androidX deps we compile with error - attr:ttcIndex (and others) not found, because these new attrs are added after AndroidP / solution:  update to compileSDKVersion28
+
+
