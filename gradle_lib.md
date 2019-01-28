@@ -56,4 +56,21 @@ org.gradle.configureondemand=true
 	* Butterknife generate class `R2` is using legacy support lib as import (only happend when using butterknife 9 or 10) / solution: add "android.userAndroidX=true; android.enableJetifier=true" to gradle.properties (check butterknife changelog.md)
 	* After upgrade to androidX deps we compile with error - attr:ttcIndex (and others) not found, because these new attrs are added after AndroidP / solution:  update to compileSDKVersion28
 
-
+## RuntimeClasspath vs CompileTimeClasspath
+* Sometimes RuntimeClasspath is different from CompileTimeClasspath because gradle needs extra tools at compile time.
+* Run `gradle :foobar:dependencies` and you will see the difference
+* If there is a version conflict, try to force a version in *build.gradle* with:
+```
+android {
+ ...
+ configurations.all {
+     resolutionStrategy {
+         force 'androidx.legacy:legacy-support-core-utils:1.0.0', 'androidx.loader:loader:1.0.0', 'androidx.core:core:1.0.1',
+                 'androidx.versionedparcelable:versionedparcelable:1.0.0', 'androidx.collection:collection:1.0.0',
+                 'androidx.lifecycle:lifecycle-runtime:2.0.0', 'androidx.documentfile:documentfile:1.0.0',
+                 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0', 'androidx.print:print:1.0.0',
+                 'androidx.lifecycle:lifecycle-common:2.0.0'
+     }
+ }
+}
+```
