@@ -4,7 +4,7 @@
 * In essence, gradle is not a build tool but an automation tool. Itself doesn't really know how to compile say C++ or Java or Android, its been done with the help of plugins.
 * Plugins in gradle can add custom tasks, new configurations, dependencies, and other capabilities to gradle project.
 * For example, in android plugin, applying the android plugin adds a wide variety of tasks, which are configurable on the "android" block in build.gradle script.
-* Build ccycle:
+* Build cycle:
 	- Initialization - scripts in setting.gradle script?
 	- Configuration - scripts in build.gradle scripts but not those in tasks execution area?
 	- Execution 
@@ -50,7 +50,7 @@ org.gradle.configureondemand=true
         - solution2 : upgrade android studio to 3.5 Canary kind of solve it 
  
 * Upgrade support lib to androidX
-	* Merge manifest related problem (Manifest merger failed : Attribute application@appComponentFactory from [com.android.support:support-compat:?] AndroidManifest.xml is also present at [androidx.core:core:?] AndroidManifest.xml ... Suggestion: add 'tools:replace="android:appComponentFactory"' to element at AndroidManifest.xml to override.)/ solution: add "android.userAndroidX=true; android.enableJetifier=true" to gradle.properties
+	* Merge manifest related problem (Manifest merger failed : Attribute application@appComponentFactory from [com.android.support:support-compat:?] AndroidManifest.xml is also present at [androidx.core:core:?] AndroidManifest.xml ... Suggestion: add 'tools:replace="android:appComponentFactory"' to element at AndroidManifest.xml to override.)/ solution: add "android.useAndroidX=true; android.enableJetifier=true" to gradle.properties
 	* Above one, can use workaround (its suggestion and assign a random string) 
 	* DexArchiveBuilderException: fail to process jetifier-butterknife-runtime.aar / solution: update sourceCompatibility to JDK1_8
 	* Butterknife generate class `R2` is using legacy support lib as import (only happend when using butterknife 9 or 10) / solution: add "android.userAndroidX=true; android.enableJetifier=true" to gradle.properties (check butterknife changelog.md)
@@ -72,5 +72,18 @@ android {
                  'androidx.lifecycle:lifecycle-common:2.0.0'
      }
  }
+}
+```
+
+## Variant handling in lifecycle - Configuration
+* Variant = Flavors(i)-Dimensions1 x Flavors(j)-Dimensions2 x ... x Flavors(k)-Dimensions(N)
+* E.g. V(fullLatestApiSummitDefaultUserId) = D1(full) x D2(LatestApi) x D3(Summit) x D4(DefaultUserId)
+* We can handle variant to decide how many different variant to output after configuration stage:
+```
+ext.disableFlavorsNotUsedForDev = { variant, flavorNames, buildType ->
+    if (buildType.equals("release") || flavorNames.contains("androidUidPhone") || !flavorNames.contains("summit")) {
+        logger.warn("Removing " + flavorNames + " from project")
+        variant.setIgnore(true)
+    }
 }
 ```

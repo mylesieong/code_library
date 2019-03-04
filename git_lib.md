@@ -28,6 +28,7 @@
 1. Working on develop branch and want to import a submodule to mysubmodule
 1. `git submodule add https://github.com/<user>/whatever mysubmodule` 
 1. At this point, submodule will still be empty and should run fetch manually: `git submodule update --init --recursive`
+* The concept is git submodule is recognoize as a hash x a repo (if cd submodule and checkout branch doesn't change the fact)
 
 ## Hooks
 * Git hooks are scripts that run automatically every time a particular event occurs in a Git repository. 

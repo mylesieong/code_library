@@ -51,7 +51,6 @@ repositories {
 * Firebase Test Lab- for devs to test medium and large tests
 
 ## UI Layout XML
-
 * Use system provided size in Layout XML: `android:layout_height="?android:attr/listPreferredItemHeight"`
 * Use system defined color in Layout XML: 
 ```
@@ -64,13 +63,34 @@ android:textColor="@color/myColor"  //this is custom color
 android:layout_gravity="center_vertical"
 android:gravity="center"
 ```
-
 * Restrict the lines of a textview:
 ```
 android:ellipsize="end"
 android:maxLines="2"
 ```
 * A divider element in ListView:
+```
+android:divider="@null"
+android:dividerHeight="0dp"
+```
+* Use system provided size in XML layout file:`android:layout_height="?android:attr/listPreferredItemHeight"`
+* Use system defined color in XML layout file:
+```
+android:textColor="@android:color/white"
+android:textColor="@color/textColorEarthquakeDetails"  <-- custom color
+```
+* Use Custom Drawable Resource in XML layout file:`android:background="@drawable/magnitude_circle"`
+* Center an element:
+```
+android:layout_gravity="center_vertical"
+android:gravity="center"
+```
+* Restrict the lines of a text:
+```
+android:ellipsize="end"
+android:maxLines="2"
+```
+* Hide divider in ListView:
 ```
 android:divider="@null"
 android:dividerHeight="0dp"
@@ -199,6 +219,11 @@ Observable.just("one", "two", "three")
 
 ## avdmanager
 * A tool to setup avd profiles and configuration
+
+## Sms mms table on android device
+* Find `smsmms.db` on device with `find /data -name smsmms.db`
+* Sms is saved at table sms 
+* Mms is saved at table pdu (extended to table part)
 	
 # Test 
 
@@ -330,4 +355,10 @@ Observable.just("one", "two", "three")
     ```
 * Dexmaker only works with Mockito framework version 1.x (not compatible with 2.x - 2018-06-01)
 * PowerMock can only work on JVM, not on Dalvik even with Dexmaker
+
+## Testing example - Run instrumented test for system app
+1. Build: ./gradlew clean ass assAT
+1. Remove: adb root && adb remount && adb shell rm system/priv-app/app-debug\* && adb shell ls system/priv-app && adb reboot
+1. Push: adb root && adb remount && adb push app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk system/priv-app && adb push app/build/outputs/apk/debug/app-debug.apk system/priv-app && adb shell ls system/priv-app && adb reboot
+1. Run test:  adb root && adb shell setenforce permissive && adb shell am instrument -w -r -e debug false com.sieong.demogba.test/android.support.test.runner.AndroidJUnitRunner
 
