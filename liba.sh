@@ -9,7 +9,8 @@ if [ $# -eq 1 ]; then
 		echo "try add command like list/help/tree xxx/present xxx"
 
 	else
-		start chrome $1
+		winPath=`cygpath -aw $1`
+		cygstart chrome $winPath
 
 	fi
 elif [ $# -eq 2 ]; then

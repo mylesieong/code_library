@@ -1,4 +1,30 @@
-# Android
+# Android ToC 
+
+---
+- [Android Sdk]
+- [Third party lib]
+- [Android tools]
+- [Test]
+---
+
+# Android SDK
+
+## Api level difference
+* Before 22, os checks permission at install time. Since 23, runtime check
+* Before 27, os allows refection but not since 28
+
+## What is targetSdkVersion
+* [Interesting] OS can behave differently(or say treat app differently) depending on app's targetSdkVersion
+* If app has targetSdkVersion as 22, your app will behave like 22 even its on OS 28(P)
+
+## Java 8 and minSdkVersion
+* To use more feature of java 8, doesn't require minSdkVersion. Just some feature requires certain version.
+
+## Release vs Signature
+* To build a release, you don't have to sign at the same time (that provides flexibility to sign a batch of modules later)
+* but will prompt error when install an unsigned apk on a device
+* Apk can be signed with any keys, but only certain keys (like platform key) will allow app to access those signature-protected system api/resource. (e.g. <permission... signatureOrSystem>)
+
 
 ## Link Aar dependency
 * Aar won't be effective if put it in build.gradle like api fileTree...
@@ -26,14 +52,6 @@ repositories {
 	- to be part of this sharedUserId: declare it and push to system app
 	- this sharedUserId can: access native sms/mms db
 1. We can use 4 old Motorola phones (android n) to test Kyocera since those phones don't need any sharedUserId to access native sms/mms db
-
-## Proguard
-* To add proguard support, add `minifyEnable true` and `proguardFiles {customProguardFilesPath}` to project build gradle > buildType > debug/release
-* One can combine element identifier (e.g. `**`, `*`, `?`) and commands (e.g. `-keep`, `-keepnames`) to perform proguard actions.
-* In proguard files, some basic usages are:
-	* `-keep class com.summit.MyActivity { <init>(...); <method>; <fields>;}` #No shrinking for this class's init, methods and fields + no obfuscation
-	* `-keep class com.**.* { <methods>;}` #No shrinking for all classes under root package com + no obfuscation
-	* For more, refers to proguard official manual [usage](https://www.guardsquare.com/en/products/proguard/manual/usage) and [example](https://www.guardsquare.com/en/products/proguard/manual/examples)
 
 ## Align in Android
 * LinearLayout- `android:gravity="center|center_vertical|center_horizontal"`
@@ -175,6 +193,16 @@ bindService(intent, ServiceConnection, int);
     * It might increase the apk size, but it can be solve by multi-version feature by Proguard
     * It is developed quickly thus not that testible and stable
 
+# Third-party lib
+
+## Proguard
+* To add proguard support, add `minifyEnable true` and `proguardFiles {customProguardFilesPath}` to project build gradle > buildType > debug/release
+* One can combine element identifier (e.g. `**`, `*`, `?`) and commands (e.g. `-keep`, `-keepnames`) to perform proguard actions.
+* In proguard files, some basic usages are:
+	* `-keep class com.summit.MyActivity { <init>(...); <method>; <fields>;}` #No shrinking for this class's init, methods and fields + no obfuscation
+	* `-keep class com.**.* { <methods>;}` #No shrinking for all classes under root package com + no obfuscation
+	* For more, refers to proguard official manual [usage](https://www.guardsquare.com/en/products/proguard/manual/usage) and [example](https://www.guardsquare.com/en/products/proguard/manual/examples)
+
 ## RxAndroid
 * This is a library to assist async methods. 
 * It is based on RxJava, which is a JVM extension for the same purpose.
@@ -221,7 +249,7 @@ Observable.just("one", "two", "three")
 * A tool to setup avd profiles and configuration
 
 ## Sms mms table on android device
-* Find `smsmms.db` on device with `find /data -name smsmms.db`
+* Find `mmssms.db` on device with `find /data -name mmssms.db`
 * Sms is saved at table sms 
 * Mms is saved at table pdu (extended to table part)
 	

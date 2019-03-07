@@ -2,6 +2,9 @@
 * 3 trees are: WorkingDirectory x StagingArea x CommitHistory
 * Git is based on changes not snapshot
 
+## Diff
+* CHeck diff for a file: `git diff master:index.md develop:index.md`
+
 ## Log
 * Checkout particular file history: `git log --oneline --stat -- fileA fileB ...`
 
