@@ -2,6 +2,12 @@
 * 3 trees are: WorkingDirectory x StagingArea x CommitHistory
 * Git is based on changes not snapshot
 
+## Config
+* global config can be set with tool: git config --global fookey barvalue
+* OS config file is at /etc/gitconfig
+* User config file is at ~/.gitconfig or ~/.config/git/config
+* Git directory config file is at .git/config
+
 ## Diff
 * CHeck diff for a file: `git diff master:index.md develop:index.md`
 
