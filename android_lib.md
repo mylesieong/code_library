@@ -1,11 +1,42 @@
-# Android ToC 
+# Android 
 
----
-- [Android Sdk]
-- [Third party lib]
-- [Android tools]
-- [Test]
----
+<!-- vim-markdown-toc GFM -->
+
+* [Android SDK](#android-sdk)
+        * [Api level difference](#api-level-difference)
+        * [What is targetSdkVersion](#what-is-targetsdkversion)
+        * [Java 8 and minSdkVersion](#java-8-and-minsdkversion)
+        * [Release vs Signature](#release-vs-signature)
+        * [Link Aar dependency](#link-aar-dependency)
+        * [SharedUserId](#shareduserid)
+        * [Align in Android](#align-in-android)
+        * [Firebase](#firebase)
+        * [UI Layout XML](#ui-layout-xml)
+        * [AsynTask](#asyntask)
+        * [ListView and RecyclerView](#listview-and-recyclerview)
+        * [Service](#service)
+        * [AIDL](#aidl)
+        * [Support Library](#support-library)
+* [Third-party lib](#third-party-lib)
+        * [Proguard](#proguard)
+        * [RxAndroid](#rxandroid)
+        * [Dagger](#dagger)
+* [Android tools](#android-tools)
+        * [Logcat](#logcat)
+        * [adb](#adb)
+        * [emulator](#emulator)
+        * [avdmanager](#avdmanager)
+        * [Sms mms table on android device](#sms-mms-table-on-android-device)
+* [Test](#test)
+        * [Build unit test and run from command line](#build-unit-test-and-run-from-command-line)
+        * [Build instrumented test and run from command line](#build-instrumented-test-and-run-from-command-line)
+        * [Testing on Android - Overview](#testing-on-android---overview)
+        * [Testing on Android - TestRunners](#testing-on-android---testrunners)
+        * [Testing on Android - Unit test](#testing-on-android---unit-test)
+        * [Testing on Android - Instrumented Test](#testing-on-android---instrumented-test)
+        * [Testing example - Run instrumented test for system app](#testing-example---run-instrumented-test-for-system-app)
+
+<!-- vim-markdown-toc -->
 
 # AOSP
 * OHA open hardware alliance
