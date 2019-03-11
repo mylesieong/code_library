@@ -1,21 +1,51 @@
 # VIM
 
-## Script commands
+## Use python in vim
+* :echo has("python")
+* :python print("hello world")
+* :pyfile mypython.py
+* In python script, there is a vim module to be used:
+    ```python
+    import vim
+    window = vim.current.window
+    window.height =200
+    window.width = 10
+    window.cursor = (1,1)
+    ```
 
-### Map
+## Register
+* Its about clipboard history.
+
+## Session
+* Session is the working status you are having with the file. 
+* `:mksession` to save 
+* Similarly, `:mkview` to save view
+
+## Tag
+* To create tag list, we can use ctag (most popular), vtags etc.
+* Let vim know where is the tag file and it will be able to navigate
+* Plugin *tagbar* can present.
+
+## Use abbrev to insert code snippet
+* `iabbrev <buffer> for( for (x=0;x<var;x++){<cr><cr>}`
+
+## Use Autocmd to insert template
+* `autocmd BufNewFile *.html 0r $VIMHOME/templates/html.tpl`
+* `autocmd BufNewFile * silent! 0r $VIMHOME/templates/%:e.tpl`
+
+## Map
 * map <F7> :NERDTreeToogle<CR>
+* map <F7> dd
 * imap : insert mode mapping
 * nmap : normal mode
 * noremap : no recursive mapping
 * nnoremap : normal mode noremap
 * See details with `:help :map-commands`
 
-### Autocmd
+## Autocmd
 //TODO
 
-## Normal mode commands
-
-### Search file by content
+## Search file by content
 * `:vimgrep /import/ **` search all
 * `:vimgrep /import/g **` search all. result inlcude a line for each match. And will jump to result.
 * `:vimgrep /import/j **` search all. Silent search. Use clist to check.
@@ -25,7 +55,7 @@
 * `:cnext`
 * `:cprevious`
 
-### Set vs Let
+## Set vs Let
 * Set is used to set system-defined fields (vim refers it as **option**)
 * Let is used to set custom fields
 * System-defined fields (aka options) types:
@@ -39,6 +69,8 @@
 * :set tabwidth=4 - set non boolean field
 * :help set
 
+## Normal mode commands
+
 ### Navigation
 Commands below can be run under normal mode. Most of them has counter-part
 * { : beginning of paragraph
@@ -46,9 +78,6 @@ Commands below can be run under normal mode. Most of them has counter-part
 * `[[` : last definition
 * gd : go to definition of field/function
 * gf : go to dependency file (doesn't really work well...)
-
-### Help
-* Ask for help with `:help *topic*`
 
 ### Normal mode grammer
 * [Times][Actions][Where]
@@ -62,6 +91,9 @@ Commands below can be run under normal mode. Most of them has counter-part
 * All packages will be the added to `runtimepath`
 * Use `:help packages` to get more info
 * Packages are composed of plugins
+
+## Help
+* Ask for help with `:help *topic*`
 
 ## Pathogen - package manager
 * Installation: 
