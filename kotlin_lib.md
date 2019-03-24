@@ -4,9 +4,9 @@
 * Lift assignment out of if: `if () { a = b }` to `a = if () b`
 * Replace signle method interface with lambda {}
 * when clause + return
-* null check
-* std functions
-* inline function remove all chars like (),{}
+* null check + elvis operator ?:
+* std functions: let, run, apply, also
+* inline(infix?) function remove all chars like (),{}  //Because it works like C's preprocessing
 * Properties access syntax: for get methods, you can access it like a member `foo.getBar()` to `foo.bar`
 * Class constructor like `class Recipe(var n: String, var s: Array<String> , var d: Int = 0) { ... }` let us:
 	* Save our time to declare vars
