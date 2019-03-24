@@ -87,3 +87,15 @@ ext.disableFlavorsNotUsedForDev = { variant, flavorNames, buildType ->
     }
 }
 ```
+
+## EnvironmentVariable x SystemProperties x ProjectProperties
+* There are 3 kinds of properties in gradle's perspective: EnvironmentVariable, SystemProperties and ProjectProperties
+|                     | Where to define                               | Can gradle script view              | Can java code view                |
+| ------------------- |:---------------------------------------------:| -----------------------------------:| ---------------------------------:|
+| EnvironmentVariable | windows                                       | No                                  | Yes w/ `System.getEnv()`          | 
+| SystemProperties    | gradle.properties `systemProp.foo.bar=foobar` | Yes w/ `System.properties[foo.bar]` | Yes w/ `System.getProperties()`   |
+|                     | command line `-Dfoo.bar=foobar`               |                                     |                                   |
+| ProjectProperties   | gradle.properties `foo.bar=foobar`            | Yes w/ `foo.bar`                    | No                                |
+|                     | command line `-Pfoo.bar=foobar`               |                                     |                                   |
+* Note only root project gradle.properties file can define SystemProperties
+
