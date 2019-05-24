@@ -112,3 +112,16 @@ ext.disableFlavorsNotUsedForDev = { variant, flavorNames, buildType ->
     - Groovy allows [optional parenthesis](http://mrhaki.blogspot.com/2009/10/groovy-goodness-optional-parenthesis.html)
     - e.g. to call `Project.dependencies(Closure configureClosure)`, we can use `dependencies { ... }` and in this closure
     - e.g. Above closure can use Project's properties + DependencyHandler's properties. (latter was assign as a delegate by the framework)
+
+## EnvironmentVariable x SystemProperties x ProjectProperties
+* There are 3 kinds of properties in gradle's perspective: EnvironmentVariable, SystemProperties and ProjectProperties
+|                     | Where to define                               | Can gradle script view              | Can java code view                |
+| ------------------- |:---------------------------------------------:| -----------------------------------:| ---------------------------------:|
+| EnvironmentVariable | windows                                       | No                                  | Yes w/ `System.getEnv()`          | 
+| SystemProperties    | gradle.properties `systemProp.foo.bar=foobar` | Yes w/ `System.properties[foo.bar]` | Yes w/ `System.getProperties()`   |
+|                     | command line `-Dfoo.bar=foobar`               |                                     |                                   |
+| ProjectProperties   | gradle.properties `foo.bar=foobar`            | Yes w/ `foo.bar`                    | No                                |
+|                     | command line `-Pfoo.bar=foobar`               |                                     |                                   |
+* Note only root project gradle.properties file can define SystemProperties
+
+

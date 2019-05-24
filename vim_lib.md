@@ -1,5 +1,21 @@
 # VIM
 
+## How to write a plugin and where to reference
+* Reference to popular plugins
+* Go to /usr/share/vim and find autoload, syntax, ftplugin (etc) system sample
+
+## Make command and errorFormat
+* Make command can be bound with different program like gcc, javac, gradle
+* Reference to github project: vim-gradle
+* ErrorFormat is used to parse the build command output and present to user at quickfix window
+* `:compiler gradlew` and then `:make {gradle-task}`
+* Famous plugins CtrlP takes advantage of the make system in vim and bind it with execute *find* and map output to errorFormat.
+
+## Search for files 
+* `:help find`
+* Amazing when use with `:set wildmenu` 
+* `:find *.md` and Tab
+
 ## Use python in vim
 * :echo has("python")
 * :python print("hello world")
