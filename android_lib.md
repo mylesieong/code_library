@@ -1,45 +1,18 @@
 # Android 
 
-<!-- vim-markdown-toc GFM -->
-
-* [Android SDK](#android-sdk)
-        * [Api level difference](#api-level-difference)
-        * [What is targetSdkVersion](#what-is-targetsdkversion)
-        * [Java 8 and minSdkVersion](#java-8-and-minsdkversion)
-        * [Release vs Signature](#release-vs-signature)
-        * [Link Aar dependency](#link-aar-dependency)
-        * [SharedUserId](#shareduserid)
-        * [Align in Android](#align-in-android)
-        * [Firebase](#firebase)
-        * [UI Layout XML](#ui-layout-xml)
-        * [AsynTask](#asyntask)
-        * [ListView and RecyclerView](#listview-and-recyclerview)
-        * [Service](#service)
-        * [AIDL](#aidl)
-        * [Support Library](#support-library)
-* [Third-party lib](#third-party-lib)
-        * [Proguard](#proguard)
-        * [RxAndroid](#rxandroid)
-        * [Dagger](#dagger)
-* [Android tools](#android-tools)
-        * [Logcat](#logcat)
-        * [adb](#adb)
-        * [emulator](#emulator)
-        * [avdmanager](#avdmanager)
-        * [Sms mms table on android device](#sms-mms-table-on-android-device)
-* [Test](#test)
-        * [Build unit test and run from command line](#build-unit-test-and-run-from-command-line)
-        * [Build instrumented test and run from command line](#build-instrumented-test-and-run-from-command-line)
-        * [Testing on Android - Overview](#testing-on-android---overview)
-        * [Testing on Android - TestRunners](#testing-on-android---testrunners)
-        * [Testing on Android - Unit test](#testing-on-android---unit-test)
-        * [Testing on Android - Instrumented Test](#testing-on-android---instrumented-test)
-        * [Testing example - Run instrumented test for system app](#testing-example---run-instrumented-test-for-system-app)
-
-<!-- vim-markdown-toc -->
-
 # AOSP
 * OHA open hardware alliance
+* Many aosp info/ guide line can be found from official support site
+* Flash with factory image [guide](https://developers.google.com/android/images)
+
+## Project Treble x GSI
+* Project Treble is published by google when launching Oreo (Android8). 
+* Any devices registered under the project's umbrella (or say treble-campatible) can install Oreo factory image
+* The project goal is to accelerate the custom aosp incubation.
+* E.g. treble-campatible devices: Google pixel, Asus ZenFone Max Pro M1, Honor View 10, Huawei Mate 10 Pro, Motorola Moto G 2015, OnePlus One
+* GSI stands for Generic System Image. It refers to Oreo GSI and Pie GSI. 
+* Until now, the project extends to cover android P as well.
+* Check [here](https://www.xda-developers.com/flash-generic-system-image-project-treble-device) for more infos.
 
 # Android SDK
 
@@ -63,19 +36,19 @@
 ## Link Aar dependency
 * Aar won't be effective if put it in build.gradle like api fileTree...
 * Try below snippet:
-```
-dependencies {
--    api 'com.summittech.android.api-new:service:' + SUMMIT_SERVICE_VERSION
-+    api(name:'service-internal-latestApi-debug', ext:'aar')
-}
+    ```
+    dependencies {
+    -    api 'com.summittech.android.api-new:service:' + SUMMIT_SERVICE_VERSION
+    +    api(name:'service-internal-latestApi-debug', ext:'aar')
+    }
 
-repositories {
-     mavenCentral()
-     flatDir {
-        dirs 'libs'
-     }
-}
-```
+    repositories {
+        mavenCentral()
+        flatDir {
+            dirs 'libs'
+        }
+    }
+    ```
 * Need gradle won't package all dependencies of an android lib into aar output for dependenciy version control reason. So make sure your aar has all it needs
 
 ## SharedUserId

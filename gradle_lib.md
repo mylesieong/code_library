@@ -8,8 +8,9 @@
 	- Initialization - scripts in setting.gradle script?
 	- Configuration - scripts in build.gradle scripts but not those in tasks execution area?
 	- Execution 
+* Gradle source code: github.com/gradle
 
-## Gradle Android Plugin
+## Gradle Android Plugin (GAP)
 * Gradle Android Plugin(gap) is the plugin for gradle to feature an android build. That means a gradle base version is not capable of building an android by its own. Now we update the gap version from 2 to 3. It requires a gradle 4.1 + base. 
 * The different between gap 2 and 3 are mainly below:
 	* *compile* keyword change to *api*
@@ -19,7 +20,17 @@
 	* A mandatory Product Flavoring is required
 	* Auto-fallback feature is added to Flavoring system
 * All above difference somehow improve the **speed** and **robusity** of building which, from what the official docs is said, the main focus of gap 3 release.
+* Source code: https://android.googlesource.com/platform/tools/base/+/studio-master-dev/source.md
+
+## Gradle wrapper
 * Gradle wrapper is just wrapper that call the real gradle commnad
+* In gradle source code: subproject/wrapper
+
+## Variant dependency management
+* The feature, to auto match variants when consuming a library, is included by GAP 3.0.0+.
+* From consumer module to pass flavor to library, 2 strategies for missing dimension and missing variant:
+    - if consumer only has MyDim1, and library has MyDim1 and MyDim2{V1, V2}, consumer uses: `missingDimensionStrategy 'MyDim2', 'V1'`
+    - if consumer has MyDim{V1, V2}, and library has MyDim{V3, V4}, consumer uses: `matchingFallbacks [V3]`
 
 ## Common-used command
 * Build a project: `./gradlew :my-project-name:assemble`    //ps. this will build all flavor
@@ -76,7 +87,7 @@ android {
 ```
 
 ## Variant handling in lifecycle - Configuration
-* Variant = Flavors(i)-Dimensions1 x Flavors(j)-Dimensions2 x ... x Flavors(k)-Dimensions(N)
+* Variant = Dmn1(Flvr(i)) * Dmn2(Flvr(j)) * ... 
 * E.g. V(fullLatestApiSummitDefaultUserId) = D1(full) x D2(LatestApi) x D3(Summit) x D4(DefaultUserId)
 * We can handle variant to decide how many different variant to output after configuration stage:
 ```
@@ -87,3 +98,17 @@ ext.disableFlavorsNotUsedForDev = { variant, flavorNames, buildType ->
     }
 }
 ```
+
+## Life cycle
+* Gradle processes a build script in three phases: initialization, configuration, and execution.
+* The initialization and configuration phases create and configure project objects and construct a DAG of tasks, which are then executed in the execution phase.
+
+## Gradle DSL Primer
+* Gradle DSL is empowered by [groovy closure](http://groovy-lang.org/closures.html). To summary these features:
+    - Closure delegate allows closure to use properties defined in delegate object
+    - Closure can replace a SAM (single abstrace method)
+    - When call a method and the last parm is a closure, syntax allow emit the closure. 
+    - When call a method without an empty parenthesis, parenthesis can be omit
+    - Groovy allows [optional parenthesis](http://mrhaki.blogspot.com/2009/10/groovy-goodness-optional-parenthesis.html)
+    - e.g. to call `Project.dependencies(Closure configureClosure)`, we can use `dependencies { ... }` and in this closure
+    - e.g. Above closure can use Project's properties + DependencyHandler's properties. (latter was assign as a delegate by the framework)

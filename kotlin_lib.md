@@ -31,12 +31,21 @@
 | also | it | this |
 | apply | this | this |
 
+* with(T) : `inline fun <T, R> with(receiver: T, block: T.() -> R): R` - Calls the specified function block with the given receiver as its receiver and returns its result.
+* run(T) :  `inline fun <R> run(block: () -> R): R`                    - Calls the specified function block and returns its result.
+* T.let :   `inline fun <T, R> T.let(block: (T) -> R): R`              - Calls the specified function block with this value as its argument and returns its result.
+* T.run :   `inline fun <T, R> T.run(block: T.() -> R): R`             - Calls the specified function block with this value as its receiver and returns its result.
+* T.apply:  `inline fun <T> T.apply(block: T.() -> Unit): T`           - Calls the specified function block with this value as its receiver and returns this value
+* T.also:   `inline fun <T> T.also(block: (T) -> Unit): T`             - Calls the specified function block with this value as its argument and returns this value.
+
 
 # Create DSL in kotlin
 * DSL programming became possible when kotlin enable lambda + closure 
 * Mainly because single method interface usage can be call like `foo.bar(object: xxxx)` or `foo.bar { }`
 * Read from [KotlinConf 2018](https://www.youtube.com/watch?v=Rvx_BfG3NDo&index=4&list=PLQ176FUIyIUbVvFMqDc2jhxS-t562uytr)
-* DSL somehow has a connection with Builder pattern
+* Some key concepts when building DSL:
+    - its a Builder pattern in essence
+    - it should not do things, it states things
 ```kotlin
 alert( title { //DSL starts
 	message = "Foo bar"

@@ -2,6 +2,12 @@
 * 3 trees are: WorkingDirectory x StagingArea x CommitHistory
 * Git is based on changes not snapshot
 
+## Trouble shooting
+* {fatal: early eof} -> {
+    solution: git clone --depth 1 remote,
+    reason: guess it happens for git repo w/ submodules
+  }
+
 ## Config
 * global config can be set with tool: git config --global fookey barvalue
 * OS config file is at /etc/gitconfig
@@ -37,7 +43,11 @@
 1. Working on develop branch and want to import a submodule to mysubmodule
 1. `git submodule add https://github.com/<user>/whatever mysubmodule` 
 1. At this point, submodule will still be empty and should run fetch manually: `git submodule update --init --recursive`
-* The concept is git submodule is recognoize as a hash x a repo (if cd submodule and checkout branch doesn't change the fact)
+1. The concept is git submodule is recognoize as a hash x a repo (if cd submodule and checkout branch doesn't change the fact)
+1. To checkout summit multi-module project:
+    - git clone ssh://sieong@..../stack
+    - cd stack && vim .gitmodules (make sure ssh usernames are good)
+    - git submodule init && git submodule update  
 
 ## Hooks
 * Git hooks are scripts that run automatically every time a particular event occurs in a Git repository. 
