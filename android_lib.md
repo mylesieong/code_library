@@ -200,6 +200,14 @@ bindService(intent, ServiceConnection, int);
     * It might increase the apk size, but it can be solve by multi-version feature by Proguard
     * It is developed quickly thus not that testible and stable
 
+# Android framework
+
+* Android treats apk targeting different version separately, it will expose different resource like the framework.jar
+* I need to check how the platform behave for uce.presence:
+    - First I search google `com.android.imd.internal.uce.presense` and it shows aosp which jar the class is located in. (platform)
+    - Check devices /system/framework/framework.jar
+    - undex it and check with jd-gui and you will see
+
 # Third-party lib
 
 ## Proguard

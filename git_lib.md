@@ -3,16 +3,21 @@
 * Git is based on changes not snapshot
 
 ## Trouble shooting
+* {the remote end hung up unexpectly} -> {
+    possibly related to http(s).postBuffer, see [post](https://stackoverflow.com/questions/6842687/the-remote-end-hung-up-unexpectedly-while-git-cloning/19286776)
+  }
 * {fatal: early eof} -> {
     solution: git clone --depth 1 remote,
     reason: guess it happens for git repo w/ submodules
   }
 
 ## Config
-* global config can be set with tool: git config --global fookey barvalue
-* OS config file is at /etc/gitconfig
-* User config file is at ~/.gitconfig or ~/.config/git/config
-* Git directory config file is at .git/config
+* To set: `git config --global fookey barvalue`
+* To get: `git config --get fookey` 
+* Where are the files:
+    * OS config file is at /etc/gitconfig
+    * User config file is at ~/.gitconfig or ~/.config/git/config
+    * Git directory config file is at .git/config
 
 ## Diff
 * CHeck diff for a file: `git diff master:index.md develop:index.md`

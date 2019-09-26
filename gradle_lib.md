@@ -21,6 +21,13 @@
 	* Auto-fallback feature is added to Flavoring system
 * All above difference somehow improve the **speed** and **robusity** of building which, from what the official docs is said, the main focus of gap 3 release.
 * Source code: https://android.googlesource.com/platform/tools/base/+/studio-master-dev/source.md
+* When [Module A] depends on [Module B] depends on [Module C]
+    - if A implements/api B api C, then A sees both
+    - if A implements/api B implements C, then A sees only B
+
+## Gradle task on specific device
+* If we run task like this: `gradle :sdk:installDebug` it will install to all connected device
+* To address specific device: `ANDROID_SERIAL=1000AB0123456YZ ./gradle ...` or `export ANDROID_SERIAL=1000AB0123456YZ && ./gradlew ...`
 
 ## Gradle wrapper
 * Gradle wrapper is just wrapper that call the real gradle commnad
@@ -115,13 +122,13 @@ ext.disableFlavorsNotUsedForDev = { variant, flavorNames, buildType ->
 
 ## EnvironmentVariable x SystemProperties x ProjectProperties
 * There are 3 kinds of properties in gradle's perspective: EnvironmentVariable, SystemProperties and ProjectProperties
-|                     | Where to define                               | Can gradle script view              | Can java code view                |
-| ------------------- |:---------------------------------------------:| -----------------------------------:| ---------------------------------:|
-| EnvironmentVariable | windows                                       | No                                  | Yes w/ `System.getEnv()`          | 
-| SystemProperties    | gradle.properties `systemProp.foo.bar=foobar` | Yes w/ `System.properties[foo.bar]` | Yes w/ `System.getProperties()`   |
-|                     | command line `-Dfoo.bar=foobar`               |                                     |                                   |
-| ProjectProperties   | gradle.properties `foo.bar=foobar`            | Yes w/ `foo.bar`                    | No                                |
-|                     | command line `-Pfoo.bar=foobar`               |                                     |                                   |
+
+| - | Where to define|   Can gradle script view  | Can java code view  |
+| -------- |:------------:|:-------------:|:-------------:|
+| EnvironmentVariable | windows | No   | Yes w/ `System.getEnv()` | 
+| SystemProperties    | gradle.properties `systemProp.foo.bar=foobar` OR command line `-Dfoo.bar=foobar`   | Yes w/ `System.properties[foo.bar]` | Yes w/ `System.getProperties()`   |
+| ProjectProperties   | gradle.properties `foo.bar=foobar` OR command line `-Pfoo.bar=foobar` | Yes w/ `foo.bar` | Its said that in code we can use InstrumentedContext.getBundle to fetch, tbc |
+
 * Note only root project gradle.properties file can define SystemProperties
 
 
