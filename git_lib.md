@@ -2,6 +2,174 @@
 * 3 trees are: WorkingDirectory x StagingArea x CommitHistory
 * Git is based on changes not snapshot
 
+
+## Migration
+
+### Browse a file history
+$git log -p {filename}
+
+### Submodule basic
+When there is git under another git folder, the upper git will regard the deeper git as "Submodule". But not until in upper git invoke command: $ git submodule add {deeper_git} then the upper git will generate the .gitmodule file and start the management of the deeper git module.
+But the submodule's content will not commit to the upper git anyway. 
+Here are some usage:
+$ git submodule add /path/to/git/name.git
+$ git submodule status
+$ git submodule init
+$ git submodule deinit        // delete the git repo
+
+
+### Git's config files
+1. File ".gitignore" in a folder is equivalent to "/.git/info/exclude", the only difference is that former is only effective for local folder and latter is valid globally
+2. File ".gitattributes" and "/.git/info/attributes" and they are simular relationship like ignore files
+
+### Teach git diff to understand excel format
+1. Add entry to  "/.git/info/attributes": 
+       $ *.xlsx diff=git_diff_xlsx
+2. Add entry to ".git/config":
+       $ [diff "git_diff_xlsx"]
+       $       binary = True
+       $       textconv = python C:/Users/BI77/Documents/playground/git_diff_xlsx.py
+3. Then when run git diff \*.xlsx, git will use given command to generate difference.
+** Interesting fact noticed: git_diff_xlsx.py only need 1 file as input, and output stdin, so that I assume that git has its framework to compare 2 file stream. So by understanding this, I can develope my own plugin too!
+** The experiment git repo is the "Playground" folder in my BCM working directory
+Previously we use python to parse an excel as git-diff's plugin. And now I try to use the liba.exe as the plugin and it works! Only need to change the textconv (in file .git/config) from previous setting: `# textconv = ./liba -show`
+
+### Git understanding
+Say A>B>C>D>E is master, A>B>C>G>H is fix, For some reasons, we want to refactor the repo to a linear order (from a so-called "disarray" order), then we perfrom below command to rebase the fix to master base:
+$ (at fix branch) git rebase master
+then the repo becomes: A>B>C>D>E>G'>H' (the base of fix changed from C to E)
+Git introduced the worktree feature not too long ago (as of version 2.5, released July 2015). A great usage scenario can be found here: https://spin.atomicobject.com/2016/06/26/parallelize-development-git-worktrees/
+Set up worktree with below command:
+$ git worktree add ../new-worktree-dir some-existing-branch
+
+### Git ignore
+1. Edit {home}/.git/info/exclude to ignore files, Every line regex the file that should (not) be ignored:
+# *.java    <- ignore javas globally
+# !*.java  <- don’t ignore java globally
+2. Put .gitignore file in any folder to state the ignore target in that folder.
+REF-- https://git-scm.com/docs/gitignore
+If some files are already under tracking, use below command to remove them from the working area:
+> git rm --cached -r target        //recursively remove files under target folder
+
+### Remote basics
+$git remote show     
+origin
+$git remote -v           
+origin https://github…library.git (fetch)
+origin https://github…library.git (push)
+$ git remote add pb https://github.com/paulboone/ticgit
+$ git remote -v
+origin https://github.com/schacon/ticgit (fetch)
+origin https://github.com/schacon/ticgit (push)
+pb https://github.com/paulboone/ticgit (fetch)
+pb https://github.com/paulboone/ticgit (push)
+
+### Remote branch 
+$ git branch -r 
+origin/HEAD -> origin/master
+origin/master
+$ git push origin master:new_branch //Crt new brnch on rmt & push lcl/mstr to it
+$ git branch -r 
+origin/HEAD -> origin/master
+origin/new_branch
+origin/master
+
+### Local revisioning
+$ git show {branch_name/at_least_4_digit_of_commit_SHA1} //show certain commit diff compare to last commit
+$ git reflog //system will name the log in format HEAD@{n} so you can easily ref them
+$ git show {branch_name/at_least_4_digit_of_commit_SHA1}^  //show previous commit
+$ git show {branch_name/at_least_4_digit_of_commit_SHA1}^2  //show 2nd parent (only for merge commit)
+$ git show {branch_name/at_least_4_digit_of_commit_SHA1}^^^... //show previous n generation father
+$ git show {branch_name/at_least_4_digit_of_commit_SHA1}~n //equivalent to last command
+
+### Fix a corrupted master
+1. First of all, assume the wrong tunnel commit cannot/shouldnot merge to head, so steps would be delete the master branch first, and then re-create master branch at the right commit
+$ git checkout master
+$ git branch wrong_track && git checkout wrong_track  <--- cannot delete master when using it
+$ git branch -d master
+$ git checkout {master_or_any_other_commit}
+$ git branch master
+
+### Handling line ending in cross-OS git project
+#### Background
+Previously when I am exploring the vim plugin, I ran into the line-end problem the first time. I used vim to set file format to unix and solve adhoc fix. But later it appears that after resetup of cygwin on windows, it regards all file as different version in git due to the line end conflict. Then I try to look for a solution from git.
+#### Solution of git 
+It provides a git attribute setting that ensure cross OS project align the line ends. Here is how it works:
+* __Set in .gitattributes__ 
+```
+# Set the default behavior, in case people don't have core.autocrlf set.
+* text=auto
+
+# Explicitly declare text files you want to always be normalized and converted
+# to native line endings on checkout.
+*.c text
+*.h text
+
+# Declare files that will always have CRLF line endings on checkout.
+*.sln text eol=crlf
+
+# Denote all files that are truly binary and should not be modified.
+*.png binary
+*.jpg binary
+```
+* __Set in global setting for a linux machine__ `git config --global core.autocrlf input`
+* __Set in global setting for a win machine__ `git config --global core.autocrlf true`
+> ref: https://help.github.com/articles/dealing-with-line-endings/#platform-all
+
+### Tagging
+#### Basic command
+`git tag ` //show all tags (both lightweight and annotated)
+`git tag v1.1` //lightweight tag HEAD to v1.1
+`git tag -a v1.4 -m "my version 1.4"` //build annotated tag v1.4
+`git show v1.1` //show the diff between v1.1 and previous commit
+#### Concept
+There are 2 kinds of tags, lightweight and Annotated. Lightweight tag is like a final branch. Annotated tag is a copy in object tree and might go with key and signature and blablabla.
+
+
+### Force-push from local to remote
+$ git push -f {target_branch_like_origin} {new_of_local_branch}
+
+### Using Local File System as remote
+If you want to build a remote repo at local file system, use below command to build a remote repo:
+> git init --bare /d/{repo_name}.git
+The you can add this as a remote origin (or whatever name) to your current git repo with below cmd:
+> git remote add {origin_or_whatever} /d/{repo_name}.git
+And so that you can perform same feature to this "remote" just as github like clone/push/pull...
+
+p.s. For more information, refer to: http://www.thehorrors.org.uk/snippets/git-local-filesystem-remotes
+
+### Relationship between "working directory" and "staging area" area
+STAGE 本質上 is the product of comparasion between HEAD and WORKDIR. So items in STAGE can be regarded as " actions" basic on HEAD to become WORK. Below command or action is related:
+> git add {…}      //move red to green entry in git status that add stuff to head
+> git rm {…}       //move red to green entry in git status that remove stuffs from head
+> git rm --cached {...}       //move green to red to unstage
+> git checkout -- {…}      //move red to nth in git status
+> user edit the WORK      //generate red entry in git status
+
+### Git folder under git folder: submodule
+* When our new git folder contains another git folder, then the subfolder is name "submodule" in git machanism.
+* When do adding in parent git folder, submodule will present as {path}/{submodule_name} as a standalone item, then no details inside submodule will be revealed in the parent folder git console.
+* When submodule has some uncommited change (staged or not), the parent folder git status will note the changes in red item as below:
+    > modified:   {path}/SUBMODULE1 (modified content, untracked content)
+    > modified:   {path}/SUBMODULE2 (modified content)
+And user cannot stage above "changes" unless going inside submodule and clean the directory.
+(p.s. the error message when try to add the submodule in parent like: Git: fatal: Pathspec is in submodule )
+
+### Working on master but need a quick reference to branch, stash can temp save the change and recover later on
+Save dirty workings on branch #1 
+> git stash -u    //And now can switch to branch #2, while at this moment branch#1 status is clean 
+View Stash:
+> git stash list
+Recover stash after switch back from branch#2:
+> (at branch#1) git stash pop
+** note: if stash doesnt cause confliction, it is transferable among different commit.
+
+
+
+
+
+
+
 ## Trouble shooting
 * {the remote end hung up unexpectly} -> {
     possibly related to http(s).postBuffer, see [post](https://stackoverflow.com/questions/6842687/the-remote-end-hung-up-unexpectedly-while-git-cloning/19286776)
@@ -81,6 +249,7 @@
 1. `git stash save "your alias to the stash"`
 
 ## Trace down history
+* git log -5    //Show 5 recent logs
 * git log --follow {filename}
 * git show {commit hashcode}
 * git diff {branchnameA} {branchnameB}
