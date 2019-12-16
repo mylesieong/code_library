@@ -26,6 +26,7 @@
 
 ## Java 8 and minSdkVersion
 * To use more feature of java 8, doesn't require minSdkVersion. Just some feature requires certain version.
+* Interesting fact, the class that javac gen from minSdkVersion 21 would be java 1.7 (class format 51) and from minSdkVersion 24 would be java 1.8 (class format 50)
 
 ## Release vs Signature
 * To build a release, you don't have to sign at the same time (that provides flexibility to sign a batch of modules later)

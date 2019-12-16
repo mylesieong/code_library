@@ -1,10 +1,13 @@
 # Bash
 
 ## Handy tools
-* Size of folder: `du -sh .` `du -sh *`
-* Uncompress file: `tar -czvf foobar.tar.gz`
-* full-text search: `grep -nrw . -e "[0-9]{3}" --color -i`
-* find files at a depth: `find . -maxdepth 2 -name gradle.*service`
+* du -sh .` `du -sh *   //Size of folder
+* df    //Size of file system
+* tar (--exclude='.git') -czvf foobar.tar.gz  //Tar compress file
+* tar -xzvf foobar.tar.gz   //Tar uncompress file
+* grep -nrw . -e "[0-9]{3}" --color -i  //full-text search with color highline and ignoring cases
+* find . -maxdepth 2 -name build.gradle  //find files at a depth
+* tree . -L 3
 
 ## Conflict of line-end
 * If using cygwin on windows you will encounter errors like:
