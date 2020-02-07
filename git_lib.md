@@ -5,22 +5,7 @@
 
 ## Migration
 
-### Browse a file history
-$git log -p {filename}
 
-### Submodule basic
-When there is git under another git folder, the upper git will regard the deeper git as "Submodule". But not until in upper git invoke command: $ git submodule add {deeper_git} then the upper git will generate the .gitmodule file and start the management of the deeper git module.
-But the submodule's content will not commit to the upper git anyway. 
-Here are some usage:
-$ git submodule add /path/to/git/name.git
-$ git submodule status
-$ git submodule init
-$ git submodule deinit        // delete the git repo
-
-
-### Git's config files
-1. File ".gitignore" in a folder is equivalent to "/.git/info/exclude", the only difference is that former is only effective for local folder and latter is valid globally
-2. File ".gitattributes" and "/.git/info/attributes" and they are simular relationship like ignore files
 
 ### Teach git diff to understand excel format
 1. Add entry to  "/.git/info/attributes": 
@@ -41,38 +26,6 @@ then the repo becomes: A>B>C>D>E>G'>H' (the base of fix changed from C to E)
 Git introduced the worktree feature not too long ago (as of version 2.5, released July 2015). A great usage scenario can be found here: https://spin.atomicobject.com/2016/06/26/parallelize-development-git-worktrees/
 Set up worktree with below command:
 $ git worktree add ../new-worktree-dir some-existing-branch
-
-### Git ignore
-1. Edit {home}/.git/info/exclude to ignore files, Every line regex the file that should (not) be ignored:
-# *.java    <- ignore javas globally
-# !*.java  <- don’t ignore java globally
-2. Put .gitignore file in any folder to state the ignore target in that folder.
-REF-- https://git-scm.com/docs/gitignore
-If some files are already under tracking, use below command to remove them from the working area:
-> git rm --cached -r target        //recursively remove files under target folder
-
-### Remote basics
-$git remote show     
-origin
-$git remote -v           
-origin https://github…library.git (fetch)
-origin https://github…library.git (push)
-$ git remote add pb https://github.com/paulboone/ticgit
-$ git remote -v
-origin https://github.com/schacon/ticgit (fetch)
-origin https://github.com/schacon/ticgit (push)
-pb https://github.com/paulboone/ticgit (fetch)
-pb https://github.com/paulboone/ticgit (push)
-
-### Remote branch 
-$ git branch -r 
-origin/HEAD -> origin/master
-origin/master
-$ git push origin master:new_branch //Crt new brnch on rmt & push lcl/mstr to it
-$ git branch -r 
-origin/HEAD -> origin/master
-origin/new_branch
-origin/master
 
 ### Local revisioning
 $ git show {branch_name/at_least_4_digit_of_commit_SHA1} //show certain commit diff compare to last commit
@@ -96,6 +49,7 @@ Previously when I am exploring the vim plugin, I ran into the line-end problem t
 #### Solution of git 
 It provides a git attribute setting that ensure cross OS project align the line ends. Here is how it works:
 * __Set in .gitattributes__ 
+
 ```
 # Set the default behavior, in case people don't have core.autocrlf set.
 * text=auto
@@ -146,14 +100,6 @@ STAGE 本質上 is the product of comparasion between HEAD and WORKDIR. So items
 > git checkout -- {…}      //move red to nth in git status
 > user edit the WORK      //generate red entry in git status
 
-### Git folder under git folder: submodule
-* When our new git folder contains another git folder, then the subfolder is name "submodule" in git machanism.
-* When do adding in parent git folder, submodule will present as {path}/{submodule_name} as a standalone item, then no details inside submodule will be revealed in the parent folder git console.
-* When submodule has some uncommited change (staged or not), the parent folder git status will note the changes in red item as below:
-    > modified:   {path}/SUBMODULE1 (modified content, untracked content)
-    > modified:   {path}/SUBMODULE2 (modified content)
-And user cannot stage above "changes" unless going inside submodule and clean the directory.
-(p.s. the error message when try to add the submodule in parent like: Git: fatal: Pathspec is in submodule )
 
 ### Working on master but need a quick reference to branch, stash can temp save the change and recover later on
 Save dirty workings on branch #1 
@@ -187,6 +133,20 @@ Recover stash after switch back from branch#2:
     * User config file is at ~/.gitconfig or ~/.config/git/config
     * Git directory config file is at .git/config
 
+## Git file system convention
+1. Ignore file ".gitignore" only effective for local folder 
+1. Ignore file "/.git/info/exclude" valid globally in project
+1. Attributes file ".gitattributes" and "/.git/info/attributes" are similar
+
+## Ignore
+1. Edit {home}/.git/info/exclude to ignore files, Every line regex the file that should (not) be ignored:
+    * `*.java`    <- ignore javas globally
+    * `# !*.java`  <- don’t ignore java globally
+2. Put .gitignore file in any folder to state the ignore target in that folder.
+REF-- https://git-scm.com/docs/gitignore
+If some files are already under tracking, use below command to remove them from the working area:
+> git rm --cached -r target        //recursively remove files under target folder
+
 ## Diff
 * CHeck diff for a file: `git diff master:index.md develop:index.md`
 
@@ -212,15 +172,30 @@ Recover stash after switch back from branch#2:
 1. Move 2 commit ahead & files discard: `git reset --hard HEAD~2`
 
 ## Submodule
-1. The submodule folder is just a hash to holder. Use `git submodule status` or `vim .gitmodules` to check
-1. Working on develop branch and want to import a submodule to mysubmodule
-1. `git submodule add https://github.com/<user>/whatever mysubmodule` 
-1. At this point, submodule will still be empty and should run fetch manually: `git submodule update --init --recursive`
-1. The concept is git submodule is recognoize as a hash x a repo (if cd submodule and checkout branch doesn't change the fact)
-1. To checkout summit multi-module project:
-    - git clone ssh://sieong@..../stack
-    - cd stack && vim .gitmodules (make sure ssh usernames are good)
-    - git submodule init && git submodule update  
+* The submodule folder is just a hash to holder. Submodule's content will not commit to the upper git anyway.  
+* When there is git under another git folder, the upper git will regard the deeper git as "Submodule". But not until in upper git invoke command: $ git submodule add {deeper_git} then the upper git will generate the .gitmodule file and start the management of the deeper git module.
+* Use `git submodule status` or `vim .gitmodules` to check
+* Example: Working on develop branch and want to import a submodule to mysubmodule
+    1. `git submodule add https://github.com/<user>/whatever mysubmodule` 
+    1. At this point, submodule will still be empty and should run fetch manually: `git submodule update --init --recursive`
+* To checkout summit multi-module project:
+    1. git clone ssh://sieong@..../stack
+    1. cd stack && vim .gitmodules (make sure ssh usernames are good)
+    1. git submodule init && git submodule update  
+* Commands:
+    - git submodule add /path/to/git/name.git
+    - git submodule status
+    - git submodule init
+    - git submodule deinit        // delete the git repo
+* How to commit submodule change:
+    1. $ cd path/to/submodule
+    1. $ git add *
+    1. $ git commit -m "comment"
+    1. $ git push # or cr
+    1. $ cd /main/project
+    1. $ git add path/to/submodule
+    1. $ git commit -m "updated my submodule"
+    1. $ git push # or cr
 
 ## Hooks
 * Git hooks are scripts that run automatically every time a particular event occurs in a Git repository. 
@@ -253,7 +228,38 @@ Recover stash after switch back from branch#2:
 * git log --follow {filename}
 * git show {commit hashcode}
 * git diff {branchnameA} {branchnameB}
+* git log -p {filename}
 
+## Remote basics
+* `git remote show` 
+```
+origin
+```
+* `git remote -v`           
+```
+origin https://github…library.git (fetch)
+origin https://github…library.git (push)
+```
+* `git remote add pb https://github.com/paulboone/ticgit && git remote -v`
+```
+origin https://github.com/schacon/ticgit (fetch)
+origin https://github.com/schacon/ticgit (push)
+pb https://github.com/paulboone/ticgit (fetch)
+pb https://github.com/paulboone/ticgit (push)
+```
+
+## Remote branch 
+* `git branch -r`
+```
+origin/HEAD -> origin/master
+origin/master
+```
+* `git push origin master:new_branch && git branch -r ` //Create new branch on remote & push local/master to it 
+```
+origin/HEAD -> origin/master
+origin/new_branch
+origin/master
+```
 ## 101
 * $git rm {file}
 * $git status (-s)
