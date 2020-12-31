@@ -294,6 +294,15 @@ origin/master
 	1. Clone existing project to build: `git clone --bare my_project my_project.git`
 	1. Init an Empty project git: `git init --bare new_project.git`
 
+## Turn on git debug messages
+1. put these var to 1 by:
+```
+export GIT_TRACE_PACKET=1
+export GIT_TRACE=1
+export GIT_CURL_VERBOSE=1
+```
+1. Run any command for example git clone
+
 # Gerrit
 * Gerrit is based on git. Similar to gitlab. Its goal is to add a CI layer and a Review System in a git host.
 * When push a commit, gerrit will create a code review contains:
