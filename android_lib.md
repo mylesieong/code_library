@@ -16,6 +16,16 @@
 
 # Android SDK
 
+## Icon best practie
+* Icon for app on device
+	1. output icon from figma as svg 
+	1. Import in android studio as vector asset 
+	1. Import Image Asset:
+		* use the xml asset (just imported from above) as foreground layer (so that a 無失真 image would be used)
+		* use transparent color as background layer (so that on device logo dragging won't have weird bg)
+* Icon on store 
+	1. Use the auto generated store icon from "Import Image Asset"
+
 ## Api level difference
 * Before 22, os checks permission at install time. Since 23, runtime check
 * Before 27, os allows refection but not since 28
